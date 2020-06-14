@@ -2,8 +2,8 @@
 
 import os
 import sys
-import logging
-import logging.handlers
+from moduls.class_Logger import Logger
+from moduls.class_TelentClinet import TelnetClient
 
 
 class Menu:
@@ -24,7 +24,6 @@ class Menu:
                 XX
             运维工具：
                 XX
-
             6.Quit
         """)
 
@@ -45,7 +44,16 @@ class Menu:
             pass
 
     def run_one(self):
-        pass
+        host = '172.11.3.100'
+        command1 = 'show version'
+        command2 = 'show board-info'
+        telnet_client = TelnetClient()
+        print("we are try to telnet to %s" %(host))
+        # login to the host, success:return true, fail: return false
+        if telnet_client.login_host(host):
+            telnet_client.input_command(command1)
+            telnet_client.input_command(command2)
+            telnet_client.logout()
 
     def quit(self):
         print("Thank you for using this tool.")
@@ -53,4 +61,5 @@ class Menu:
 
 if __name__ == '__main__':
     #logging.basicConfig(level=logging.DEBUG, format='[%(levelname)s]%(message)s',)
+    logging = Logger(name='log')
     Menu().run()
