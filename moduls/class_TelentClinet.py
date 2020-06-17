@@ -4,6 +4,9 @@ import sys
 import time
 import telnetlib
 import logging
+# from .class_Logger import Logger
+
+# logging = Logger()
 
 class TelnetClient():
     def __int__(self,):
@@ -66,7 +69,6 @@ if __name__ == '__main__':
     command1 = 'show version'
     command2 = 'show board-info'
     telnet_client = TelnetClient()
-    print("we are try to telnet to %s" %(host))
    # login to the host, success:return true, fail: return false
     if telnet_client.login_host(host):
         telnet_client.input_command('command1')

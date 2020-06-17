@@ -1,0 +1,5 @@
+2020-06-14 22:53:43,901 - class_TelentClinet.py[login_host line:20] - DEBUG: failed to connect to host:172.11.3.100
+2020-06-14 22:57:12,755 - class_TelentClinet[login_host line:20] - DEBUG: failed to connect to host:172.11.3.100
+2020-06-14 23:03:04,837 - class_TelentClinet[login_host line:20] - DEBUG: failed to connect to host:172.11.3.100
+2020-06-14 23:03:28,807 - class_TelentClinet[login_host line:20] - DEBUG: failed to connect to host:172.11.3.100
+2020-06-14 23:14:43,538 - class_TelentClinet.py [login_host line:21] - DEBUG: failed to connect to host:172.11.3.100

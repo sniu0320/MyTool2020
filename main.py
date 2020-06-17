@@ -2,6 +2,7 @@
 
 import os
 import sys
+# import logging
 from moduls.class_Logger import Logger
 from moduls.class_TelentClinet import TelnetClient
 
@@ -61,5 +62,5 @@ class Menu:
 
 if __name__ == '__main__':
     #logging.basicConfig(level=logging.DEBUG, format='[%(levelname)s]%(message)s',)
-    logging = Logger(name='log')
+    logging = Logger() #通过class 只在main 不行
     Menu().run()

@@ -23,7 +23,7 @@ class Logger():
         """
         self.__logger = logging.getLogger(str(name))
         self.logger.setLevel(logging.DEBUG) #Log等级总开关
-        fmt = logging.Formatter('%(asctime)s - %(filename)s[%(funcName)s line:%(lineno)d] - %(levelname)s: %(message)s')
+        fmt = logging.Formatter('%(asctime)s - %(filename)s [%(funcName)s line:%(lineno)d] - %(levelname)s: %(message)s')
         '''
         %(name)s            Logger的名字
         %(levelname)s       文本形式的日志级别
