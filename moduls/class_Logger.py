@@ -6,25 +6,42 @@ import time
 import logging
 from logging.handlers import TimedRotatingFileHandler
 
+def __singletion(cls):
+    """
+    单例模式的装饰器函数
+    :param cls: 实体类
+    :return: 返回实体类对象
+    """
+    instances = {}
+    def getInstance(*args, **kwargs):
+        if cls not in instances:
+            instances[cls] = cls(*args, **kwargs)
+        return instances[cls]
+    return getInstance
+
+@__singletion
 class Logger():
-    def __init__(self, set_level="DEBUG",
+    def __init__(self, out=0,
                  name=os.path.split(os.path.splitext(sys.argv[0])[0])[-1],
+                #  name='main',
+                 set_level=logging.DEBUG,
                  log_name=time.strftime("%Y-%m-%d.log", time.localtime()),
                  log_path=os.path.join(os.path.dirname(os.path.abspath(__file__)), "log"),
-                 use_console=True,
-                 clevel=logging.DEBUG, 
-                 Flevel=logging.DEBUG):
+                 console_level=logging.DEBUG, 
+                 file_level=logging.DEBUG):
         """
-        :param set_level: 日志级别["NOTSET"|"DEBUG"|"INFO"|"WARNING"|"ERROR"|"CRITICAL"]，默认为DEBUG
+        :param out: 设置输出端：0：默认控制台和文件都输出，1：仅控制台输出，其他：仅文件输出
         :param name: 日志中打印的name，默认为运行程序的name
+        :param set_level: 日志级别["NOTSET"|"DEBUG"|"INFO"|"WARNING"|"ERROR"|"CRITICAL"]，默认为logging.DEBUG
         :param log_name: 日志文件的名字，默认为当前时间（年-月-日.log）
         :param log_path: 日志文件夹的路径，默认为logger.py同级目录中的log文件夹
-        :param use_console: 是否在控制台打印，默认为True
         """
-        self.__logger = logging.getLogger(str(name))
-        self.logger.setLevel(logging.DEBUG) #Log等级总开关
-        fmt = logging.Formatter('%(asctime)s - %(filename)s [%(funcName)s line:%(lineno)d] - %(levelname)s: %(message)s')
+        self.__logger = logging.getLogger(name)
+        self.logger.setLevel(set_level) #Log等级总开关
+        self.out = out
+        formater = logging.Formatter('%(asctime)s - %(name)s - %(filename)s [%(funcName)s line:%(lineno)d] - %(levelname)s: %(message)s')
         '''
+        %(filename)-25s -25的意思是左对齐，固定长度25 ，默认用空格填充
         %(name)s            Logger的名字
         %(levelname)s       文本形式的日志级别
         %(message)s         用户输出的消息
@@ -41,23 +58,27 @@ class Logger():
         %(threadName)s      线程名。可能没有
         %(process)d         进程ID。可能没有
         '''
-        if use_console:
-            # 建立一个streamhandler来把日志打在控制台窗口上，级别为Flevel以上
-            sh = logging.StreamHandler()
-            sh.setFormatter(fmt)
-            sh.setLevel(clevel)
-            self.logger.addHandler(sh)
+        # 控制台日志
+        console_handler = logging.StreamHandler()
+        console_handler.setFormatter(formater)
+        console_handler.setLevel(console_level)
 
-        # 建立一个filehandler来把日志记录在文件里，级别为Flevel以上
+        # 文件日志
         if not os.path.exists(log_path):  # 创建日志目录
             os.makedirs(log_path)
         # fh = logging.FileHandler(os.path.join(log_path, log_name), mode='a')
         # 每天生成一个新的日志文件,保留两天的日志文件
-        fh = TimedRotatingFileHandler(os.path.join(log_path, log_name), when='D', interval=1, backupCount=2, encoding='utf-8')
-        fh.setFormatter(fmt)
-        fh.setLevel(Flevel)
-        self.logger.addHandler(fh)
-
+        file_handler = TimedRotatingFileHandler(os.path.join(log_path, log_name), when='D', interval=1, backupCount=2, encoding='utf-8')
+        file_handler.setFormatter(formater)
+        file_handler.setLevel(file_level)
+        
+        if self.out == 0:
+            self.logger.addHandler(console_handler)
+            self.logger.addHandler(file_handler)
+        elif  self.out == 1:
+            self.logger.addHandler(console_handler)
+        else:
+            self.logger.addHandler(file_handler)
 
     def __getattr__(self, item):
         return getattr(self.logger, item)

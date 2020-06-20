@@ -1,0 +1,198 @@
+2020-06-18 23:08:56,039 - main - class_TelentClinet.py [login_host line:20] - DEBUG: failed to connect to host:172.11.3.100
+2020-06-18 23:08:56,039 - main - class_TelentClinet.py [login_host line:20] - DEBUG: failed to connect to host:172.11.3.100
+2020-06-18 23:08:56,041 - main - class_TelentClinet.py [login_host line:21] - ERROR: timed out
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/moduls/class_TelentClinet.py", line 18, in login_host
+    self.tn = telnetlib.Telnet(host,port=23,timeout=10)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/telnetlib.py", line 218, in __init__
+    self.open(host, port, timeout)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/telnetlib.py", line 234, in open
+    self.sock = socket.create_connection((host, port), timeout)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/socket.py", line 724, in create_connection
+    raise err
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/socket.py", line 713, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+2020-06-18 23:08:56,041 - main - class_TelentClinet.py [login_host line:21] - ERROR: timed out
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/moduls/class_TelentClinet.py", line 18, in login_host
+    self.tn = telnetlib.Telnet(host,port=23,timeout=10)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/telnetlib.py", line 218, in __init__
+    self.open(host, port, timeout)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/telnetlib.py", line 234, in open
+    self.sock = socket.create_connection((host, port), timeout)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/socket.py", line 724, in create_connection
+    raise err
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/socket.py", line 713, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+2020-06-18 23:09:43,427 - main - class_TelentClinet.py [login_host line:20] - DEBUG: failed to connect to host:172.11.3.100
+2020-06-18 23:09:43,427 - main - class_TelentClinet.py [login_host line:20] - DEBUG: failed to connect to host:172.11.3.100
+2020-06-18 23:09:43,428 - main - class_TelentClinet.py [login_host line:22] - ERROR: timed out
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/moduls/class_TelentClinet.py", line 18, in login_host
+    self.tn = telnetlib.Telnet(host,port=23,timeout=10)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/telnetlib.py", line 218, in __init__
+    self.open(host, port, timeout)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/telnetlib.py", line 234, in open
+    self.sock = socket.create_connection((host, port), timeout)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/socket.py", line 724, in create_connection
+    raise err
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/socket.py", line 713, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+2020-06-18 23:09:43,428 - main - class_TelentClinet.py [login_host line:22] - ERROR: timed out
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/moduls/class_TelentClinet.py", line 18, in login_host
+    self.tn = telnetlib.Telnet(host,port=23,timeout=10)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/telnetlib.py", line 218, in __init__
+    self.open(host, port, timeout)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/telnetlib.py", line 234, in open
+    self.sock = socket.create_connection((host, port), timeout)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/socket.py", line 724, in create_connection
+    raise err
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/socket.py", line 713, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+2020-06-18 23:14:51,270 - main - class_TelentClinet.py [login_host line:20] - DEBUG: failed to connect to host:172.11.3.100
+2020-06-18 23:14:51,270 - main - class_TelentClinet.py [login_host line:20] - DEBUG: failed to connect to host:172.11.3.100
+2020-06-18 23:15:44,101 - main - class_TelentClinet.py [login_host line:20] - DEBUG: failed to connect to host:172.11.3.100
+2020-06-18 23:15:44,101 - main - class_TelentClinet.py [login_host line:20] - DEBUG: failed to connect to host:172.11.3.100
+2020-06-18 23:15:44,102 - main - class_TelentClinet.py [login_host line:22] - ERROR: Error
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/moduls/class_TelentClinet.py", line 18, in login_host
+    self.tn = telnetlib.Telnet(host,port=23,timeout=10)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/telnetlib.py", line 218, in __init__
+    self.open(host, port, timeout)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/telnetlib.py", line 234, in open
+    self.sock = socket.create_connection((host, port), timeout)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/socket.py", line 724, in create_connection
+    raise err
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/socket.py", line 713, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+2020-06-18 23:15:44,102 - main - class_TelentClinet.py [login_host line:22] - ERROR: Error
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/moduls/class_TelentClinet.py", line 18, in login_host
+    self.tn = telnetlib.Telnet(host,port=23,timeout=10)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/telnetlib.py", line 218, in __init__
+    self.open(host, port, timeout)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/telnetlib.py", line 234, in open
+    self.sock = socket.create_connection((host, port), timeout)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/socket.py", line 724, in create_connection
+    raise err
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/socket.py", line 713, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+2020-06-18 23:17:44,475 - main - class_TelentClinet.py [login_host line:20] - DEBUG: failed to connect to host:172.11.3.100
+2020-06-18 23:17:44,475 - main - class_TelentClinet.py [login_host line:20] - DEBUG: failed to connect to host:172.11.3.100
+2020-06-18 23:17:44,476 - main - class_TelentClinet.py [login_host line:21] - ERROR: Error
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/moduls/class_TelentClinet.py", line 18, in login_host
+    self.tn = telnetlib.Telnet(host,port=23,timeout=10)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/telnetlib.py", line 218, in __init__
+    self.open(host, port, timeout)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/telnetlib.py", line 234, in open
+    self.sock = socket.create_connection((host, port), timeout)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/socket.py", line 724, in create_connection
+    raise err
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/socket.py", line 713, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+2020-06-18 23:17:44,476 - main - class_TelentClinet.py [login_host line:21] - ERROR: Error
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/moduls/class_TelentClinet.py", line 18, in login_host
+    self.tn = telnetlib.Telnet(host,port=23,timeout=10)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/telnetlib.py", line 218, in __init__
+    self.open(host, port, timeout)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/telnetlib.py", line 234, in open
+    self.sock = socket.create_connection((host, port), timeout)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/socket.py", line 724, in create_connection
+    raise err
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/socket.py", line 713, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+2020-06-18 23:34:19,520 - main - class_TelentClinet.py [login_host line:20] - DEBUG: failed to connect to host:172.11.3.100
+2020-06-18 23:34:19,520 - main - class_TelentClinet.py [login_host line:21] - ERROR: Error
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/moduls/class_TelentClinet.py", line 18, in login_host
+    self.tn = telnetlib.Telnet(host,port=23,timeout=10)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/telnetlib.py", line 218, in __init__
+    self.open(host, port, timeout)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/telnetlib.py", line 234, in open
+    self.sock = socket.create_connection((host, port), timeout)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/socket.py", line 724, in create_connection
+    raise err
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/socket.py", line 713, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+2020-06-18 23:34:55,426 - main - class_TelentClinet.py [login_host line:20] - DEBUG: failed to connect to host:172.11.3.100
+2020-06-18 23:34:55,426 - main - class_TelentClinet.py [login_host line:20] - DEBUG: failed to connect to host:172.11.3.100
+2020-06-18 23:34:55,426 - main - class_TelentClinet.py [login_host line:21] - ERROR: Error
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/moduls/class_TelentClinet.py", line 18, in login_host
+    self.tn = telnetlib.Telnet(host,port=23,timeout=10)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/telnetlib.py", line 218, in __init__
+    self.open(host, port, timeout)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/telnetlib.py", line 234, in open
+    self.sock = socket.create_connection((host, port), timeout)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/socket.py", line 724, in create_connection
+    raise err
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/socket.py", line 713, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+2020-06-18 23:34:55,426 - main - class_TelentClinet.py [login_host line:21] - ERROR: Error
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/moduls/class_TelentClinet.py", line 18, in login_host
+    self.tn = telnetlib.Telnet(host,port=23,timeout=10)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/telnetlib.py", line 218, in __init__
+    self.open(host, port, timeout)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/telnetlib.py", line 234, in open
+    self.sock = socket.create_connection((host, port), timeout)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/socket.py", line 724, in create_connection
+    raise err
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/socket.py", line 713, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+2020-06-18 23:58:11,424 - root - class_TelentClinet.py [login_host line:20] - DEBUG: failed to connect to host:172.11.3.100
+2020-06-18 23:58:11,424 - root - class_TelentClinet.py [login_host line:20] - DEBUG: failed to connect to host:172.11.3.100
+2020-06-18 23:58:11,424 - root - class_TelentClinet.py [login_host line:21] - ERROR: Error
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/moduls/class_TelentClinet.py", line 18, in login_host
+    self.tn = telnetlib.Telnet(host,port=23,timeout=10)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/telnetlib.py", line 218, in __init__
+    self.open(host, port, timeout)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/telnetlib.py", line 234, in open
+    self.sock = socket.create_connection((host, port), timeout)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/socket.py", line 724, in create_connection
+    raise err
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/socket.py", line 713, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+2020-06-18 23:58:11,424 - root - class_TelentClinet.py [login_host line:21] - ERROR: Error
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/moduls/class_TelentClinet.py", line 18, in login_host
+    self.tn = telnetlib.Telnet(host,port=23,timeout=10)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/telnetlib.py", line 218, in __init__
+    self.open(host, port, timeout)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/telnetlib.py", line 234, in open
+    self.sock = socket.create_connection((host, port), timeout)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/socket.py", line 724, in create_connection
+    raise err
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/socket.py", line 713, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+2020-06-18 23:59:00,163 - root.mainss - class_TelentClinet.py [login_host line:20] - DEBUG: failed to connect to host:172.11.3.100
+2020-06-18 23:59:00,164 - root.mainss - class_TelentClinet.py [login_host line:21] - ERROR: Error
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/moduls/class_TelentClinet.py", line 18, in login_host
+    self.tn = telnetlib.Telnet(host,port=23,timeout=10)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/telnetlib.py", line 218, in __init__
+    self.open(host, port, timeout)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/telnetlib.py", line 234, in open
+    self.sock = socket.create_connection((host, port), timeout)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/socket.py", line 724, in create_connection
+    raise err
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/socket.py", line 713, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out

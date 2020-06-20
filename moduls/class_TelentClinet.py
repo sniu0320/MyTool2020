@@ -3,10 +3,9 @@
 import sys
 import time
 import telnetlib
-import logging
-# from .class_Logger import Logger
-
-# logging = Logger()
+#import logging
+from .class_Logger import Logger
+logging = Logger()
 
 class TelnetClient():
     def __int__(self,):
@@ -17,8 +16,10 @@ class TelnetClient():
         try:
            # self.tn.open(host, port=23)
             self.tn = telnetlib.Telnet(host,port=23,timeout=10)
-        except:
+        except :
             logging.debug("failed to connect to host:%s" %host)
+            logging.error('Error', exc_info=True)  #输出Traceback信息
+            #logging.exception('Error') #输出Traceback信息,同上
             return False
 
         self.tn.read_until(b'Username:', timeout=10)

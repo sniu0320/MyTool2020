@@ -6,6 +6,7 @@ import sys
 from moduls.class_Logger import Logger
 from moduls.class_TelentClinet import TelnetClient
 
+logging = Logger()
 
 class Menu:
     '''Display a menu and respond to choices when run'''
@@ -20,7 +21,7 @@ class Menu:
         print("""
         Tools Menu(2020):
             轮询工具：
-
+                1.test
             日志处理：
                 XX
             运维工具：
@@ -62,5 +63,4 @@ class Menu:
 
 if __name__ == '__main__':
     #logging.basicConfig(level=logging.DEBUG, format='[%(levelname)s]%(message)s',)
-    logging = Logger() #通过class 只在main 不行
     Menu().run()
