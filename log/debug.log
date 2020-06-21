@@ -1,0 +1,16 @@
+2020-06-21 17:48:31,621 - root - class_TelentClinet.py [login_host line:20] - DEBUG: failed to connect to host:172.11.3.100'
+2020-06-21 17:48:31,622 - root - class_TelentClinet.py [login_host line:21] - ERROR: 
+'
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/moduls/class_TelentClinet.py", line 18, in login_host
+    self.tn = telnetlib.Telnet(host,port=23,timeout=10)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/telnetlib.py", line 218, in __init__
+    self.open(host, port, timeout)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/telnetlib.py", line 234, in open
+    self.sock = socket.create_connection((host, port), timeout)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/socket.py", line 724, in create_connection
+    raise err
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/socket.py", line 713, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+2020-06-21 17:50:35,555 - root - logger_test2.py [<module> line:24] - DEBUG: this is a debug level message'

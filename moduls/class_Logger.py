@@ -20,22 +20,30 @@ def __singletion(cls):
     return getInstance
 
 @__singletion
-class Logger():
-    def __init__(self, out=0,
+class MyLogger():
+    def __init__(self, enable=True,out=0,
                  name=os.path.split(os.path.splitext(sys.argv[0])[0])[-1],
-                #  name='main',
+                #  name=__name__,
                  set_level=logging.DEBUG,
-                 log_name=time.strftime("%Y-%m-%d.log", time.localtime()),
-                 log_path=os.path.join(os.path.dirname(os.path.abspath(__file__)), "log"),
+                #  log_name=time.strftime("%Y-%m-%d.log", time.localtime()),
+                 log_path=os.path.join(os.path.abspath(os.path.dirname(os.path.dirname(__file__))), "log"),
                  console_level=logging.DEBUG, 
                  file_level=logging.DEBUG):
         """
+        :param enable: False 禁用日志输出
+
         :param out: 设置输出端：0：默认控制台和文件都输出，1：仅控制台输出，其他：仅文件输出
+
         :param name: 日志中打印的name，默认为运行程序的name
+
         :param set_level: 日志级别["NOTSET"|"DEBUG"|"INFO"|"WARNING"|"ERROR"|"CRITICAL"]，默认为logging.DEBUG
+
         :param log_name: 日志文件的名字，默认为当前时间（年-月-日.log）
-        :param log_path: 日志文件夹的路径，默认为logger.py同级目录中的log文件夹
+
+        :param log_path: 日志文件夹的路径，默认为logger.py上级目录中的log文件夹
+
         """
+        #print(log_path)
         self.__logger = logging.getLogger(name)
         self.logger.setLevel(set_level) #Log等级总开关
         self.out = out
@@ -68,7 +76,10 @@ class Logger():
             os.makedirs(log_path)
         # fh = logging.FileHandler(os.path.join(log_path, log_name), mode='a')
         # 每天生成一个新的日志文件,保留两天的日志文件
-        file_handler = TimedRotatingFileHandler(os.path.join(log_path, log_name), when='D', interval=1, backupCount=2, encoding='utf-8')
+        #file_handler = TimedRotatingFileHandler(os.path.join(log_path, log_name), when='D', interval=1, backupCount=2, encoding='utf-8')
+        # 每隔 Byte 划分一个日志文件，备份文件为 1 个
+        file_handler = logging.handlers.RotatingFileHandler(
+            os.path.join(log_path, 'debug.log'), maxBytes=1024*1024, backupCount=1, encoding="utf-8")
         file_handler.setFormatter(formater)
         file_handler.setLevel(file_level)
         
@@ -79,6 +90,11 @@ class Logger():
             self.logger.addHandler(console_handler)
         else:
             self.logger.addHandler(file_handler)
+
+        if enable:
+            pass
+        else:
+            self.logger.disabled = True
 
     def __getattr__(self, item):
         return getattr(self.logger, item)
@@ -100,7 +116,7 @@ logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s - %(filename)s[%(funcName)s line:%(lineno)d] - %(levelname)s: %(message)s')
 '''
 if __name__ == '__main__':
-    logger = Logger()
+    logger = MyLogger(out=1)
     logger.debug('一个debug信息')
     logger.info('一个info信息')
     logger.warning('一个warning信息')

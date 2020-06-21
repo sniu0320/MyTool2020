@@ -2,11 +2,11 @@
 
 import os
 import sys
-# import logging
-from moduls.class_Logger import Logger
 from moduls.class_TelentClinet import TelnetClient
-
-logging = Logger()
+# from moduls.class_Logger import MyLogger
+# logging = MyLogger('root')
+import logging.config
+logging.config.fileConfig(fname='conf/logging_config.ini')
 
 class Menu:
     '''Display a menu and respond to choices when run'''
