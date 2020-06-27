@@ -2,7 +2,7 @@
 
 import os
 import sys
-from moduls.class_TelentClinet import TelnetClient
+from modules.tool.class_TelentClinet import TelnetClient
 # from moduls.class_Logger import MyLogger
 # logging = MyLogger('root')
 import logging.config
