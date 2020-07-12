@@ -7,6 +7,7 @@ import logging
 # from .class_Logger import MyLogger
 # logging = MyLogger()
 
+
 class TelnetClient():
     def __int__(self):
         self.tn = telnetlib.Telnet()
@@ -15,15 +16,16 @@ class TelnetClient():
         ''' return true or false'''
         try:
            # self.tn.open(host, port=23)
-            self.tn = telnetlib.Telnet(host,port=23,timeout=10)
+            self.tn = telnetlib.Telnet(host, port=23, timeout=10)
         except:
-            logging.error("failed to connect to host:%s \n" %host, exc_info=True)  #输出Traceback信息
-            #logging.exception('Error') #输出Traceback信息,同上
+            logging.error("failed to connect to host:%s \n" %
+                          host, exc_info=True)  # 输出Traceback信息
+            # logging.exception('Error') #输出Traceback信息,同上
             return False
 
         self.tn.read_until(b'Username:', timeout=10)
         self.tn.write(username.encode('utf-8') + b'\n')
-      
+
         self.tn.read_until(b'Password:', timeout=10)
         self.tn.write(password.encode('utf-8') + b'\n')
 
@@ -32,9 +34,9 @@ class TelnetClient():
         # 获取登录结果
         # read_very_eager()获取到的是的是上次获取之后本次获取之前的所有输出
         command_result = self.tn.read_very_eager().decode('utf-8')
-        #logging.debug()
+        # logging.debug()
         if "Login at" not in command_result:
-            logging.debug("login to host:%s successfully" %host)
+            logging.debug("login to host:%s successfully" % host)
             self.tn.read_until(b'>', timeout=1)
             self.tn.write(enable.encode('utf-8') + b"\n")
             self.tn.read_until(b'Password:', timeout=1)
@@ -42,7 +44,7 @@ class TelnetClient():
             # self.tn.write(b"ter len 0\n")
             return True
         else:
-            logging.debug("login to host:%s failed" %host)
+            logging.debug("login to host:%s failed" % host)
             return False
 
     def input_command(self, command):
@@ -62,7 +64,8 @@ class TelnetClient():
 
     def logout(self):
         self.tn.write(b"end\n")
-        self.tn.write(b"exit\n") #self.tn.close()
+        self.tn.write(b"exit\n")  # self.tn.close()
+
 
 if __name__ == '__main__':
     host = '172.11.3.100'
