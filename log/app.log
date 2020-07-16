@@ -1,0 +1,759 @@
+2020-07-14 23:12:14,894 - logger.py [wrapper line:29] - ERROR: 
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 27, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 35, in test
+    b = a+1
+TypeError: must be str, not int
+2020-07-14 23:13:13,446 - logger.py [wrapper line:29] - ERROR: 
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 27, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 37, in test
+    b = a+1
+TypeError: must be str, not int
+2020-07-14 23:15:23,845 - logger.py [wrapper line:29] - ERROR: 运行错误：
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 27, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 37, in test
+    b = a+1
+TypeError: must be str, not int
+2020-07-14 23:22:05,347 - logger.py [wrapper line:30] - ERROR: 运行错误：
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 28, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 38, in test
+    b = a+1
+TypeError: must be str, not int
+2020-07-14 23:31:17,999 - logger.py [wrapper line:30] - ERROR: 运行错误：
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 28, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 38, in test
+    b = a+1
+TypeError: must be str, not int
+2020-07-14 23:31:47,135 - logger.py [wrapper line:30] - ERROR: 运行错误：
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 28, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 38, in test
+    b = a+1
+TypeError: must be str, not int
+2020-07-14 23:37:08,905 - XXX - ERROR - 运行错误：
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 28, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 38, in test
+    b = a+1
+TypeError: must be str, not int
+2020-07-14 23:46:29,160 - logger.py [wrapper line:26] - ERROR: 运行错误：
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 24, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 49, in test
+    b = a+1
+TypeError: must be str, not int
+2020-07-14 23:53:43,502 - logger.py [wrapper line:26] - ERROR: 运行错误：
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 24, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 49, in test
+    b = a+1
+TypeError: must be str, not int
+2020-07-14 23:55:28,787 - logger.py [wrapper line:26] - ERROR: 运行错误：
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 24, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 56, in test
+    b = a+1
+TypeError: must be str, not int
+2020-07-14 23:58:04,095 - logger.py [wrapper line:26] - ERROR: 运行错误：
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 24, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 47, in test
+    b = a+1
+TypeError: must be str, not int
+2020-07-14 23:59:20,039 - logger.py [wrapper line:26] - ERROR: 运行错误：
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 24, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 47, in test
+    b = a+1
+TypeError: must be str, not int
+2020-07-14 23:59:20,039 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,039 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,040 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,040 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,040 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,040 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,040 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,040 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,040 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,041 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,041 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,041 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,041 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,041 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,041 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,041 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,041 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,041 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,042 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,042 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,042 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,043 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,043 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,043 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,043 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,043 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,043 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,043 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,043 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,043 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,044 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,044 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,044 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,044 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,044 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,044 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,052 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,052 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,052 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,053 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,053 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,053 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,053 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,053 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,053 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,054 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,054 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,054 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,054 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,054 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,055 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,055 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,061 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,061 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,062 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,062 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,067 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,067 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,067 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,069 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,069 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,069 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,070 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,070 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,070 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,070 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,070 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,072 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,073 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,073 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,075 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,081 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,081 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,082 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,082 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,082 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,083 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,083 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,083 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,083 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,083 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,084 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,084 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,084 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,084 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,084 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,090 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,091 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,094 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,094 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,094 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,095 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,095 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,095 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,095 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,095 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,095 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,096 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,096 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:20,096 - logger.py [add line:55] - INFO: ceshi.
+2020-07-14 23:59:57,457 - logger.py [wrapper line:26] - ERROR: 运行错误：
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 24, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 47, in test
+    b = a+1
+TypeError: must be str, not int
+2020-07-14 23:59:57,457 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,458 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,458 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,458 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,458 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,458 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,459 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,459 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,459 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,459 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,459 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,459 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,459 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,459 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,459 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,460 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,460 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,460 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,460 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,460 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,461 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,461 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,461 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,461 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,461 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,461 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,462 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,462 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,462 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,462 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,462 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,462 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,463 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,463 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,463 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,463 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,463 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,463 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,463 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,463 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,463 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,464 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,464 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,464 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,464 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,464 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,465 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,465 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,465 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,465 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,465 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,465 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,465 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,466 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,466 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,466 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,466 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,466 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,467 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,467 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,467 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,467 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,467 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,467 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,467 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,468 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,468 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,468 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,468 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,477 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,477 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,478 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,479 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,480 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,481 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,481 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,481 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,481 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,481 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,481 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,482 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,482 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,482 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,482 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,482 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,482 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,482 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,482 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,482 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,482 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,482 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,483 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,483 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,483 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,483 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,484 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,484 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,484 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,484 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-14 23:59:57,484 - logger.py [add line:55] - ERROR: ceshi.
+2020-07-15 00:05:20,445 - logger.py [wrapper line:26] - ERROR: must be str, not int
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 24, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 57, in test
+    b = a+1
+TypeError: must be str, not int
+2020-07-15 00:05:20,445 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,445 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,446 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,446 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,446 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,446 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,446 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,446 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,447 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,447 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,447 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,447 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,447 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,447 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,448 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,448 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,448 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,448 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,448 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,448 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,448 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,449 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,449 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,449 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,449 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,449 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,449 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,449 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,449 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,449 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,456 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,456 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,456 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,456 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,457 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,457 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,458 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,459 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,460 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,461 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,461 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,461 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,461 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,462 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,463 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,464 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,465 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,465 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,466 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,466 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,466 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,466 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,479 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,480 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,480 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,480 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,480 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,480 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,480 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,481 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,481 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,481 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,481 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,481 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,481 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,481 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,482 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,482 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,501 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,501 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,501 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,501 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,501 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,501 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,501 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,501 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,501 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,501 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,505 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,519 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,520 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,520 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,521 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,522 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,522 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,522 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,522 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,523 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,523 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,523 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,523 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,523 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,523 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,524 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,524 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,534 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,543 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,543 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,543 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:05:20,543 - logger.py [add line:65] - ERROR: ceshi.
+2020-07-15 00:08:40,451 - logger.py [wrapper line:26] - ERROR: 运行错误：
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 24, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 57, in test
+    b = a+1
+TypeError: must be str, not int
+2020-07-15 00:08:40,452 - logger.py [add line:66] - ERROR: ceshi.
+2020-07-15 00:08:40,452 - logger.py [add line:66] - ERROR: ceshi.
+2020-07-15 00:08:40,452 - logger.py [add line:66] - ERROR: ceshi.
+2020-07-15 00:08:40,452 - logger.py [add line:66] - ERROR: ceshi.
+2020-07-15 00:08:40,452 - logger.py [add line:66] - ERROR: ceshi.
+2020-07-15 00:08:57,268 - logger.py [wrapper line:26] - ERROR: 运行错误：
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 24, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 57, in test
+    b = a+1
+TypeError: must be str, not int
+2020-07-15 00:08:57,269 - logger.py [add line:66] - INFO: ceshi.
+2020-07-15 00:08:57,269 - logger.py [add line:66] - INFO: ceshi.
+2020-07-15 00:08:57,269 - logger.py [add line:66] - INFO: ceshi.
+2020-07-15 00:08:57,269 - logger.py [add line:66] - INFO: ceshi.
+2020-07-15 00:08:57,269 - logger.py [add line:66] - INFO: ceshi.
+2020-07-15 00:12:17,619 - logger.py [wrapper line:28] - ERROR: 运行错误：
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 26, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 59, in test
+    b = a+1
+TypeError: must be str, not int
+2020-07-15 00:12:17,620 - logger.py [add line:68] - INFO: ceshi.
+2020-07-15 00:12:17,620 - logger.py [add line:68] - INFO: ceshi.
+2020-07-15 00:12:17,620 - logger.py [add line:68] - INFO: ceshi.
+2020-07-15 00:12:17,620 - logger.py [add line:68] - INFO: ceshi.
+2020-07-15 00:12:17,620 - logger.py [add line:68] - INFO: ceshi.
+2020-07-15 00:15:11,390 - logger.py [wrapper line:28] - ERROR: 运行错误：
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 26, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 60, in test
+    b = a+1
+TypeError: must be str, not int
+2020-07-15 00:15:11,391 - logger.py [add line:69] - INFO: ceshi.
+2020-07-15 00:15:11,391 - logger.py [add line:69] - INFO: ceshi.
+2020-07-15 00:15:11,392 - logger.py [add line:69] - INFO: ceshi.
+2020-07-15 00:15:11,392 - logger.py [add line:69] - INFO: ceshi.
+2020-07-15 00:15:11,392 - logger.py [add line:69] - INFO: ceshi.
+2020-07-15 07:33:58,716 - logger.py [wrapper line:26] - ERROR: 运行错误：
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 24, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 57, in test
+    b = a+1
+TypeError: must be str, not int
+2020-07-15 07:33:58,717 - logger.py [add line:66] - INFO: ceshi.
+2020-07-15 07:33:58,717 - logger.py [add line:66] - INFO: ceshi.
+2020-07-15 07:33:58,717 - logger.py [add line:66] - INFO: ceshi.
+2020-07-15 07:33:58,718 - logger.py [add line:66] - INFO: ceshi.
+2020-07-15 07:33:58,718 - logger.py [add line:66] - INFO: ceshi.
+2020-07-15 22:32:10,836 - logger.py [wrapper line:38] - ERROR: 运行错误：
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 36, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 59, in test
+    b = a+1
+TypeError: must be str, not int
+2020-07-15 22:32:48,971 - logger.py [wrapper line:38] - ERROR: 运行错误：
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 36, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 59, in test
+    b = a+1
+TypeError: must be str, not int
+2020-07-15 22:32:48,973 - logger.py [wrapper line:21] - DEBUG: Test is running
+2020-07-15 22:32:48,973 - logger.py [add line:68] - INFO: ceshi.
+2020-07-15 22:32:48,973 - logger.py [add line:68] - INFO: ceshi.
+2020-07-15 22:32:48,973 - logger.py [add line:68] - INFO: ceshi.
+2020-07-15 22:32:48,973 - logger.py [add line:68] - INFO: ceshi.
+2020-07-15 22:32:48,973 - logger.py [add line:68] - INFO: ceshi.
+2020-07-15 22:35:05,640 - logger.py [wrapper line:39] - ERROR: 运行错误：
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 37, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 60, in test
+    b = a+1
+TypeError: must be str, not int
+2020-07-15 22:35:05,641 - logger.py [wrapper line:24] - DEBUG: Test is running
+2020-07-15 22:35:05,641 - logger.py [add line:69] - INFO: ceshi.
+2020-07-15 22:35:05,642 - logger.py [add line:69] - INFO: ceshi.
+2020-07-15 22:35:05,642 - logger.py [add line:69] - INFO: ceshi.
+2020-07-15 22:35:05,642 - logger.py [add line:69] - INFO: ceshi.
+2020-07-15 22:35:05,642 - logger.py [add line:69] - INFO: ceshi.
+2020-07-15 22:36:10,647 - logger.py [wrapper line:39] - ERROR: 运行错误：
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 37, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 60, in test
+    b = a+1
+TypeError: must be str, not int
+2020-07-15 22:36:10,648 - logger.py [wrapper line:24] - DEBUG: Test is running
+2020-07-15 22:36:10,648 - logger.py [add line:69] - INFO: ceshi.
+2020-07-15 22:36:10,648 - logger.py [add line:69] - INFO: ceshi.
+2020-07-15 22:36:10,648 - logger.py [add line:69] - INFO: ceshi.
+2020-07-15 22:36:10,648 - logger.py [add line:69] - INFO: ceshi.
+2020-07-15 22:36:10,648 - logger.py [add line:69] - INFO: ceshi.
+2020-07-15 22:58:03,865 - logger.py [wrapper line:56] - ERROR: 运行错误：
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 54, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 97, in test
+    b = a+1
+TypeError: must be str, not int
+2020-07-15 23:00:54,492 - logger.py [wrapper line:24] - DEBUG: Test is running
+2020-07-15 23:00:54,493 - logger.py [add line:107] - INFO: ceshi.
+2020-07-15 23:00:54,493 - logger.py [add line:107] - INFO: ceshi.
+2020-07-15 23:00:54,493 - logger.py [add line:107] - INFO: ceshi.
+2020-07-15 23:00:54,493 - logger.py [add line:107] - INFO: ceshi.
+2020-07-15 23:00:54,494 - logger.py [add line:107] - INFO: ceshi.
+2020-07-15 23:02:34,119 - logger.py [wrapper line:24] - DEBUG: Test is running
+2020-07-15 23:02:34,119 - logger.py [add line:107] - INFO: ceshi.
+2020-07-15 23:02:34,119 - logger.py [add line:107] - INFO: ceshi.
+2020-07-15 23:02:34,119 - logger.py [add line:107] - INFO: ceshi.
+2020-07-15 23:02:34,120 - logger.py [add line:107] - INFO: ceshi.
+2020-07-15 23:02:34,120 - logger.py [add line:107] - INFO: ceshi.
+2020-07-15 23:02:45,412 - logger.py [wrapper line:56] - ERROR: 运行错误：
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 54, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 98, in test
+    b = a+1
+TypeError: must be str, not int
+2020-07-15 23:02:45,413 - logger.py [wrapper line:24] - DEBUG: Test is running
+2020-07-15 23:02:45,414 - logger.py [add line:107] - INFO: ceshi.
+2020-07-15 23:02:45,414 - logger.py [add line:107] - INFO: ceshi.
+2020-07-15 23:02:45,414 - logger.py [add line:107] - INFO: ceshi.
+2020-07-15 23:02:45,414 - logger.py [add line:107] - INFO: ceshi.
+2020-07-15 23:02:45,414 - logger.py [add line:107] - INFO: ceshi.
+2020-07-15 23:03:33,026 - logger.py [wrapper line:24] - DEBUG: Test is running
+2020-07-15 23:03:33,026 - logger.py [add line:107] - INFO: ceshi.
+2020-07-15 23:03:33,026 - logger.py [add line:107] - INFO: ceshi.
+2020-07-15 23:03:33,026 - logger.py [add line:107] - INFO: ceshi.
+2020-07-15 23:03:33,027 - logger.py [add line:107] - INFO: ceshi.
+2020-07-15 23:03:33,027 - logger.py [add line:107] - INFO: ceshi.
+2020-07-15 23:03:46,707 - logger.py [wrapper line:24] - DEBUG: Test is running
+2020-07-15 23:03:46,707 - logger.py [add line:107] - INFO: ceshi.
+2020-07-15 23:03:46,707 - logger.py [add line:107] - INFO: ceshi.
+2020-07-15 23:03:46,707 - logger.py [add line:107] - INFO: ceshi.
+2020-07-15 23:03:46,707 - logger.py [add line:107] - INFO: ceshi.
+2020-07-15 23:03:46,707 - logger.py [add line:107] - INFO: ceshi.
+2020-07-15 23:04:05,508 - logger.py [wrapper line:56] - ERROR: 运行错误：
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 54, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 97, in test
+    b = a+1
+TypeError: must be str, not int
+2020-07-15 23:04:05,509 - logger.py [wrapper line:24] - DEBUG: Test is running
+2020-07-15 23:04:05,509 - logger.py [add line:106] - INFO: ceshi.
+2020-07-15 23:04:05,509 - logger.py [add line:106] - INFO: ceshi.
+2020-07-15 23:04:05,510 - logger.py [add line:106] - INFO: ceshi.
+2020-07-15 23:04:05,510 - logger.py [add line:106] - INFO: ceshi.
+2020-07-15 23:04:05,510 - logger.py [add line:106] - INFO: ceshi.
+2020-07-15 23:04:55,503 - logger.py [wrapper line:56] - ERROR: 运行错误：
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 54, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 97, in test
+    b = a+1
+TypeError: must be str, not int
+2020-07-15 23:05:30,794 - logger.py [wrapper line:56] - ERROR: 运行错误：
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 54, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 97, in test
+    b = a+1
+TypeError: must be str, not int
+2020-07-15 23:05:30,795 - logger.py [wrapper line:24] - DEBUG: Test is running
+2020-07-15 23:13:48,654 - logger.py [wrapper line:76] - ERROR: 运行错误：
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 74, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 98, in test
+    b = a+1
+TypeError: must be str, not int
+2020-07-15 23:13:48,655 - logger.py [add line:107] - INFO: ceshi.
+2020-07-15 23:13:48,655 - logger.py [add line:107] - INFO: ceshi.
+2020-07-15 23:13:48,655 - logger.py [add line:107] - INFO: ceshi.
+2020-07-15 23:13:48,655 - logger.py [add line:107] - INFO: ceshi.
+2020-07-15 23:13:48,656 - logger.py [add line:107] - INFO: ceshi.
+2020-07-15 23:14:03,099 - logger.py [wrapper line:76] - ERROR: 运行错误：
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 74, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 98, in test
+    b = a+1
+TypeError: must be str, not int
+2020-07-15 23:14:03,100 - logger.py [wrapper line:24] - DEBUG: Test is running
+2020-07-15 23:14:03,100 - logger.py [add line:107] - INFO: ceshi.
+2020-07-15 23:14:03,100 - logger.py [add line:107] - INFO: ceshi.
+2020-07-15 23:14:03,100 - logger.py [add line:107] - INFO: ceshi.
+2020-07-15 23:14:03,100 - logger.py [add line:107] - INFO: ceshi.
+2020-07-15 23:14:03,101 - logger.py [add line:107] - INFO: ceshi.
+2020-07-15 23:56:09,926 - logger.py [wrapper line:76] - ERROR: 运行错误：
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/logger.py", line 74, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/yangyang/MyTool2020/core/modules/iptool.py", line 111, in test
+    ipaddress.ip_network('172.')
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/ipaddress.py", line 84, in ip_network
+    address)
+ValueError: '172.' does not appear to be an IPv4 or IPv6 network
+2020-07-15 23:57:27,989 - logtool.py [wrapper line:76] - ERROR: 运行错误：
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/logtool.py", line 74, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/yangyang/MyTool2020/core/modules/iptool.py", line 111, in test
+    ipaddress.ip_network('172.')
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/ipaddress.py", line 84, in ip_network
+    address)
+ValueError: '172.' does not appear to be an IPv4 or IPv6 network
+2020-07-16 00:02:47,345 - iptool.py [is_ip_Valid line:30] - ERROR: 
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/iptool.py", line 25, in is_ip_Valid
+    ipaddress.ip_address(addr)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/ipaddress.py", line 54, in ip_address
+    address)
+ValueError: '172.1.1.' does not appear to be an IPv4 or IPv6 address
+2020-07-16 00:05:40,580 - logtool.py [wrapper line:24] - DEBUG: is_ip_Valid is running
+2020-07-16 00:08:42,755 - logtool.py [wrapper line:24] - DEBUG: is_ip_Valid is running
+2020-07-16 00:09:28,392 - logtool.py [wrapper line:24] - DEBUG: is_ip_Valid is running
+2020-07-16 23:21:52,263 - logtool.py [wrapper line:76] - ERROR: 运行错误：
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/logtool.py", line 74, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/yangyang/MyTool2020/core/modules/iptool.py", line 96, in interface_info
+    iface = ipaddress.ip_interface(ip.strip())
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/ipaddress.py", line 119, in ip_interface
+    address)
+ValueError: '172.11.6./16' does not appear to be an IPv4 or IPv6 interface
+2020-07-16 23:27:44,046 - iptool.py [network_hosts line:45] - DEBUG: IPv4Network('172.11.3.0/24')
+2020-07-16 23:27:44,047 - iptool.py [network_hosts line:45] - DEBUG: IPv4Network('172.11.4.0/24')
+2020-07-16 23:27:44,047 - iptool.py [network_hosts line:45] - DEBUG: IPv4Network('172.11.5.0/24')
+2020-07-16 23:27:44,048 - logtool.py [wrapper line:76] - ERROR: 运行错误：
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/logtool.py", line 74, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/yangyang/MyTool2020/core/modules/iptool.py", line 44, in network_hosts
+    net = ipaddress.ip_network(n.strip())
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/ipaddress.py", line 84, in ip_network
+    address)
+ValueError: '172.11.6./24' does not appear to be an IPv4 or IPv6 network
+2020-07-16 23:27:44,049 - iptool.py [network_hosts line:45] - DEBUG: IPv4Network('172.11.7.0/24')
+2020-07-16 23:27:44,050 - iptool.py [is_ip_Valid line:27] - DEBUG: '172.1.1.' does not appear to be an IPv4 or IPv6 address
+2020-07-16 23:27:44,050 - logtool.py [wrapper line:76] - ERROR: 运行错误：
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/logtool.py", line 74, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/yangyang/MyTool2020/core/modules/iptool.py", line 90, in interface_info
+    iface = ipaddress.ip_interface(ip.strip())
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/ipaddress.py", line 119, in ip_interface
+    address)
+ValueError: '172.11.6./16' does not appear to be an IPv4 or IPv6 interface
+2020-07-16 23:29:53,245 - iptool.py [network_hosts line:45] - DEBUG: IPv4Network('172.11.3.0/24')
+2020-07-16 23:29:53,246 - iptool.py [network_hosts line:45] - DEBUG: IPv4Network('172.11.4.0/24')
+2020-07-16 23:29:53,246 - iptool.py [network_hosts line:45] - DEBUG: IPv4Network('172.11.5.0/24')
+2020-07-16 23:29:53,247 - logtool.py [wrapper line:76] - ERROR: 运行错误：
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/logtool.py", line 74, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/yangyang/MyTool2020/core/modules/iptool.py", line 44, in network_hosts
+    net = ipaddress.ip_network(n.strip())
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/ipaddress.py", line 84, in ip_network
+    address)
+ValueError: '172.11.6./24' does not appear to be an IPv4 or IPv6 network
+2020-07-16 23:29:53,248 - iptool.py [network_hosts line:45] - DEBUG: IPv4Network('172.11.7.0/24')
+2020-07-16 23:29:53,249 - iptool.py [is_ip_Valid line:27] - DEBUG: '172.1.1.' does not appear to be an IPv4 or IPv6 address
+2020-07-16 23:29:53,249 - logtool.py [wrapper line:76] - ERROR: 运行错误：
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/logtool.py", line 74, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/yangyang/MyTool2020/core/modules/iptool.py", line 91, in interface_info
+    iface = ipaddress.ip_interface(ip.strip())
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/ipaddress.py", line 119, in ip_interface
+    address)
+ValueError: '172.11.6./16' does not appear to be an IPv4 or IPv6 interface
+2020-07-16 23:34:21,269 - iptool.py [is_ip_Valid line:27] - DEBUG: '1' does not appear to be an IPv4 or IPv6 address
+2020-07-16 23:36:50,069 - iptool.py [is_ip_Valid line:27] - DEBUG: '172.1.1.' does not appear to be an IPv4 or IPv6 address
+2020-07-16 23:37:05,812 - iptool.py [is_ip_Valid line:27] - DEBUG: '172.1.1.' does not appear to be an IPv4 or IPv6 address
+2020-07-16 23:37:22,594 - iptool.py [is_ip_Valid line:27] - DEBUG: '172.1.1.' does not appear to be an IPv4 or IPv6 address
+2020-07-16 23:39:41,311 - iptool.py [is_ip_Valid line:27] - DEBUG: '172.1.1.' does not appear to be an IPv4 or IPv6 address
+2020-07-16 23:40:01,309 - iptool.py [is_ip_Valid line:27] - DEBUG: '172.1.1.' does not appear to be an IPv4 or IPv6 address
+2020-07-16 23:42:08,086 - iptool.py [is_ip_Valid line:25] - DEBUG:  172.1.1.0  is a valid address
+2020-07-16 23:42:08,086 - iptool.py [is_ip_Valid line:28] - DEBUG: '172.1.1.' does not appear to be an IPv4 or IPv6 address
+2020-07-16 23:42:31,380 - iptool.py [is_ip_Valid line:25] - DEBUG: ' 172.1.1.0 ' is a valid address
+2020-07-16 23:42:31,381 - iptool.py [is_ip_Valid line:28] - DEBUG: '172.1.1.' does not appear to be an IPv4 or IPv6 address
+2020-07-16 23:43:07,663 - iptool.py [is_ip_Valid line:26] - DEBUG: '172.1.1.0' is a valid address
+2020-07-16 23:43:07,663 - iptool.py [is_ip_Valid line:29] - DEBUG: '172.1.1.' does not appear to be an IPv4 or IPv6 address
+2020-07-16 23:45:30,034 - iptool.py [is_ip_Valid line:26] - DEBUG: '172.1.1.0' is a valid address
+2020-07-16 23:45:30,034 - iptool.py [is_ip_Valid line:29] - DEBUG: '172.1.1.' does not appear to be an IPv4 or IPv6 address
+2020-07-16 23:45:30,035 - iptool.py [is_ip_Valid line:26] - DEBUG: '172.11.3.0' is a valid address
+2020-07-16 23:45:30,035 - iptool.py [network_hosts line:49] - DEBUG: IPv4Network('172.11.3.0/24')
+2020-07-16 23:45:30,037 - iptool.py [is_ip_Valid line:26] - DEBUG: '172.11.4.0' is a valid address
+2020-07-16 23:45:30,037 - iptool.py [network_hosts line:49] - DEBUG: IPv4Network('172.11.4.0/24')
+2020-07-16 23:45:30,037 - iptool.py [is_ip_Valid line:26] - DEBUG: '172.11.5.0' is a valid address
+2020-07-16 23:45:30,037 - iptool.py [network_hosts line:49] - DEBUG: IPv4Network('172.11.5.0/24')
+2020-07-16 23:45:30,038 - iptool.py [is_ip_Valid line:29] - DEBUG: '172.11.6.' does not appear to be an IPv4 or IPv6 address
+2020-07-16 23:48:47,236 - iptool.py [is_ip_Valid line:29] - DEBUG: ' 172.1.1.0 ' does not appear to be an IPv4 or IPv6 address
+2020-07-16 23:48:47,236 - iptool.py [is_ip_Valid line:29] - DEBUG: '172.1.1.' does not appear to be an IPv4 or IPv6 address
+2020-07-16 23:48:47,237 - iptool.py [is_ip_Valid line:26] - DEBUG: '172.11.3.0' is a valid address
+2020-07-16 23:48:47,237 - iptool.py [network_hosts line:49] - DEBUG: IPv4Network('172.11.3.0/24')
+2020-07-16 23:48:47,238 - iptool.py [is_ip_Valid line:29] - DEBUG: ' 172.11.4.0' does not appear to be an IPv4 or IPv6 address
+2020-07-16 23:48:47,239 - iptool.py [is_ip_Valid line:26] - DEBUG: '172.11.5.0' is a valid address
+2020-07-16 23:48:47,239 - iptool.py [network_hosts line:49] - DEBUG: IPv4Network('172.11.5.0/24')
+2020-07-16 23:48:47,239 - iptool.py [is_ip_Valid line:29] - DEBUG: ' 172.11.6.' does not appear to be an IPv4 or IPv6 address
+2020-07-16 23:49:50,331 - iptool.py [is_ip_Valid line:28] - DEBUG: ' 172.1.1.0 ' does not appear to be an IPv4 or IPv6 address
+2020-07-16 23:49:50,331 - iptool.py [is_ip_Valid line:28] - DEBUG: '172.1.1.' does not appear to be an IPv4 or IPv6 address
+2020-07-16 23:49:50,331 - iptool.py [is_ip_Valid line:25] - DEBUG: '172.11.3.0/24' is a valid address
+2020-07-16 23:49:50,331 - iptool.py [network_hosts line:48] - DEBUG: IPv4Network('172.11.3.0/24')
+2020-07-16 23:49:50,332 - iptool.py [is_ip_Valid line:28] - DEBUG: ' 172.11.4.0' does not appear to be an IPv4 or IPv6 address
+2020-07-16 23:49:50,332 - iptool.py [is_ip_Valid line:25] - DEBUG: '172.11.5.0/24' is a valid address
+2020-07-16 23:49:50,332 - iptool.py [network_hosts line:48] - DEBUG: IPv4Network('172.11.5.0/24')
+2020-07-16 23:49:50,333 - iptool.py [is_ip_Valid line:28] - DEBUG: ' 172.11.6.' does not appear to be an IPv4 or IPv6 address
+2020-07-16 23:50:29,782 - iptool.py [is_ip_Valid line:25] - DEBUG: '172.1.1.0/24' is a valid address
+2020-07-16 23:50:29,782 - iptool.py [is_ip_Valid line:28] - DEBUG: '172.1.1.' does not appear to be an IPv4 or IPv6 address
+2020-07-16 23:50:29,783 - iptool.py [is_ip_Valid line:25] - DEBUG: '172.11.3.0/24' is a valid address
+2020-07-16 23:50:29,783 - iptool.py [network_hosts line:48] - DEBUG: IPv4Network('172.11.3.0/24')
+2020-07-16 23:50:29,783 - iptool.py [is_ip_Valid line:28] - DEBUG: ' 172.11.4.0' does not appear to be an IPv4 or IPv6 address
+2020-07-16 23:50:29,784 - iptool.py [is_ip_Valid line:25] - DEBUG: '172.11.5.0/24' is a valid address
+2020-07-16 23:50:29,784 - iptool.py [network_hosts line:48] - DEBUG: IPv4Network('172.11.5.0/24')
+2020-07-16 23:50:29,785 - iptool.py [is_ip_Valid line:28] - DEBUG: ' 172.11.6.' does not appear to be an IPv4 or IPv6 address
+2020-07-16 23:51:29,706 - iptool.py [is_ip_Valid line:25] - DEBUG: '172.1.1.0/24' is a valid address
+2020-07-16 23:51:29,707 - iptool.py [is_ip_Valid line:28] - DEBUG: '172.1.1./24' is not a valid address
+2020-07-16 23:51:29,707 - iptool.py [is_ip_Valid line:25] - DEBUG: '172.11.3.0/24' is a valid address
+2020-07-16 23:51:29,707 - iptool.py [network_hosts line:48] - DEBUG: IPv4Network('172.11.3.0/24')
+2020-07-16 23:51:29,708 - iptool.py [is_ip_Valid line:28] - DEBUG: ' 172.11.4.0/24' is not a valid address
+2020-07-16 23:51:29,708 - iptool.py [is_ip_Valid line:25] - DEBUG: '172.11.5.0/24' is a valid address
+2020-07-16 23:51:29,708 - iptool.py [network_hosts line:48] - DEBUG: IPv4Network('172.11.5.0/24')
+2020-07-16 23:51:29,708 - iptool.py [is_ip_Valid line:28] - DEBUG: ' 172.11.6./24' is not a valid address
+2020-07-16 23:54:27,655 - iptool.py [is_ip_Valid line:25] - DEBUG: '172.1.1.0/24' is a valid address
+2020-07-16 23:54:27,656 - iptool.py [is_ip_Valid line:28] - DEBUG: '172.1.1./24' is not a valid address
+2020-07-16 23:54:27,656 - iptool.py [is_ip_Valid line:25] - DEBUG: '172.11.3.0/24' is a valid address
+2020-07-16 23:54:27,656 - iptool.py [network_hosts line:48] - DEBUG: IPv4Network('172.11.3.0/24') num hosts:254
+2020-07-16 23:54:27,657 - iptool.py [is_ip_Valid line:28] - DEBUG: ' 172.11.4.0/24' is not a valid address
+2020-07-16 23:54:27,657 - iptool.py [is_ip_Valid line:25] - DEBUG: '172.11.5.0/24' is a valid address
+2020-07-16 23:54:27,657 - iptool.py [network_hosts line:48] - DEBUG: IPv4Network('172.11.5.0/24') num hosts:254
+2020-07-16 23:54:27,657 - iptool.py [is_ip_Valid line:28] - DEBUG: ' 172.11.6./24' is not a valid address
+2020-07-16 23:56:10,301 - iptool.py [is_ip_Valid line:25] - DEBUG: '172.1.1.0/24' is a valid address
+2020-07-16 23:56:10,301 - iptool.py [is_ip_Valid line:28] - DEBUG: '172.1.1./24' is not a valid address
+2020-07-16 23:56:10,301 - iptool.py [is_ip_Valid line:25] - DEBUG: '172.11.3.0/24' is a valid address
+2020-07-16 23:56:10,302 - iptool.py [network_num_hosts line:48] - DEBUG: IPv4Network('172.11.3.0/24') num hosts: 254
+2020-07-16 23:56:10,302 - iptool.py [is_ip_Valid line:28] - DEBUG: ' 172.11.4.0/24' is not a valid address
+2020-07-16 23:56:10,303 - iptool.py [is_ip_Valid line:25] - DEBUG: '172.11.5.0/24' is a valid address
+2020-07-16 23:56:10,303 - iptool.py [network_num_hosts line:48] - DEBUG: IPv4Network('172.11.5.0/24') num hosts: 254
+2020-07-16 23:56:10,303 - iptool.py [is_ip_Valid line:28] - DEBUG: ' 172.11.6./24' is not a valid address
+2020-07-16 23:56:33,962 - iptool.py [is_ip_Valid line:25] - DEBUG: '172.11.3.0/24' is a valid address
+2020-07-16 23:56:33,965 - iptool.py [network_num_hosts line:48] - DEBUG: IPv4Network('172.11.3.0/24') num hosts: 254
+2020-07-16 23:56:33,966 - iptool.py [is_ip_Valid line:28] - DEBUG: ' 172.11.4.0/24' is not a valid address
+2020-07-16 23:56:33,968 - iptool.py [is_ip_Valid line:25] - DEBUG: '172.11.5.0/24' is a valid address
+2020-07-16 23:56:33,969 - iptool.py [network_num_hosts line:48] - DEBUG: IPv4Network('172.11.5.0/24') num hosts: 254
+2020-07-16 23:56:33,969 - iptool.py [is_ip_Valid line:28] - DEBUG: ' 172.11.6./24' is not a valid address
