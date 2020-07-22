@@ -757,3 +757,462 @@ ValueError: '172.11.6./16' does not appear to be an IPv4 or IPv6 interface
 2020-07-16 23:56:33,968 - iptool.py [is_ip_Valid line:25] - DEBUG: '172.11.5.0/24' is a valid address
 2020-07-16 23:56:33,969 - iptool.py [network_num_hosts line:48] - DEBUG: IPv4Network('172.11.5.0/24') num hosts: 254
 2020-07-16 23:56:33,969 - iptool.py [is_ip_Valid line:28] - DEBUG: ' 172.11.6./24' is not a valid address
+2020-07-20 00:09:50,817 - iptool.py [is_ip_Valid line:32] - DEBUG: '172.11.3.0/24' is a valid address
+2020-07-20 00:09:50,818 - iptool.py [network_num_hosts line:56] - DEBUG: IPv4Network('172.11.3.0/24') num hosts: 254
+2020-07-20 00:09:50,819 - iptool.py [is_ip_Valid line:35] - DEBUG: ' 172.11.4.0/24' is not a valid address
+2020-07-20 00:09:50,821 - iptool.py [is_ip_Valid line:32] - DEBUG: '172.11.5.0/24' is a valid address
+2020-07-20 00:09:50,821 - iptool.py [network_num_hosts line:56] - DEBUG: IPv4Network('172.11.5.0/24') num hosts: 254
+2020-07-20 00:09:50,822 - iptool.py [is_ip_Valid line:35] - DEBUG: ' 172.11.6./24' is not a valid address
+2020-07-20 00:09:50,822 - iptool.py [ip_in_network line:121] - DEBUG: 172.11.1.1 is on 172.11.1.0/24
+2020-07-20 00:10:14,684 - iptool.py [is_ip_Valid line:32] - DEBUG: '172.11.3.0/24' is a valid address
+2020-07-20 00:10:14,684 - iptool.py [network_num_hosts line:56] - DEBUG: IPv4Network('172.11.3.0/24') num hosts: 254
+2020-07-20 00:10:14,685 - iptool.py [is_ip_Valid line:35] - DEBUG: ' 172.11.4.0/24' is not a valid address
+2020-07-20 00:10:14,685 - iptool.py [is_ip_Valid line:32] - DEBUG: '172.11.5.0/24' is a valid address
+2020-07-20 00:10:14,685 - iptool.py [network_num_hosts line:56] - DEBUG: IPv4Network('172.11.5.0/24') num hosts: 254
+2020-07-20 00:10:14,686 - iptool.py [is_ip_Valid line:35] - DEBUG: ' 172.11.6./24' is not a valid address
+2020-07-20 00:10:14,686 - iptool.py [ip_in_network line:124] - DEBUG: 172.11.2.1 is not on 172.11.1.0/24
+2020-07-20 00:11:03,942 - iptool.py [is_ip_Valid line:32] - DEBUG: '172.11.3.0/24' is a valid address
+2020-07-20 00:11:03,943 - iptool.py [network_num_hosts line:56] - DEBUG: IPv4Network('172.11.3.0/24') num hosts: 254
+2020-07-20 00:11:03,943 - iptool.py [is_ip_Valid line:35] - DEBUG: ' 172.11.4.0/24' is not a valid address
+2020-07-20 00:11:03,944 - iptool.py [is_ip_Valid line:32] - DEBUG: '172.11.5.0/24' is a valid address
+2020-07-20 00:11:03,944 - iptool.py [network_num_hosts line:56] - DEBUG: IPv4Network('172.11.5.0/24') num hosts: 254
+2020-07-20 00:11:03,945 - iptool.py [is_ip_Valid line:35] - DEBUG: ' 172.11.6./24' is not a valid address
+2020-07-20 00:12:00,663 - iptool.py [is_ip_Valid line:32] - DEBUG: '172.11.3.0/24' is a valid address
+2020-07-20 00:12:00,664 - iptool.py [network_num_hosts line:56] - DEBUG: IPv4Network('172.11.3.0/24') num hosts: 254
+2020-07-20 00:12:00,664 - iptool.py [is_ip_Valid line:35] - DEBUG: ' 172.11.4.0/24' is not a valid address
+2020-07-20 00:12:00,665 - iptool.py [is_ip_Valid line:32] - DEBUG: '172.11.5.0/24' is a valid address
+2020-07-20 00:12:00,665 - iptool.py [network_num_hosts line:56] - DEBUG: IPv4Network('172.11.5.0/24') num hosts: 254
+2020-07-20 00:12:00,665 - iptool.py [is_ip_Valid line:35] - DEBUG: ' 172.11.6./24' is not a valid address
+2020-07-20 00:20:17,214 - iptool.py [is_ip_Valid line:32] - DEBUG: '172.11.3.0/24' is a valid address
+2020-07-20 00:20:17,215 - iptool.py [network_num_hosts line:56] - DEBUG: IPv4Network('172.11.3.0/24') num hosts: 254
+2020-07-20 00:20:17,216 - iptool.py [is_ip_Valid line:35] - DEBUG: ' 172.11.4.0/24' is not a valid address
+2020-07-20 00:20:17,216 - iptool.py [is_ip_Valid line:32] - DEBUG: '172.11.5.0/24' is a valid address
+2020-07-20 00:20:17,217 - iptool.py [network_num_hosts line:56] - DEBUG: IPv4Network('172.11.5.0/24') num hosts: 254
+2020-07-20 00:20:17,218 - iptool.py [is_ip_Valid line:35] - DEBUG: ' 172.11.6./24' is not a valid address
+2020-07-20 23:02:37,323 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.3.0/24') num hosts: 254
+2020-07-20 23:02:37,323 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.4.0/24') num hosts: 254
+2020-07-20 23:02:37,324 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.5.0/24') num hosts: 254
+2020-07-20 23:02:37,324 - iptool.py [network_num_hosts line:50] - DEBUG: ' 172.11.6./24' is not a valid address
+2020-07-20 23:02:57,034 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.3.0/24') num hosts: 254
+2020-07-20 23:02:57,035 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.4.0/24') num hosts: 254
+2020-07-20 23:02:57,036 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.5.0/24') num hosts: 254
+2020-07-20 23:02:57,036 - iptool.py [network_num_hosts line:50] - DEBUG: ' 172.11.6.1/24' is not a valid address
+2020-07-20 23:04:22,116 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.3.0/24') num hosts: 254
+2020-07-20 23:04:22,117 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.4.0/24') num hosts: 254
+2020-07-20 23:04:22,117 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.5.0/24') num hosts: 254
+2020-07-20 23:04:22,118 - iptool.py [network_num_hosts line:50] - DEBUG: 172.11.6.1/24 has host bits set
+2020-07-20 23:04:59,689 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.3.0/24') num hosts: 254
+2020-07-20 23:04:59,690 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.4.0/24') num hosts: 254
+2020-07-20 23:04:59,690 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.5.0/24') num hosts: 254
+2020-07-20 23:04:59,691 - iptool.py [network_num_hosts line:50] - DEBUG: 172.11.6.1/24 has host bits set
+2020-07-20 23:04:59,691 - iptool.py [network_num_hosts line:51] - ERROR: 运行错误：
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/iptool.py", line 45, in network_num_hosts
+    net = ipaddress.ip_network(n.strip())
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/ipaddress.py", line 74, in ip_network
+    return IPv4Network(address, strict)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/ipaddress.py", line 1537, in __init__
+    raise ValueError('%s has host bits set' % self)
+ValueError: 172.11.6.1/24 has host bits set
+2020-07-20 23:05:45,224 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.3.0/24') num hosts: 254
+2020-07-20 23:05:45,225 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.4.0/24') num hosts: 254
+2020-07-20 23:05:45,225 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.5.0/24') num hosts: 254
+2020-07-20 23:05:45,226 - iptool.py [network_num_hosts line:50] - DEBUG: '172.11.6./24' does not appear to be an IPv4 or IPv6 network
+2020-07-20 23:05:45,226 - iptool.py [network_num_hosts line:51] - ERROR: 运行错误：
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/iptool.py", line 45, in network_num_hosts
+    net = ipaddress.ip_network(n.strip())
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/ipaddress.py", line 84, in ip_network
+    address)
+ValueError: '172.11.6./24' does not appear to be an IPv4 or IPv6 network
+2020-07-20 23:07:10,803 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.3.0/24') num hosts: 254
+2020-07-20 23:07:10,804 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.4.0/24') num hosts: 254
+2020-07-20 23:07:10,804 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.5.0/24') num hosts: 254
+2020-07-20 23:07:10,805 - iptool.py [network_num_hosts line:50] - ERROR: '172.11.6./24' does not appear to be an IPv4 or IPv6 network
+2020-07-20 23:07:24,071 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.3.0/24') num hosts: 254
+2020-07-20 23:07:24,072 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.4.0/24') num hosts: 254
+2020-07-20 23:07:24,072 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.5.0/24') num hosts: 254
+2020-07-20 23:07:24,073 - iptool.py [network_num_hosts line:50] - ERROR: '172.11.6./24' does not appear to be an IPv4 or IPv6 network
+2020-07-20 23:08:09,509 - iptool.py [is_ip_Valid line:28] - ERROR: '172.1.1./24' is not a valid address
+2020-07-20 23:08:09,509 - iptool.py [is_ip_Valid line:29] - ERROR: '172.1.1.' does not appear to be an IPv4 or IPv6 address
+2020-07-20 23:08:09,509 - iptool.py [network_num_hosts line:48] - DEBUG: IPv4Network('172.11.3.0/24') num hosts: 254
+2020-07-20 23:08:09,510 - iptool.py [network_num_hosts line:48] - DEBUG: IPv4Network('172.11.4.0/24') num hosts: 254
+2020-07-20 23:08:09,510 - iptool.py [network_num_hosts line:48] - DEBUG: IPv4Network('172.11.5.0/24') num hosts: 254
+2020-07-20 23:08:09,511 - iptool.py [network_num_hosts line:51] - ERROR: '172.11.6./24' does not appear to be an IPv4 or IPv6 network
+2020-07-20 23:09:03,580 - iptool.py [is_ip_Valid line:28] - ERROR: '172.1.1./24' is not a valid address
+2020-07-20 23:09:03,580 - iptool.py [is_ip_Valid line:29] - ERROR: '172.1.1./24' does not appear to be an IPv4 or IPv6 address
+2020-07-20 23:09:03,581 - iptool.py [network_num_hosts line:48] - DEBUG: IPv4Network('172.11.3.0/24') num hosts: 254
+2020-07-20 23:09:03,581 - iptool.py [network_num_hosts line:48] - DEBUG: IPv4Network('172.11.4.0/24') num hosts: 254
+2020-07-20 23:09:03,582 - iptool.py [network_num_hosts line:48] - DEBUG: IPv4Network('172.11.5.0/24') num hosts: 254
+2020-07-20 23:09:03,582 - iptool.py [network_num_hosts line:51] - ERROR: '172.11.6./24' does not appear to be an IPv4 or IPv6 network
+2020-07-20 23:09:26,105 - iptool.py [is_ip_Valid line:28] - ERROR: '172.1.1.1/24' is not a valid address
+2020-07-20 23:09:26,105 - iptool.py [is_ip_Valid line:29] - ERROR: '172.1.1.1/24' does not appear to be an IPv4 or IPv6 address
+2020-07-20 23:09:26,106 - iptool.py [network_num_hosts line:48] - DEBUG: IPv4Network('172.11.3.0/24') num hosts: 254
+2020-07-20 23:09:26,107 - iptool.py [network_num_hosts line:48] - DEBUG: IPv4Network('172.11.4.0/24') num hosts: 254
+2020-07-20 23:09:26,108 - iptool.py [network_num_hosts line:48] - DEBUG: IPv4Network('172.11.5.0/24') num hosts: 254
+2020-07-20 23:09:26,109 - iptool.py [network_num_hosts line:51] - ERROR: '172.11.6./24' does not appear to be an IPv4 or IPv6 network
+2020-07-20 23:09:40,642 - iptool.py [is_ip_Valid line:28] - ERROR: '172.1.1.0/24' is not a valid address
+2020-07-20 23:09:40,644 - iptool.py [is_ip_Valid line:29] - ERROR: '172.1.1.0/24' does not appear to be an IPv4 or IPv6 address
+2020-07-20 23:09:40,645 - iptool.py [network_num_hosts line:48] - DEBUG: IPv4Network('172.11.3.0/24') num hosts: 254
+2020-07-20 23:09:40,646 - iptool.py [network_num_hosts line:48] - DEBUG: IPv4Network('172.11.4.0/24') num hosts: 254
+2020-07-20 23:09:40,647 - iptool.py [network_num_hosts line:48] - DEBUG: IPv4Network('172.11.5.0/24') num hosts: 254
+2020-07-20 23:09:40,647 - iptool.py [network_num_hosts line:51] - ERROR: '172.11.6./24' does not appear to be an IPv4 or IPv6 network
+2020-07-20 23:10:28,063 - iptool.py [is_ip_Valid line:25] - DEBUG: '172.1.1.0' is a valid address
+2020-07-20 23:10:28,063 - iptool.py [is_ip_Valid line:28] - ERROR: '172.1.1.0/24' does not appear to be an IPv4 or IPv6 address
+2020-07-20 23:10:28,063 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.3.0/24') num hosts: 254
+2020-07-20 23:10:28,064 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.4.0/24') num hosts: 254
+2020-07-20 23:10:28,064 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.5.0/24') num hosts: 254
+2020-07-20 23:10:28,064 - iptool.py [network_num_hosts line:50] - ERROR: '172.11.6./24' does not appear to be an IPv4 or IPv6 network
+2020-07-20 23:10:49,792 - iptool.py [is_ip_Valid line:25] - DEBUG: '172.1.1.0' is a valid address
+2020-07-20 23:10:49,793 - iptool.py [is_ip_Valid line:28] - ERROR: '172.1.1.0/24' does not appear to be an IPv4 or IPv6 address
+2020-07-20 23:10:49,793 - iptool.py [is_ip_Valid line:28] - ERROR: '172.1.1.1/24' does not appear to be an IPv4 or IPv6 address
+2020-07-20 23:10:49,793 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.3.0/24') num hosts: 254
+2020-07-20 23:10:49,794 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.4.0/24') num hosts: 254
+2020-07-20 23:10:49,795 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.5.0/24') num hosts: 254
+2020-07-20 23:10:49,795 - iptool.py [network_num_hosts line:50] - ERROR: '172.11.6./24' does not appear to be an IPv4 or IPv6 network
+2020-07-20 23:13:09,060 - iptool.py [is_ip_Valid line:25] - DEBUG: '172.1.1.0' is a valid address
+2020-07-20 23:13:09,060 - iptool.py [is_ip_Valid line:28] - ERROR: '172.1.1.0/24' does not appear to be an IPv4 or IPv6 address
+2020-07-20 23:13:09,061 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.3.0/24') num hosts: 254
+2020-07-20 23:13:09,062 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.4.0/24') num hosts: 254
+2020-07-20 23:13:09,062 - iptool.py [network_num_hosts line:51] - DEBUG: num hosts: 508
+2020-07-20 23:13:09,063 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.5.0/24') num hosts: 254
+2020-07-20 23:13:09,063 - iptool.py [network_num_hosts line:50] - ERROR: '172.11.6./24' does not appear to be an IPv4 or IPv6 network
+2020-07-20 23:13:09,064 - iptool.py [network_num_hosts line:51] - DEBUG: num hosts: 254
+2020-07-20 23:16:49,452 - iptool.py [is_ip_Valid line:25] - DEBUG: '172.1.1.0' is a valid address
+2020-07-20 23:16:49,452 - iptool.py [is_ip_Valid line:28] - ERROR: '172.1.1.0/24' does not appear to be an IPv4 or IPv6 address
+2020-07-20 23:16:49,452 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.3.0/24') num hosts: 254
+2020-07-20 23:16:49,453 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.4.0/24') num hosts: 254
+2020-07-20 23:16:49,453 - iptool.py [network_num_hosts line:51] - DEBUG: num hosts: 508
+2020-07-20 23:16:49,453 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.5.0/24') num hosts: 254
+2020-07-20 23:16:49,454 - iptool.py [network_num_hosts line:50] - ERROR: '172.11.6./24' does not appear to be an IPv4 or IPv6 network
+2020-07-20 23:16:49,454 - iptool.py [network_num_hosts line:51] - DEBUG: num hosts: 254
+2020-07-20 23:17:08,086 - iptool.py [is_ip_Valid line:25] - DEBUG: '172.1.1.0' is a valid address
+2020-07-20 23:17:08,087 - iptool.py [is_ip_Valid line:28] - ERROR: '172.1.1.0/24' does not appear to be an IPv4 or IPv6 address
+2020-07-20 23:17:08,087 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.3.0/24') num hosts: 254
+2020-07-20 23:17:08,088 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.4.0/24') num hosts: 254
+2020-07-20 23:17:08,088 - iptool.py [network_num_hosts line:51] - DEBUG: num hosts: 508
+2020-07-20 23:17:08,088 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.5.0/24') num hosts: 254
+2020-07-20 23:17:08,089 - iptool.py [network_num_hosts line:50] - ERROR: '172.11.6./24' does not appear to be an IPv4 or IPv6 network
+2020-07-20 23:17:08,089 - iptool.py [network_num_hosts line:51] - DEBUG: num hosts: 254
+2020-07-20 23:17:08,089 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.7.0/24') num hosts: 254
+2020-07-20 23:17:08,090 - iptool.py [network_num_hosts line:51] - DEBUG: num hosts: 254
+2020-07-20 23:20:55,518 - iptool.py [is_ip_Valid line:25] - DEBUG: '172.1.1.0' is a valid address
+2020-07-20 23:20:55,519 - iptool.py [is_ip_Valid line:28] - ERROR: '172.1.1.0/24' does not appear to be an IPv4 or IPv6 address
+2020-07-20 23:20:55,519 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.3.0/24') num hosts: 254
+2020-07-20 23:20:55,520 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.4.0/24') num hosts: 254
+2020-07-20 23:20:55,521 - iptool.py [network_num_hosts line:51] - DEBUG: Total hosts: 508
+2020-07-20 23:20:55,521 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.5.0/24') num hosts: 254
+2020-07-20 23:20:55,521 - iptool.py [network_num_hosts line:50] - ERROR: '172.11.6./24' does not appear to be an IPv4 or IPv6 network
+2020-07-20 23:20:55,522 - iptool.py [network_num_hosts line:51] - DEBUG: Total hosts: 254
+2020-07-20 23:20:55,522 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.7.0/24') num hosts: 254
+2020-07-20 23:20:55,522 - iptool.py [network_num_hosts line:51] - DEBUG: Total hosts: 254
+2020-07-20 23:21:12,983 - iptool.py [is_ip_Valid line:25] - DEBUG: '172.1.1.0' is a valid address
+2020-07-20 23:21:12,983 - iptool.py [is_ip_Valid line:28] - ERROR: '172.1.1.0/24' does not appear to be an IPv4 or IPv6 address
+2020-07-20 23:21:12,984 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.3.0/24') num hosts: 254
+2020-07-20 23:21:12,984 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.4.0/24') num hosts: 254
+2020-07-20 23:21:12,985 - iptool.py [network_num_hosts line:51] - DEBUG: total hosts: 508
+2020-07-20 23:21:12,985 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.5.0/24') num hosts: 254
+2020-07-20 23:21:12,986 - iptool.py [network_num_hosts line:50] - ERROR: '172.11.6./24' does not appear to be an IPv4 or IPv6 network
+2020-07-20 23:21:12,986 - iptool.py [network_num_hosts line:51] - DEBUG: total hosts: 254
+2020-07-20 23:21:12,986 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.7.0/24') num hosts: 254
+2020-07-20 23:21:12,987 - iptool.py [network_num_hosts line:51] - DEBUG: total hosts: 254
+2020-07-20 23:23:11,424 - iptool.py [is_ip_Valid line:25] - DEBUG: '172.1.1.0' is a valid address
+2020-07-20 23:23:11,424 - iptool.py [is_ip_Valid line:28] - ERROR: '172.1.1.0/24' does not appear to be an IPv4 or IPv6 address
+2020-07-20 23:23:11,425 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.3.0/24') num hosts: 254
+2020-07-20 23:23:11,425 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.4.0/24') num hosts: 254
+2020-07-20 23:23:11,426 - iptool.py [network_num_hosts line:51] - DEBUG: total hosts: 508
+2020-07-20 23:23:11,426 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.5.0/24') num hosts: 254
+2020-07-20 23:23:11,426 - iptool.py [network_num_hosts line:50] - ERROR: '172.11.6./24' does not appear to be an IPv4 or IPv6 network
+2020-07-20 23:23:11,426 - iptool.py [network_num_hosts line:51] - DEBUG: total hosts: 254
+2020-07-20 23:23:11,427 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.7.0/24') num hosts: 254
+2020-07-20 23:23:11,427 - iptool.py [network_num_hosts line:51] - DEBUG: total hosts: 254
+2020-07-20 23:23:11,427 - iptool.py [network_info line:77] - ERROR: '172.11.0.0/16, 10.85.1.0/24' does not appear to be an IPv4 or IPv6 network
+2020-07-20 23:23:24,002 - iptool.py [is_ip_Valid line:25] - DEBUG: '172.1.1.0' is a valid address
+2020-07-20 23:23:24,003 - iptool.py [is_ip_Valid line:28] - ERROR: '172.1.1.0/24' does not appear to be an IPv4 or IPv6 address
+2020-07-20 23:23:24,003 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.3.0/24') num hosts: 254
+2020-07-20 23:23:24,003 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.4.0/24') num hosts: 254
+2020-07-20 23:23:24,004 - iptool.py [network_num_hosts line:51] - DEBUG: total hosts: 508
+2020-07-20 23:23:24,004 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.5.0/24') num hosts: 254
+2020-07-20 23:23:24,004 - iptool.py [network_num_hosts line:50] - ERROR: '172.11.6./24' does not appear to be an IPv4 or IPv6 network
+2020-07-20 23:23:24,004 - iptool.py [network_num_hosts line:51] - DEBUG: total hosts: 254
+2020-07-20 23:23:24,005 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.7.0/24') num hosts: 254
+2020-07-20 23:23:24,005 - iptool.py [network_num_hosts line:51] - DEBUG: total hosts: 254
+2020-07-20 23:31:28,920 - iptool.py [is_ip_Valid line:25] - DEBUG: '172.1.1.0' is a valid address
+2020-07-20 23:31:28,920 - iptool.py [is_ip_Valid line:28] - ERROR: '172.1.1.0/24' does not appear to be an IPv4 or IPv6 address
+2020-07-20 23:31:28,921 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.3.0/24') num hosts: 254
+2020-07-20 23:31:28,921 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.4.0/24') num hosts: 254
+2020-07-20 23:31:28,922 - iptool.py [network_num_hosts line:51] - DEBUG: total hosts: 508
+2020-07-20 23:31:28,922 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.5.0/24') num hosts: 254
+2020-07-20 23:31:28,922 - iptool.py [network_num_hosts line:50] - ERROR: '172.11.6./24' does not appear to be an IPv4 or IPv6 network
+2020-07-20 23:31:28,922 - iptool.py [network_num_hosts line:51] - DEBUG: total hosts: 254
+2020-07-20 23:31:28,923 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.7.0/24') num hosts: 254
+2020-07-20 23:31:28,923 - iptool.py [network_num_hosts line:51] - DEBUG: total hosts: 254
+2020-07-20 23:31:28,925 - iptool.py [interface_info line:96] - ERROR: '172.11.6./16,' does not appear to be an IPv4 or IPv6 interface
+2020-07-20 23:31:40,518 - iptool.py [is_ip_Valid line:25] - DEBUG: '172.1.1.0' is a valid address
+2020-07-20 23:31:40,518 - iptool.py [is_ip_Valid line:28] - ERROR: '172.1.1.0/24' does not appear to be an IPv4 or IPv6 address
+2020-07-20 23:31:40,518 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.3.0/24') num hosts: 254
+2020-07-20 23:31:40,519 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.4.0/24') num hosts: 254
+2020-07-20 23:31:40,519 - iptool.py [network_num_hosts line:51] - DEBUG: total hosts: 508
+2020-07-20 23:31:40,520 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.5.0/24') num hosts: 254
+2020-07-20 23:31:40,520 - iptool.py [network_num_hosts line:50] - ERROR: '172.11.6./24' does not appear to be an IPv4 or IPv6 network
+2020-07-20 23:31:40,520 - iptool.py [network_num_hosts line:51] - DEBUG: total hosts: 254
+2020-07-20 23:31:40,520 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.7.0/24') num hosts: 254
+2020-07-20 23:31:40,521 - iptool.py [network_num_hosts line:51] - DEBUG: total hosts: 254
+2020-07-20 23:33:36,530 - iptool.py [is_ip_Valid line:25] - DEBUG: '172.1.1.0' is a valid address
+2020-07-20 23:33:36,530 - iptool.py [is_ip_Valid line:28] - ERROR: '172.1.1.0/24' does not appear to be an IPv4 or IPv6 address
+2020-07-20 23:33:36,530 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.3.0/24') num hosts: 254
+2020-07-20 23:33:36,531 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.4.0/24') num hosts: 254
+2020-07-20 23:33:36,531 - iptool.py [network_num_hosts line:51] - DEBUG: total hosts: 508
+2020-07-20 23:33:36,532 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.5.0/24') num hosts: 254
+2020-07-20 23:33:36,532 - iptool.py [network_num_hosts line:50] - ERROR: '172.11.6./24' does not appear to be an IPv4 or IPv6 network
+2020-07-20 23:33:36,533 - iptool.py [network_num_hosts line:51] - DEBUG: total hosts: 254
+2020-07-20 23:33:36,533 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.7.0/24') num hosts: 254
+2020-07-20 23:33:36,533 - iptool.py [network_num_hosts line:51] - DEBUG: total hosts: 254
+2020-07-20 23:33:36,534 - iptool.py [ip_in_network line:110] - ERROR: 172.11.1.1/24 has host bits set
+2020-07-20 23:35:06,023 - iptool.py [is_ip_Valid line:25] - DEBUG: '172.1.1.0' is a valid address
+2020-07-20 23:35:06,023 - iptool.py [is_ip_Valid line:28] - ERROR: '172.1.1.0/24' does not appear to be an IPv4 or IPv6 address
+2020-07-20 23:35:06,024 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.3.0/24') num hosts: 254
+2020-07-20 23:35:06,024 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.4.0/24') num hosts: 254
+2020-07-20 23:35:06,025 - iptool.py [network_num_hosts line:51] - DEBUG: total hosts: 508
+2020-07-20 23:35:06,026 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.5.0/24') num hosts: 254
+2020-07-20 23:35:06,026 - iptool.py [network_num_hosts line:50] - ERROR: '172.11.6./24' does not appear to be an IPv4 or IPv6 network
+2020-07-20 23:35:06,026 - iptool.py [network_num_hosts line:51] - DEBUG: total hosts: 254
+2020-07-20 23:35:06,027 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.7.0/24') num hosts: 254
+2020-07-20 23:35:06,027 - iptool.py [network_num_hosts line:51] - DEBUG: total hosts: 254
+2020-07-20 23:35:06,028 - iptool.py [ip_in_network line:110] - ERROR: 172.11.1.1/24 has host bits set
+2020-07-20 23:35:47,406 - iptool.py [is_ip_Valid line:25] - DEBUG: '172.1.1.0' is a valid address
+2020-07-20 23:35:47,406 - iptool.py [is_ip_Valid line:28] - ERROR: '172.1.1.0/24' does not appear to be an IPv4 or IPv6 address
+2020-07-20 23:35:47,406 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.3.0/24') num hosts: 254
+2020-07-20 23:35:47,407 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.4.0/24') num hosts: 254
+2020-07-20 23:35:47,408 - iptool.py [network_num_hosts line:51] - DEBUG: total hosts: 508
+2020-07-20 23:35:47,408 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.5.0/24') num hosts: 254
+2020-07-20 23:35:47,409 - iptool.py [network_num_hosts line:50] - ERROR: '172.11.6./24' does not appear to be an IPv4 or IPv6 network
+2020-07-20 23:35:47,409 - iptool.py [network_num_hosts line:51] - DEBUG: total hosts: 254
+2020-07-20 23:35:47,409 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.7.0/24') num hosts: 254
+2020-07-20 23:35:47,410 - iptool.py [network_num_hosts line:51] - DEBUG: total hosts: 254
+2020-07-20 23:35:47,410 - iptool.py [ip_in_network line:113] - DEBUG: 172.11.1.2 is on 172.11.1.0/24
+2020-07-20 23:36:26,324 - iptool.py [is_ip_Valid line:25] - DEBUG: '172.1.1.0' is a valid address
+2020-07-20 23:36:26,324 - iptool.py [is_ip_Valid line:28] - ERROR: '172.1.1.0/24' does not appear to be an IPv4 or IPv6 address
+2020-07-20 23:36:26,324 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.3.0/24') num hosts: 254
+2020-07-20 23:36:26,325 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.4.0/24') num hosts: 254
+2020-07-20 23:36:26,326 - iptool.py [network_num_hosts line:51] - DEBUG: total hosts: 508
+2020-07-20 23:36:26,326 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.5.0/24') num hosts: 254
+2020-07-20 23:36:26,326 - iptool.py [network_num_hosts line:50] - ERROR: '172.11.6./24' does not appear to be an IPv4 or IPv6 network
+2020-07-20 23:36:26,327 - iptool.py [network_num_hosts line:51] - DEBUG: total hosts: 254
+2020-07-20 23:36:26,327 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.7.0/24') num hosts: 254
+2020-07-20 23:36:26,327 - iptool.py [network_num_hosts line:51] - DEBUG: total hosts: 254
+2020-07-20 23:36:26,328 - iptool.py [ip_in_network line:110] - ERROR: 172.11.1.1/24 has host bits set
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/iptool.py", line 108, in ip_in_network
+    net = ipaddress.ip_network(net)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/ipaddress.py", line 74, in ip_network
+    return IPv4Network(address, strict)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/ipaddress.py", line 1537, in __init__
+    raise ValueError('%s has host bits set' % self)
+ValueError: 172.11.1.1/24 has host bits set
+2020-07-20 23:37:52,142 - iptool.py [is_ip_Valid line:25] - DEBUG: '172.1.1.0' is a valid address
+2020-07-20 23:37:52,143 - iptool.py [is_ip_Valid line:28] - ERROR: '172.1.1.0/24' does not appear to be an IPv4 or IPv6 address
+2020-07-20 23:37:52,143 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.3.0/24') num hosts: 254
+2020-07-20 23:37:52,144 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.4.0/24') num hosts: 254
+2020-07-20 23:37:52,144 - iptool.py [network_num_hosts line:51] - DEBUG: total hosts: 508
+2020-07-20 23:37:52,145 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.5.0/24') num hosts: 254
+2020-07-20 23:37:52,145 - iptool.py [network_num_hosts line:50] - ERROR: '172.11.6./24' does not appear to be an IPv4 or IPv6 network
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/iptool.py", line 45, in network_num_hosts
+    net = ipaddress.ip_network(n.strip())
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/ipaddress.py", line 84, in ip_network
+    address)
+ValueError: '172.11.6./24' does not appear to be an IPv4 or IPv6 network
+2020-07-20 23:37:52,146 - iptool.py [network_num_hosts line:51] - DEBUG: total hosts: 254
+2020-07-20 23:37:52,147 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.7.0/24') num hosts: 254
+2020-07-20 23:37:52,147 - iptool.py [network_num_hosts line:51] - DEBUG: total hosts: 254
+2020-07-20 23:37:52,148 - iptool.py [ip_in_network line:110] - ERROR: 172.11.1.1/24 has host bits set
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/iptool.py", line 108, in ip_in_network
+    net = ipaddress.ip_network(net)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/ipaddress.py", line 74, in ip_network
+    return IPv4Network(address, strict)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/ipaddress.py", line 1537, in __init__
+    raise ValueError('%s has host bits set' % self)
+ValueError: 172.11.1.1/24 has host bits set
+2020-07-20 23:41:24,778 - iptool.py [is_ip_Valid line:25] - DEBUG: '172.1.1.0' is a valid address
+2020-07-20 23:41:24,779 - iptool.py [is_ip_Valid line:28] - ERROR: '172.1.1.0/24' does not appear to be an IPv4 or IPv6 address
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/iptool.py", line 24, in is_ip_Valid
+    ipaddress.ip_address(addr)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/ipaddress.py", line 54, in ip_address
+    address)
+ValueError: '172.1.1.0/24' does not appear to be an IPv4 or IPv6 address
+2020-07-20 23:41:24,780 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.3.0/24') num hosts: 254
+2020-07-20 23:41:24,780 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.4.0/24') num hosts: 254
+2020-07-20 23:41:24,781 - iptool.py [network_num_hosts line:51] - DEBUG: total hosts: 508
+2020-07-20 23:41:24,781 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.5.0/24') num hosts: 254
+2020-07-20 23:41:24,781 - iptool.py [network_num_hosts line:50] - ERROR: '172.11.6./24' does not appear to be an IPv4 or IPv6 network
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/iptool.py", line 45, in network_num_hosts
+    net = ipaddress.ip_network(n.strip())
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/ipaddress.py", line 84, in ip_network
+    address)
+ValueError: '172.11.6./24' does not appear to be an IPv4 or IPv6 network
+2020-07-20 23:41:24,782 - iptool.py [network_num_hosts line:51] - DEBUG: total hosts: 254
+2020-07-20 23:41:24,782 - iptool.py [network_num_hosts line:47] - DEBUG: IPv4Network('172.11.7.0/24') num hosts: 254
+2020-07-20 23:41:24,782 - iptool.py [network_num_hosts line:51] - DEBUG: total hosts: 254
+2020-07-20 23:41:24,783 - iptool.py [ip_in_network line:110] - ERROR: 172.11.1.1/24 has host bits set
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/iptool.py", line 108, in ip_in_network
+    net = ipaddress.ip_network(net)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/ipaddress.py", line 74, in ip_network
+    return IPv4Network(address, strict)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/ipaddress.py", line 1537, in __init__
+    raise ValueError('%s has host bits set' % self)
+ValueError: 172.11.1.1/24 has host bits set
+2020-07-21 00:06:00,169 - iptool.py [is_ip_Valid line:27] - DEBUG: '172.1.1.0' is a valid address
+2020-07-21 00:06:00,170 - iptool.py [is_ip_Valid line:30] - ERROR: '172.1.1.0/24' does not appear to be an IPv4 or IPv6 address
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/iptool.py", line 26, in is_ip_Valid
+    ipaddress.ip_address(addr)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/ipaddress.py", line 54, in ip_address
+    address)
+ValueError: '172.1.1.0/24' does not appear to be an IPv4 or IPv6 address
+2020-07-21 00:06:00,171 - iptool.py [network_num_hosts line:49] - DEBUG: IPv4Network('172.11.3.0/24') num hosts: 254
+2020-07-21 00:06:00,171 - iptool.py [network_num_hosts line:49] - DEBUG: IPv4Network('172.11.4.0/24') num hosts: 254
+2020-07-21 00:06:00,172 - iptool.py [network_num_hosts line:53] - DEBUG: total hosts: 508
+2020-07-21 00:06:00,172 - iptool.py [network_num_hosts line:49] - DEBUG: IPv4Network('172.11.5.0/24') num hosts: 254
+2020-07-21 00:06:00,173 - iptool.py [network_num_hosts line:52] - ERROR: '172.11.6./24' does not appear to be an IPv4 or IPv6 network
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/iptool.py", line 47, in network_num_hosts
+    net = ipaddress.ip_network(n.strip())
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/ipaddress.py", line 84, in ip_network
+    address)
+ValueError: '172.11.6./24' does not appear to be an IPv4 or IPv6 network
+2020-07-21 00:06:00,173 - iptool.py [network_num_hosts line:53] - DEBUG: total hosts: 254
+2020-07-21 00:06:00,174 - iptool.py [network_num_hosts line:49] - DEBUG: IPv4Network('172.11.7.0/24') num hosts: 254
+2020-07-21 00:06:00,174 - iptool.py [network_num_hosts line:53] - DEBUG: total hosts: 254
+2020-07-21 00:06:00,175 - iptool.py [ip_in_network line:112] - ERROR: 172.11.1.1/24 has host bits set
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/iptool.py", line 110, in ip_in_network
+    net = ipaddress.ip_network(net)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/ipaddress.py", line 74, in ip_network
+    return IPv4Network(address, strict)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/ipaddress.py", line 1537, in __init__
+    raise ValueError('%s has host bits set' % self)
+ValueError: 172.11.1.1/24 has host bits set
+2020-07-21 00:08:22,115 - iptool.py [is_ip_Valid line:27] - DEBUG: '172.1.1.0' is a valid address
+2020-07-21 00:08:22,116 - iptool.py [is_ip_Valid line:30] - ERROR: '172.1.1.0/24' does not appear to be an IPv4 or IPv6 address
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/iptool.py", line 26, in is_ip_Valid
+    ipaddress.ip_address(addr)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/ipaddress.py", line 54, in ip_address
+    address)
+ValueError: '172.1.1.0/24' does not appear to be an IPv4 or IPv6 address
+2020-07-21 00:08:22,118 - iptool.py [network_num_hosts line:49] - DEBUG: IPv4Network('172.11.3.0/24') num hosts: 254
+2020-07-21 00:08:22,118 - iptool.py [network_num_hosts line:49] - DEBUG: IPv4Network('172.11.4.0/24') num hosts: 254
+2020-07-21 00:08:22,119 - iptool.py [network_num_hosts line:53] - DEBUG: total hosts: 508
+2020-07-21 00:08:22,119 - iptool.py [network_num_hosts line:49] - DEBUG: IPv4Network('172.11.5.0/24') num hosts: 254
+2020-07-21 00:08:22,119 - iptool.py [network_num_hosts line:52] - ERROR: '172.11.6./24' does not appear to be an IPv4 or IPv6 network
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/iptool.py", line 47, in network_num_hosts
+    net = ipaddress.ip_network(n.strip())
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/ipaddress.py", line 84, in ip_network
+    address)
+ValueError: '172.11.6./24' does not appear to be an IPv4 or IPv6 network
+2020-07-21 00:08:22,120 - iptool.py [network_num_hosts line:53] - DEBUG: total hosts: 254
+2020-07-21 00:08:22,120 - iptool.py [network_num_hosts line:49] - DEBUG: IPv4Network('172.11.7.0/24') num hosts: 254
+2020-07-21 00:08:22,121 - iptool.py [network_num_hosts line:53] - DEBUG: total hosts: 254
+2020-07-21 00:08:22,122 - iptool.py [ip_in_network line:115] - DEBUG: 172.11.1.2 is on 172.11.1.0/24
+2020-07-21 00:08:22,122 - iptool.py [is_ip_Valid line:27] - DEBUG: '172.11.1.1' is a valid address
+2020-07-21 00:08:22,122 - iptool.py [ping_test line:129] - DEBUG: Starting:ping 172.11.1.1
+2020-07-21 00:08:22,399 - iptool.py [ping_test line:152] - DEBUG: 172.11.1.1离线
+2020-07-21 00:09:31,122 - iptool.py [is_ip_Valid line:27] - DEBUG: '172.1.1.0' is a valid address
+2020-07-21 00:09:31,123 - iptool.py [is_ip_Valid line:30] - ERROR: '172.1.1.0/24' does not appear to be an IPv4 or IPv6 address
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/iptool.py", line 26, in is_ip_Valid
+    ipaddress.ip_address(addr)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/ipaddress.py", line 54, in ip_address
+    address)
+ValueError: '172.1.1.0/24' does not appear to be an IPv4 or IPv6 address
+2020-07-21 00:09:31,124 - iptool.py [network_num_hosts line:49] - DEBUG: IPv4Network('172.11.3.0/24') num hosts: 254
+2020-07-21 00:09:31,125 - iptool.py [network_num_hosts line:49] - DEBUG: IPv4Network('172.11.4.0/24') num hosts: 254
+2020-07-21 00:09:31,125 - iptool.py [network_num_hosts line:53] - DEBUG: total hosts: 508
+2020-07-21 00:09:31,125 - iptool.py [network_num_hosts line:49] - DEBUG: IPv4Network('172.11.5.0/24') num hosts: 254
+2020-07-21 00:09:31,126 - iptool.py [network_num_hosts line:52] - ERROR: '172.11.6./24' does not appear to be an IPv4 or IPv6 network
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/iptool.py", line 47, in network_num_hosts
+    net = ipaddress.ip_network(n.strip())
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/ipaddress.py", line 84, in ip_network
+    address)
+ValueError: '172.11.6./24' does not appear to be an IPv4 or IPv6 network
+2020-07-21 00:09:31,126 - iptool.py [network_num_hosts line:53] - DEBUG: total hosts: 254
+2020-07-21 00:09:31,127 - iptool.py [network_num_hosts line:49] - DEBUG: IPv4Network('172.11.7.0/24') num hosts: 254
+2020-07-21 00:09:31,127 - iptool.py [network_num_hosts line:53] - DEBUG: total hosts: 254
+2020-07-21 00:09:31,127 - iptool.py [ip_in_network line:115] - DEBUG: 172.11.1.2 is on 172.11.1.0/24
+2020-07-21 00:09:31,128 - iptool.py [is_ip_Valid line:27] - DEBUG: '172.11.1.1' is a valid address
+2020-07-21 00:09:31,128 - iptool.py [ping_test line:129] - DEBUG: ping 172.11.1.1
+2020-07-21 00:09:31,430 - iptool.py [ping_test line:152] - DEBUG: 172.11.1.1 is not online
+2020-07-22 23:22:00,565 - iptool.py [is_ip_Valid line:28] - DEBUG: '172.1.1.0' is a valid address
+2020-07-22 23:22:00,565 - iptool.py [is_ip_Valid line:31] - ERROR: '172.1.1.0/24' does not appear to be an IPv4 or IPv6 address
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/iptool.py", line 27, in is_ip_Valid
+    ipaddress.ip_address(addr)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/ipaddress.py", line 54, in ip_address
+    address)
+ValueError: '172.1.1.0/24' does not appear to be an IPv4 or IPv6 address
+2020-07-22 23:22:00,567 - iptool.py [network_num_hosts line:50] - DEBUG: IPv4Network('172.11.3.0/24') num hosts: 254
+2020-07-22 23:22:00,568 - iptool.py [network_num_hosts line:50] - DEBUG: IPv4Network('172.11.4.0/24') num hosts: 254
+2020-07-22 23:22:00,569 - iptool.py [network_num_hosts line:54] - DEBUG: total hosts: 508
+2020-07-22 23:22:00,569 - iptool.py [network_num_hosts line:50] - DEBUG: IPv4Network('172.11.5.0/24') num hosts: 254
+2020-07-22 23:22:00,570 - iptool.py [network_num_hosts line:53] - ERROR: '172.11.6./24' does not appear to be an IPv4 or IPv6 network
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/iptool.py", line 48, in network_num_hosts
+    net = ipaddress.ip_network(n.strip())
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/ipaddress.py", line 84, in ip_network
+    address)
+ValueError: '172.11.6./24' does not appear to be an IPv4 or IPv6 network
+2020-07-22 23:22:00,570 - iptool.py [network_num_hosts line:54] - DEBUG: total hosts: 254
+2020-07-22 23:22:00,570 - iptool.py [network_num_hosts line:50] - DEBUG: IPv4Network('172.11.7.0/24') num hosts: 254
+2020-07-22 23:22:00,571 - iptool.py [network_num_hosts line:54] - DEBUG: total hosts: 254
+2020-07-22 23:22:00,572 - iptool.py [ip_in_network line:116] - DEBUG: 172.11.1.2 is on 172.11.1.0/24
+2020-07-22 23:22:00,572 - iptool.py [is_ip_Valid line:28] - DEBUG: '172.11.1.1' is a valid address
+2020-07-22 23:22:00,572 - iptool.py [ping_test line:130] - DEBUG: ping 172.11.1.1
+2020-07-22 23:22:01,700 - iptool.py [ping_test line:153] - DEBUG: 172.11.1.1 is not online
+2020-07-22 23:26:46,827 - iptool.py [is_ip_Valid line:28] - DEBUG: '172.1.1.0' is a valid address
+2020-07-22 23:26:46,827 - iptool.py [is_ip_Valid line:31] - ERROR: ValueError:'172.1.1.0/24' does not appear to be an IPv4 or IPv6 address
+2020-07-22 23:26:46,827 - iptool.py [network_num_hosts line:52] - DEBUG: IPv4Network('172.11.3.0/24') num hosts: 254
+2020-07-22 23:26:46,828 - iptool.py [network_num_hosts line:52] - DEBUG: IPv4Network('172.11.4.0/24') num hosts: 254
+2020-07-22 23:26:46,828 - iptool.py [network_num_hosts line:58] - DEBUG: total hosts: 508
+2020-07-22 23:26:46,829 - iptool.py [network_num_hosts line:52] - DEBUG: IPv4Network('172.11.5.0/24') num hosts: 254
+2020-07-22 23:26:46,829 - iptool.py [network_num_hosts line:55] - ERROR: ValueError:'172.11.6./24' does not appear to be an IPv4 or IPv6 network
+2020-07-22 23:26:46,829 - iptool.py [network_num_hosts line:58] - DEBUG: total hosts: 254
+2020-07-22 23:26:46,829 - iptool.py [network_num_hosts line:52] - DEBUG: IPv4Network('172.11.7.0/24') num hosts: 254
+2020-07-22 23:26:46,830 - iptool.py [network_num_hosts line:58] - DEBUG: total hosts: 254
+2020-07-22 23:26:46,835 - iptool.py [ip_in_network line:126] - DEBUG: 172.11.1.2 is on 172.11.1.0/24
+2020-07-22 23:26:46,837 - iptool.py [is_ip_Valid line:28] - DEBUG: '172.11.1.1' is a valid address
+2020-07-22 23:26:46,838 - iptool.py [ping_test line:140] - DEBUG: ping 172.11.1.1
+2020-07-22 23:26:47,967 - iptool.py [ping_test line:163] - DEBUG: 172.11.1.1 is not online
+2020-07-23 00:06:20,201 - telnetclient.py [login_host line:34] - ERROR: telnet 172.11.3.100:timed out
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/telnetclient.py", line 31, in login_host
+    self.tn = telnetlib.Telnet(host, port=port, timeout=timeout)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/telnetlib.py", line 218, in __init__
+    self.open(host, port, timeout)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/telnetlib.py", line 234, in open
+    self.sock = socket.create_connection((host, port), timeout)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/socket.py", line 724, in create_connection
+    raise err
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/socket.py", line 713, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+2020-07-23 00:07:42,712 - telnetclient.py [login_host line:36] - ERROR: telnet 172.11.3.100 timed out
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/modules/telnetclient.py", line 33, in login_host
+    self.tn = telnetlib.Telnet(host, port=port, timeout=timeout)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/telnetlib.py", line 218, in __init__
+    self.open(host, port, timeout)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/telnetlib.py", line 234, in open
+    self.sock = socket.create_connection((host, port), timeout)
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/socket.py", line 724, in create_connection
+    raise err
+  File "/usr/local/Cellar/python/3.6.4_4/Frameworks/Python.framework/Versions/3.6/lib/python3.6/socket.py", line 713, in create_connection
+    sock.connect(sa)
+socket.timeout: timed out
+2020-07-23 00:09:46,737 - telnetclient.py [login_host line:35] - ERROR: telnet 172.11.3.100 timed out

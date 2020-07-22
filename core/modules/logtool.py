@@ -13,6 +13,7 @@ logging.config.fileConfig(CONF_LOG)
 # LOG_KEY = 'root'
 
 # https://www.runoob.com/w3cnote/python-func-decorators.html
+# https://blog.csdn.net/lilygg/article/details/86775226?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-7.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromBaidu-7.nonecase
 
 
 def use_log(func):
@@ -47,6 +48,7 @@ class logit(object):
     """
     装饰器类 主要使用call，可以创建子类，添加功能（示例）;这个还没弄明白
     """
+
     def __init__(self):
         pass
 
@@ -72,8 +74,8 @@ def log_error(func):
         # logger = logging.getLogger(LOG_KEY)
         try:
             return func(*args, **kwargs)
-        except Exception:
-            logging.error("运行错误：", exc_info=True)
+        except Exception as e:
+            logging.error(e, exc_info=True)
     return wrapper
 
 
@@ -104,6 +106,6 @@ if __name__ == '__main__':
     class Test:
         def add(self):
             for _ in range(5):
-                self.log.info('ceshi.')
+                self.log.info('test.')
     t = Test()
     t.add()

@@ -13,7 +13,8 @@ class Dut(object):
         self.mng_ip = mng_ip
         self.username = username
         self.password = password
-        self.version = None
+        self.dutType = None  # 设备类型 9900 or 5960 or 其他
+        self.version = None  # 版本信息
 
     def enableSNMP(self):
         pass

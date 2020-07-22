@@ -1,22 +1,42 @@
 # -*- coding: UTF-8 -*-
 
 import time
+import socket
 import telnetlib
 import logging
+import logtool
 
 
 class TelnetClient():
+    """
+    telnetclient类
+
+    login_host: 登陆设备
+    """
+
     def __int__(self):
         self.tn = telnetlib.Telnet()
 
-    def login_host(self, host, username='test', password='test', enable='enable', password_enable='zxr10'):
-        ''' return true or false'''
+    def login(self,
+              host,
+              username='test',
+              password='test',
+              enable='enable',
+              password_enable='zxr10',
+              port=23,
+              timeout=3):
+        """
+        return true or false
+        """
         try:
-           # self.tn.open(host, port=23)
-            self.tn = telnetlib.Telnet(host, port=23, timeout=10)
-        except:
-            logging.error("failed to connect to host:%s \n" %
-                          host, exc_info=True)  # 输出Traceback信息
+            # self.tn.open(host, port=23)
+            self.tn = telnetlib.Telnet(host, port=port, timeout=timeout)
+        except socket.timeout as e:
+            logging.error("telnet {} {}".format(host, e))  # 输出Traceback信息
+            return False
+        except Exception as e:
+            logging.error("telnet {} {}".format(host, e),
+                          exc_info=True)  # 输出Traceback信息
             # logging.exception('Error') #输出Traceback信息,同上
             return False
 
@@ -31,7 +51,6 @@ class TelnetClient():
         # 获取登录结果
         # read_very_eager()获取到的是的是上次获取之后本次获取之前的所有输出
         command_result = self.tn.read_very_eager().decode('utf-8')
-        # logging.debug()
         if "Login at" not in command_result:
             logging.debug("login to host:%s successfully" % host)
             self.tn.read_until(b'>', timeout=1)
@@ -69,8 +88,8 @@ if __name__ == '__main__':
     command1 = 'show version'
     command2 = 'show board-info'
     telnet_client = TelnetClient()
-   # login to the host, success:return true, fail: return false
-    if telnet_client.login_host(host):
+    # login to the host, success:return true, fail: return false
+    if telnet_client.login(host):
         telnet_client.input_command('command1')
         telnet_client.input_command('command2')
         telnet_client.logout()
