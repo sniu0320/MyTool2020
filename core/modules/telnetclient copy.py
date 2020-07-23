@@ -123,7 +123,7 @@ class TelnetClient():
         else:
             logging.debug('从特权模式进入全局配置模式失败')
             if clear_vty:
-                logging.debug('尝试踢同用户') # 这里写的应该不对，这有2个用户在吧？
+                logging.debug('尝试踢同用户')  # 这里写的应该不对，这有2个用户在吧？
                 result = self.send_command('who')
                 vty_id = re.search(r'vty (.*) test', result).group(1).strip()
                 print(vty_id)
