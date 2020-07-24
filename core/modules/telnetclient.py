@@ -204,6 +204,14 @@ if __name__ == '__main__':
     commands = ['show board-info', 'show hostname']
     dut = TelnetClient()
     # login to the host, success:return true, fail: return false
+    dut.login('172.11.1.1')
+    time.sleep(2)
+    dut.login(host, 'test1')
+    time.sleep(2)
+    dut.login(host, password_enable='zxr11')
+    time.sleep(2)
+    dut.login(host, port=24)
+    time.sleep(2)
     if dut.login(host):
         if dut.enter_config_terminal():
             dut.send_command(command1)
