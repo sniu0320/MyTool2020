@@ -4,7 +4,6 @@ import ipaddress
 import logging
 import platform
 import subprocess
-# from logtool import log_error
 import logtool
 
 
@@ -172,7 +171,7 @@ class ipTool(object):
                 logging.debug("{} is online".format(addr))
                 return True
             else:
-                logging.debug("{} is not online".format(addr))
+                logging.error("{} is not online".format(addr))
                 return False
 
 

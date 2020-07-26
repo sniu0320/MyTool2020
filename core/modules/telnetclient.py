@@ -6,12 +6,20 @@ import telnetlib
 import re
 import logging
 import logtool
+from iptool import ipTool
 
 
-class TelnetClient():
+class TelnetClient(object):
     """
-    telnetclient类:
-    __init__: self.login_fail_info = None
+    telnetclient类
+
+    attribute:
+
+    self.login_fail_info: login失败信息
+
+    self.send_command_output: send_command后获取回显
+
+    method:
 
     login: 登陆设备
 
@@ -26,106 +34,123 @@ class TelnetClient():
     send_commands: 连续多条命令行下发
     """
 
-    def __int__(self):
+    def __init__(self,
+                 host,
+                 username='test',
+                 password='test',
+                 enable='enable',
+                 password_enable='zxr10',
+                 port=23,
+                 timeout=3):
         """
-        self.tn = telnetlib.Telnet()
+        self.login_fail_info: login失败信息
 
-        self.login_fail_info = None, login失败信息
-
-        self.send_command_output = None, send_command 回显
+        self.send_command_output: send_command后获取回显
         """
-        self.tn = telnetlib.Telnet()
+        self.host = host
+        self.username = username
+        self.password = password
+        self.enable = enable
+        self.password_enable = password_enable
+        self.port = port
+        self.timeout = timeout
+
+        self.client = telnetlib.Telnet()
         self.login_fail_info = None
         self.send_command_output = None
 
-    def login(self,
-              host,
-              username='test',
-              password='test',
-              enable='enable',
-              password_enable='zxr10',
-              port=23,
-              timeout=3):
+    def login(self):
         """
         登陆设备
         :return True or False，并记录self.login_fail_info
         """
-        try:
-            # self.tn.open(host, port=23)
-            self.tn = telnetlib.Telnet(host, port=port, timeout=timeout)
-        except socket.timeout as e:
-            logging.error("telnet {} {}".format(host, e))
-            self.login_fail_info = 'socket.timeout'
-            return False
-        except ConnectionResetError as e:
-            logging.error("telnet {} ConnectionResetError {}".format(host, e))
-            self.login_fail_info = 'ConnectionResetError'
-            return False
-        except Exception as e:
-            logging.error("telnet {} {}".format(host, e),
-                          exc_info=True)
-            self.login_fail_info = e
-            return False
+        if ipTool.ping_test(self.host):
+            try:
+                # self.client.open(host, port=23)
+                self.client = telnetlib.Telnet(
+                    self.host, port=self.port, timeout=self.timeout)
+            except socket.timeout as e:
+                logging.error("telnet {} failed({})".format(self.host, e))
+                self.login_fail_info = 'socket.timeout'
+                return False
+            except ConnectionResetError as e:
+                #  [WinError 10054] 远程主机强迫关闭了一个现有的连接
+                logging.error("telnet {} failed({})".format(self.host, e))
+                self.login_fail_info = e
+                return False
+            except ConnectionResetError as e:
+                #  [WinError 10061] 由于目标计算机积极拒绝，无法连接
+                logging.error("telnet {} failed({})".format(self.host, e))
+                self.login_fail_info = e
+                return False
+            except Exception as e:
+                logging.error("telnet {} {}".format(self.host, e),
+                              exc_info=True)
+                self.login_fail_info = e
+                return False
 
-        self.tn.read_until(b'Username:', timeout=10)
-        self.tn.write(username.encode('utf-8') + b'\n')
+            self.client.read_until(b'Username:', timeout=10)
+            self.client.write(self.username.encode('utf-8') + b'\n')
 
-        self.tn.read_until(b'Password:', timeout=10)
-        self.tn.write(password.encode('utf-8') + b'\n')
+            self.client.read_until(b'Password:', timeout=10)
+            self.client.write(self.password.encode('utf-8') + b'\n')
 
-        # 延时两秒再收取返回结果，给服务端足够响应时间
-        time.sleep(1)
-        # 获取登录结果
-        # read_very_eager()获取到的是的是上次获取之后本次获取之前的所有输出
-        login_result = self.tn.read_very_eager().decode('utf-8')
-        if "Login at" in login_result:
-            self.tn.read_until(b'>', timeout=1)
-            self.tn.write(enable.encode('utf-8') + b"\n")
-            self.tn.read_until(b'Password:', timeout=1)
-            self.tn.write(password_enable.encode('utf-8') + b"\n")
-            login_result = self.tn.read_very_eager().decode('utf-8')
+            # 延时两秒再收取返回结果，给服务端足够响应时间
             time.sleep(1)
-            if "#" in login_result:
-                logging.debug("login {} successful".format(host))
-                self.login_fail_info = None
-                return True
-            elif "Bad password" in login_result:
-                logging.error("login {} failed: 特权模式密码错误".format(host))
-                self.login_fail_info = '特权模式密码错误'
+            # 获取登录结果
+            # read_very_eager()获取到的是的是上次获取之后本次获取之前的所有输出
+            login_result = self.client.read_very_eager().decode('utf-8')
+            if "Login at" in login_result:
+                self.client.read_until(b'>', timeout=1)
+                self.client.write(self.enable.encode('utf-8') + b"\n")
+                self.client.read_until(b'Password:', timeout=1)
+                self.client.write(self.password_enable.encode('utf-8') + b"\n")
+                login_result = self.client.read_very_eager().decode('utf-8')
+                time.sleep(1)
+                if "#" in login_result:
+                    logging.debug("login {} successful".format(self.host))
+                    self.login_fail_info = None
+                    return True
+                elif "Bad password" in login_result:
+                    logging.error(
+                        "login {} failed: 特权模式密码错误".format(self.host))
+                    self.login_fail_info = '特权模式密码错误'
+                    self.logout()
+                    return False
+                else:
+                    logging.error("login {} failed(特权模式): {}".format(
+                        self.host, login_result))
+                    self.login_fail_info = login_result
+                    self.logout()
+                    return False
+            elif 'error' in login_result:
+                logging.error(
+                    "login {} failed: Username or password error".format(self.host))
+                self.login_fail_info = 'Username or password error'
                 self.logout()
                 return False
             else:
-                logging.error("login {} failed(特权模式): {}"
-                              .format(host, login_result))
+                logging.error("login {} failed(用户模式): {}".format(
+                    self.host, login_result))
                 self.login_fail_info = login_result
                 self.logout()
                 return False
-        elif 'error' in login_result:
-            logging.error("login {} failed: Username or password \
-                          error ".format(host))
-            self.login_fail_info = 'Username or password error'
-            self.logout()
-            return False
         else:
-            logging.error("login {} failed(用户模式): {}"
-                          .format(host, login_result))
-            self.login_fail_info = login_result
-            self.logout()
+            self.login_fail_info = "offline"
             return False
 
     def logout(self):
         """
         退出登陆
         """
-        # self.tn.write(b"end\n")
-        # self.tn.write(b"exit\n")
-        self.tn.close()
+        # self.client.write(b"end\n")
+        # self.client.write(b"exit\n")
+        self.client.close()
 
     def enter_config_terminal(self, multi_user=1, clear_vty=1):
         """
-        进入全局配置模式
-
-        如果multi_user=1 配置多用户；如果clear_vty=1，尝试踢掉用户
+        进入全局配置模式，multi_user=1 配置多用户；
+        如果clear_vty=1，尝试踢掉锁定用户(串口锁定踢不掉)
 
         :return True or False
         """
@@ -138,20 +163,17 @@ class TelnetClient():
                     self.send_command('multi-user config')
                 return True
             else:
-                logging.error('进入全局配置模式失败')
                 if clear_vty == 1:
-                    logging.debug('尝试踢掉锁定用户')  # 这里写的应该不对，这有2个用户在吧？
-                    self.send_command('who')
-                    if True:
-                        # 如果是串口锁定
+                    if 'Locked from con' in self.send_command_output:
+                        logging.error('进入全局配置模式失败(串口用户锁定)')
                         return False
                     else:
-                        # 尝试踢掉用户，
-                        # vty_id = re.search(r'vty (.*) test', result).group(1).strip()
-                        # print(vty_id)
-                        # # self.send_command('clear vty {}'.format(vty_id))
+                        vty_id = re.search(r'Locked from vty(\d*)',
+                                           self.send_command_output).group(1)
+                        self.send_command('clear line vty {}'.format(vty_id))
                         i += 1
                 else:
+                    logging.error('进入全局配置模式失败')
                     return False
 
     def exit_config_terminal(self):
@@ -160,21 +182,22 @@ class TelnetClient():
         """
         self.send_command('end')
 
-    def send_command(self, command):
+    def send_command(self, command, time_sleep=1):
         """
         单条命令行下发
-        :param command str
+        :param command str: 命令行
+        :param time_sleep int: 命令行下发后等待回显时间
 
         :回显信息 self.send_command_output
         """
         result_list = []
-        self.tn.write(command.encode('utf-8') + b'\n')
-        time.sleep(1)
+        self.client.write(command.encode('utf-8') + b'\n')
+        time.sleep(time_sleep)
         while (True):
-            command_result = self.tn.read_very_eager().decode('utf-8')
+            command_result = self.client.read_very_eager().decode('utf-8')
             result_list.append(command_result)
             if '--More--' in command_result.strip():
-                self.tn.write(b" ")
+                self.client.write(b" ")
                 time.sleep(0.5)
             else:
                 break
@@ -189,12 +212,12 @@ class TelnetClient():
         :回显信息 self.send_command_output
         """
         result_list = []
+        if type(commands) is str:
+            commands = commands.split(',')
         for command in commands:
             self.send_command(command)
             result_list.append(self.send_command_output)
         self.send_command_output = "\n".join(result_list)
-        logging.debug('************************************************')
-        logging.debug(self.send_command_output)
 
 
 if __name__ == '__main__':
@@ -202,18 +225,12 @@ if __name__ == '__main__':
     command1 = 'show version'
     command2 = 'show board-info'
     commands = ['show board-info', 'show hostname']
-    dut = TelnetClient()
+    dut = TelnetClient(host)
     # login to the host, success:return true, fail: return false
-    dut.login('172.11.1.1')
-    time.sleep(2)
-    dut.login(host, 'test1')
-    time.sleep(2)
-    dut.login(host, password_enable='zxr11')
-    time.sleep(2)
-    dut.login(host, port=24)
-    time.sleep(2)
-    if dut.login(host):
+    if dut.login():
         if dut.enter_config_terminal():
             dut.send_command(command1)
+            print(dut.send_command_output)
         dut.send_commands(commands)
+        print(dut.send_command_output)
         dut.logout()

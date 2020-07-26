@@ -6,7 +6,7 @@ import logging.config
 from functools import wraps
 
 CONF_LOG = os.path.join(os.path.abspath(os.path.dirname(
-    os.path.dirname(os.path.dirname(__file__)))), "conf/logging_config.ini")
+    os.path.dirname(os.path.dirname(__file__)))), "conf", "logging_config.ini")
 
 logging.config.fileConfig(CONF_LOG)
 
