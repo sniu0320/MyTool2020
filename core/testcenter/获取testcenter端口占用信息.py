@@ -1,13 +1,14 @@
 # -*- coding: UTF-8 -*-
 
-import StcPython as zte
 import sys
 import os
 import time
 current_dir = os.path.split(os.path.realpath(__file__))[0]
 if current_dir not in sys.path:
     sys.path.append(current_dir)
+print(current_dir)
 
+import StcPython as zte
 ######################################
 
 stc = zte.StcPython()

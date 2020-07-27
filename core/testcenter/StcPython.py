@@ -4,7 +4,7 @@ import os
 import sys
 import time
 import atexit
-import _winreg
+import winreg
 
 
 class StcPython():
@@ -23,12 +23,12 @@ class StcPython():
         # Linux example:
         #   /home/user/Spirent_TestCenter_4.40/Spirent_TestCenter_Application_Linux
 
-        key = _winreg.OpenKey(_winreg.HKEY_LOCAL_MACHINE,
-                              r"SOFTWARE\Spirent Communications\Spirent TestCenter")
+        key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE,
+                             r"SOFTWARE\Spirent Communications\Spirent TestCenter")
         try:
             i = 0
             while True:
-                stcVersion = _winreg.EnumKey(key, i)
+                stcVersion = winreg.EnumKey(key, i)
                 self.stcVersionList.append(stcVersion)
                 i += 1
         except WindowsError:
@@ -44,10 +44,10 @@ class StcPython():
             print('The TestCenter Client %s is not installed!!' % version)
             sys.exit(1)
 
-        key = _winreg.OpenKey(_winreg.HKEY_LOCAL_MACHINE,
-                              r"SOFTWARE\Spirent Communications\Spirent TestCenter\%s\Components\Spirent TestCenter Application" % version)
-        stcDir, type = _winreg.QueryValueEx(key, 'TARGETDIR')
-        stcTitle, type = _winreg.QueryValueEx(key, 'Title')
+        key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE,
+                             r"SOFTWARE\Spirent Communications\Spirent TestCenter\%s\Components\Spirent TestCenter Application" % version)
+        stcDir, type = winreg.QueryValueEx(key, 'TARGETDIR')
+        stcTitle, type = winreg.QueryValueEx(key, 'Title')
         stcInstallDir = stcDir + '\\' + stcTitle
 
         os.environ['STC_PRIVATE_INSTALL_DIR'] = stcInstallDir

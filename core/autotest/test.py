@@ -6,7 +6,7 @@ import autotelnetlib as my
 import os
 current_dir = os.path.dirname(os.path.realpath(__file__))
 os.chdir(current_dir)
-######################################
+###################################ç###
 
 mng_ipaddr = '192.166.4.10'
 # mng_ipaddr = '192.166.26.2'

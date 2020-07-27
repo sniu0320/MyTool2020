@@ -1,23 +1,29 @@
 # -*- coding: UTF-8 -*-
- 
+# Imported modules
+import datetime
+import logging
+import logging.handlers
+import os
+import re
+import sys
+import telnetlib
+import time
+
 # notepad++ 快速执行脚本方法
 # cmd /k cd /d "$(CURRENT_DIRECTORY)" & python "$(FULL_CURRENT_PATH)" & ECHO & PAUSE & EXIT
 # cmd /k cd /d "$(CURRENT_DIRECTORY)" & tclsh "$(FULL_CURRENT_PATH)" & ECHO & PAUSE & EXIT
- 
+
 r'''
 本库是基于python3.7实现，不兼容python2.x 系列.
 所有的 \r\n 都被转换为了 \n 方便统一处理
 '''
 __version__ = '2018.11.02'
-print('Loading %s , current lib version is : %s' % (__name__ , __version__))
- 
-# Imported modules
-import logging,logging.handlers,time,datetime,sys,re,os,telnetlib
- 
-#########################  初始化日志模块  #########################
+print('Loading %s , current lib version is : %s' % (__name__, __version__))
+
+# ########################  初始化日志模块  #########################
 current_dir = os.getcwd()
 syslog_file = os.path.join(current_dir, 'syslog.log')
-#初始化 文件日志
+# 初始化 文件日志
 filelog_handler = logging.handlers.RotatingFileHandler(syslog_file,mode='a', \
                                                        maxBytes = 10*1024*1024, \
                                                        backupCount = 10, \
@@ -1187,4 +1193,3 @@ class txtFile(BaseDUT):
 		
 	def close(self):
 		self.file.close()
-
