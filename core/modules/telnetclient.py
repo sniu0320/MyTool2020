@@ -55,7 +55,7 @@ class TelnetClient(object):
         self.port = port
         self.timeout = timeout
 
-        self.client = telnetlib.Telnet()
+        self.client = telnetlib.Telnet()  # 没用？
         self.login_fail_info = None
         self.send_command_output = None
 
