@@ -4,7 +4,7 @@ import os
 import sys
 import time
 import atexit
-import winreg
+import _winreg
 
 
 class StcPython():
@@ -23,12 +23,12 @@ class StcPython():
         # Linux example:
         #   /home/user/Spirent_TestCenter_4.40/Spirent_TestCenter_Application_Linux
 
-        key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE,
-                             r"SOFTWARE\Spirent Communications\Spirent TestCenter")
+        key = _winreg.OpenKey(_winreg.HKEY_LOCAL_MACHINE,
+                              r"SOFTWARE\Spirent Communications\Spirent TestCenter")
         try:
             i = 0
             while True:
-                stcVersion = winreg.EnumKey(key, i)
+                stcVersion = _winreg.EnumKey(key, i)
                 self.stcVersionList.append(stcVersion)
                 i += 1
         except WindowsError:
@@ -44,10 +44,10 @@ class StcPython():
             print('The TestCenter Client %s is not installed!!' % version)
             sys.exit(1)
 
-        key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE,
-                             r"SOFTWARE\Spirent Communications\Spirent TestCenter\%s\Components\Spirent TestCenter Application" % version)
-        stcDir, type = winreg.QueryValueEx(key, 'TARGETDIR')
-        stcTitle, type = winreg.QueryValueEx(key, 'Title')
+        key = _winreg.OpenKey(_winreg.HKEY_LOCAL_MACHINE,
+                              r"SOFTWARE\Spirent Communications\Spirent TestCenter\%s\Components\Spirent TestCenter Application" % version)
+        stcDir, type = _winreg.QueryValueEx(key, 'TARGETDIR')
+        stcTitle, type = _winreg.QueryValueEx(key, 'Title')
         stcInstallDir = stcDir + '\\' + stcTitle
 
         os.environ['STC_PRIVATE_INSTALL_DIR'] = stcInstallDir
@@ -366,17 +366,3 @@ class StcIntPythonHelp(object):
             example="stc.unsubscribe( resultDataSet1 )"))
 
 # ============================diy====================================
-
-
-def readtxt(filename):
-    '''读取一个文本文件，返回列表，每行数据作为一个元素'''
-    with open(filename, 'rb') as f:
-        szlist = f.readlines()
-        for index in range(0, len(szlist)):
-            szlist[index] = szlist[index].strip()
-            # 支持注释功能
-            if '#' in szlist[index]:
-                szlist[index] = ''
-        while '' in szlist:
-            szlist.remove('')
-        return szlist

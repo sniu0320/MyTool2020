@@ -6,7 +6,7 @@ import autotelnetlib as my
 import os
 current_dir = os.path.dirname(os.path.realpath(__file__))
 os.chdir(current_dir)
-###################################ç###
+######################################
 
 mng_ipaddr = '192.166.4.10'
 # mng_ipaddr = '192.166.26.2'
@@ -18,7 +18,7 @@ mng_ipaddr = '192.166.4.10'
 
 
 def main():
-    for cnt in range(0, 5):
+    for cnt in range(0, 1):
         t = threading.Thread(target=ssh_test, args=())
         t.start()
 

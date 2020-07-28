@@ -27,7 +27,7 @@ def main():
 def loadTestCenter(version):
     from StcPython import StcPython
     stc = StcPython(version)
-    print("Spirent TestCenter version : %s" % stc.get("system1", "version"))
+    print "Spirent TestCenter version : %s" % stc.get("system1", "version")
 
 
 if __name__ == '__main__':

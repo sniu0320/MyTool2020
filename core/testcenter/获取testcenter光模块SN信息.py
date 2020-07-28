@@ -3,22 +3,24 @@
 import sys
 import os
 import time
-# This loads the TestCenter library.
-import StcPython as zte
-stc = zte.StcPython()
-
 current_dir = os.path.split(os.path.realpath(__file__))[0]
 if current_dir not in sys.path:
     sys.path.append(current_dir)
 
 # # This loads the TestCenter library.
-# import StcPython as zte
-# stc = zte.StcPython()
+import StcPython as zte
+stc = zte.StcPython()
 
 
 ######################################
 def main():
-    szChassisIpList = zte.readtxt('ChassisIpList.py')
+    # szChassisIpList = zte.readtxt('ChassisIpList.py')
+    szChassisIpList = ['173.11.1.220',
+                       '173.11.6.220',
+                       '173.11.4.220',
+                       '173.11.4.221',
+                       '173.11.5.220',
+                       '173.11.5.221']
     for szChassisIp in szChassisIpList:
         try:
             print('Connect to TestCenter Chassis : '+szChassisIp)
@@ -122,14 +124,14 @@ def getEthernetFiber(hPort):
 
 def displayChassisInfo(hChassis):
     chassisProps = stc.get(hChassis)
-    print(chassisProps['SerialNum'])
+    print chassisProps['SerialNum']
 
 
 def displayEthernetFiberInfo(hEthernetFiber):
     fiberProps = stc.get(hEthernetFiber)
-    print(fiberProps['ModuleType'])
-    print(fiberProps['VendorName'])
-    print(fiberProps['VendorSerialNumber'])
+    print fiberProps['ModuleType']
+    print fiberProps['VendorName']
+    print fiberProps['VendorSerialNumber']
 # ================================================================
 
 

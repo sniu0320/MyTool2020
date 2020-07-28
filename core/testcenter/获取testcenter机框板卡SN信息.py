@@ -1,6 +1,5 @@
 # -*- coding: UTF-8 -*-
 
-import StcPython as zte
 import sys
 import os
 import time
@@ -9,7 +8,7 @@ if current_dir not in sys.path:
     sys.path.append(current_dir)
 
 ######################################
-
+import StcPython as zte
 stc = zte.StcPython()
 print("Spirent TestCenter version : %s" % stc.get("system1", "version"))
 
@@ -18,7 +17,13 @@ print("Spirent TestCenter version : %s" % stc.get("system1", "version"))
 
 def main():
     # 初始化
-    szChassisIpList = zte.readtxt('ChassisIpList.py')
+    # szChassisIpList = zte.readtxt('ChassisIpList.py')
+    szChassisIpList = ['173.11.1.220',
+                       '173.11.6.220',
+                       '173.11.4.220',
+                       '173.11.4.221',
+                       '173.11.5.220',
+                       '173.11.5.221']
     chassisLocationList = []
     chassisInfoDict = {}
     tmLocationList = []
@@ -114,14 +119,14 @@ def getEthernetFiber(hPort):
 
 def displayChassisInfo(hChassis):
     chassisProps = stc.get(hChassis)
-    print(chassisProps['SerialNum'])
+    print chassisProps['SerialNum']
 
 
 def displayEthernetFiberInfo(hEthernetFiber):
     fiberProps = stc.get(hEthernetFiber)
-    print(fiberProps['ModuleType'])
-    print(fiberProps['VendorName'])
-    print(fiberProps['VendorSerialNumber'])
+    print fiberProps['ModuleType']
+    print fiberProps['VendorName']
+    print fiberProps['VendorSerialNumber']
 
 
 main()
