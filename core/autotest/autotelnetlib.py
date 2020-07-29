@@ -104,118 +104,138 @@ def miboid2char(oid):
     '''
     ascii_list = oid.split('.')
     szString = ''
-    for ascii in ascii_list :
+    for ascii in ascii_list:
         szString += chr(int(ascii))
     return szString
- 
-    
-############################ 定义类 #################################
+
+
+# ########################### 定义类 #################################
 class BaseDUT(object):
     """基础DUT类，公共函数统一放置于此"""
-    
+
     CRLF = b'\r'
- 
-    #----------------------------------------------------------------------
-    def __init__(self, debug = True, log_switch = True):
+
+    # ----------------------------------------------------------------------
+    def __init__(self, debug=True, log_switch=True):
         """Constructor"""
         self.logfilename = time.strftime('%Y.%m.%d.%H.%M.%S')+'.log'
         self.debug = debug
         self.log_switch = log_switch
- 
-    def shell_print(self, szString,end_flag=''):
-        if self.debug :
+
+    def shell_print(self, szString, end_flag=''):
+        if self.debug:
             szString = BaseDUT.to_str(szString)
             szString = BaseDUT.process_newline_forshell(szString)
-            print(szString,end=end_flag, flush = True)	
-            
-    def oam_print(self, szString,end_flag=''):
-        if self.debug :
+            # end -- 用来设定以什么结尾。默认值是换行符 \n，我们可以换成其他字符串
+            # flush -- 输出是否被缓存通常决定于 file，但如果 flush 关键字参数为 True，流会被强制刷新。
+            # 比如打点:Loading..........
+            # print("Loading",end = "")
+            # for i in range(20):
+            #     print(".",end = '',flush = True)
+            #     time.sleep(0.5)
+            print(szString, end=end_flag, flush=True)
+
+    def oam_print(self, szString, end_flag=''):
+        if self.debug:
             szString = BaseDUT.to_str(szString)
             szString = BaseDUT.process_newline_foroam(szString)
-            print(szString,end=end_flag, flush = True)	
-    
-    @staticmethod		
+            print(szString, end=end_flag, flush=True)
+
+    @staticmethod
     def process_newline_foroam(szString):
-        '''把字符串中的\r\n统一转为\n'''
+        r'''
+        把字符串中的\r\n统一转为\n，去掉--More--
+        '''
         szString = szString.replace('\r\n', '\n')
-        #美化分页时的打印效果
+        # 美化分页时的打印效果
         szString = szString.replace('\b \b', '')
-        szString = szString.replace(' --More--', '')	
+        szString = szString.replace(' --More--', '')
         return szString
-    
-    @staticmethod		
+
+    @staticmethod
     def process_newline_forshell(szString):
-        '''把字符串中的\r\n统一转为\n'''
+        r'''把字符串中的\r\n统一转为\n'''
         szString = szString.replace('\r\n', '\n')
-        return szString	
-    
+        return szString
+
     def logger(self, szString):
-        '''日志文件名称固定，适合做系统日志记录'''
+        '''文件日志'''
         szString = BaseDUT.process_newline_forshell(szString)
         filelog_logger.info(szString)
-        
+
     def conlogger(self, szString):
-        '''控制台日志打印,支持多线程'''
-        if self.log_switch == True:
+        '''控制台日志,支持多线程'''
+        if self.log_switch:
             szString = BaseDUT.process_newline_forshell(szString)
             consolelog_logger.info(szString)
- 
+
     def logecho(self, szString):
+        '''文件和控制台都打印'''
         self.logger(szString)
         self.conlogger(szString)
-    
-    def log(self,szString):
+
+    def log(self, szString):
         '''每次的日志文件名都不同，以脚本运行的时间命名日志文件名称 '''
-        with open(self.logfilename,'a') as f:
+        with open(self.logfilename, 'a') as f:
             datefmt = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[0:-3]
             szString = BaseDUT.process_newline_forshell(szString)
             f.write(datefmt+'->'+szString + '\n')
- 
-    def setlogfilename(self,szString):
+
+    def setlogfilename(self, szString):
         '''修改log函数保存文件名的前缀'''
         self.logfilename = szString + '_' + time.strftime('%Y.%m.%d.%H.%M.%S')+'.log'
-        
+
     @staticmethod
     def sleep(ms):
+        '''time.sleep'''
         time.sleep(ms/1000.0)
-    
-    @staticmethod	
+
+    @staticmethod
     def timestamp():
-        return time.time()	
- 
+        '''time.time'''
+        return time.time()
+
     @staticmethod
     def dec2hex(num):
+        '''将10进制整数转换成16进制,并去掉前边的0x'''
         num_temp = hex(num)
         return num_temp[2:]
- 
+
     @staticmethod
     def getrowcnt(szString):
+        '''return szString行数'''
         if (szString == ''):
             return 0
         else:
             szString_temp = szString.split('\n')
             return len(szString_temp)
- 
+
     @staticmethod
-    def listfind(szString,list):
+    def listfind(szString, list):
+        '''
+        在list中 查找是否存在szString:
+        如果存在return list index,
+        如果找不到 return None.
+        '''
         index = 0
-        while index < len(list) :
-            if szString in list[index] :
+        while index < len(list):
+            if szString in list[index]:
                 return index
             index = index + 1
-        return None	
- 
+        return None
+
     @staticmethod
-    def getrow(szString,row):
+    def getrow(szString, row):
+        '''return 指定的某行的字符串'''
         if (szString == ''):
             return 0
         else:
             szString_temp = szString.split('\n')
             return szString_temp[row]
- 
+
     @staticmethod
-    def getstring(szString,row,column):
-        '''返回指定的某行某列的字符串'''
+    def getstring(szString, row, column):
+        '''return 指定的某行某列的字符串'''
         if (szString == ''):
             return ''
         else:
@@ -223,62 +243,65 @@ class BaseDUT(object):
             szString_temp = szString_temp[row]
             szString_temp = szString_temp.split()
             return szString_temp[column]
- 
+
     @staticmethod
-    def getcolumn(szString,column):
-        '''返回一个列表'''
+    def getcolumn(szString, column):
+        '''return szString 某列字符串的一个列表'''
         columnlist = []
         if (szString == ''):
             return columnlist
         else:
-            for row in range(0,BaseDUT.getrowcnt(szString)) :
-                columnlist.append(BaseDUT.getstring(szString,row,column))
+            for row in range(0, BaseDUT.getrowcnt(szString)):
+                columnlist.append(BaseDUT.getstring(szString, row, column))
             return columnlist
- 
+
     @staticmethod
     def readportlist(filename='portlist.py'):
-        '''返回一个端口列表'''
-        with open(filename,'r') as f:
+        '''读取文件，返回一个端口列表，’#‘行会被识别为注释。，丢弃'''
+        with open(filename, 'r') as f:
             portlist = f.readlines()
-            for index in range(0,len(portlist)):
+            for index in range(0, len(portlist)):
                 portlist[index] = portlist[index].strip()
-                #支持注释功能
-                if '#' in portlist[index] :
+                # 支持注释功能
+                if '#' in portlist[index]:
                     portlist[index] = ''
             while '' in portlist:
                 portlist.remove('')
         return portlist
- 
+
     @staticmethod
     def readtxt(filename):
-        '''读取一个文本文件，返回列表，每行数据作为一个元素'''
-        with open(filename,'r') as f:
+        '''
+        读取一个文本文件，返回列表，每行数据作为一个元素，
+        ’#‘行会被识别为注释。，丢弃
+        '''
+        with open(filename, 'r') as f:
             szlist = f.readlines()
-            for index in range(0,len(szlist)):
+            for index in range(0, len(szlist)):
                 szlist[index] = szlist[index].strip()
-                #支持注释功能
-                if '#' in szlist[index] :
+                # 支持注释功能
+                if '#' in szlist[index]:
                     szlist[index] = ''
             while '' in szlist:
                 szlist.remove('')
         return szlist
-    
+
     @staticmethod
     def readtxt_raw(filename):
         '''读取一个文本文件，返回列表，每行数据作为一个元素'''
-        with open(filename,'r') as f:
+        with open(filename, 'r') as f:
             szlist = f.readlines()
         return szlist
     
     @staticmethod
     def readtxt_all(filename):
         '''读取一个文本文件，返回str'''
-        with open(filename,'r') as f:
+        with open(filename, 'r') as f:
             temp = f.read()
         return temp
  
     @staticmethod
-    def nextipv4addr(startipv4addr , step , netmask = 24):
+    def nextipv4addr(startipv4addr, step, netmask=24):
         '''根据起始ip地址，步长，掩码，计算ip地址'''
         szipv4addrlist = startipv4addr.split('.')
         intValue = int(szipv4addrlist[0])*256*256*256 + int(szipv4addrlist[1])*256*256 + int(szipv4addrlist[2])*256 + int(szipv4addrlist[3])
@@ -292,9 +315,9 @@ class BaseDUT(object):
         ipv4addr3 = (temp % 65536) / 256
         ipv4addr4 = intValue_new % 256
         return str(ipv4addr1)+'.'+str(ipv4addr2)+'.'+str(ipv4addr3)+'.'+str(ipv4addr4)
- 
+
     @staticmethod
-    def nextipv6addr(startipv6addr , step , netmask = 48):
+    def nextipv6addr(startipv6addr, step, netmask=48):
         '''根据起始ip地址，步长，掩码，计算ip地址'''
         szipv6addrlist = startipv6addr.split(':')
         length = len(szipv6addrlist)
@@ -306,31 +329,31 @@ class BaseDUT(object):
             szipv6addrlist[-1] = ('0:'*(10-length))[:-1]
         elif length < 8 :
             for index in range(length) :
-                if szipv6addrlist[index] == '' :
+                if szipv6addrlist[index] == '':
                     szipv6addrlist[index] = ('0:'*(9-length))[:-1]
                     break
- 
+
         startipv6addr = ':'.join(szipv6addrlist)
         szipv6addrlist = startipv6addr.split(':')
-        for index in range(8) :
+        for index in range(8):
             szipv6addrlist[index] = int(szipv6addrlist[index],16)
         index = (netmask / 16) - 1
         szipv6addrlist[index] = szipv6addrlist[index] + step
-        while index > -1 :
-            if szipv6addrlist[index] > 65535 :
+        while index > -1:
+            if szipv6addrlist[index] > 65535:
                 szipv6addrlist[index-1] = szipv6addrlist[index-1] + (szipv6addrlist[index] / 65536)
                 szipv6addrlist[index] = szipv6addrlist[index] % 65536
                 index = index - 1
-            else :
+            else:
                 break
-        for index in range(8) :
+        for index in range(8):
             szipv6addrlist[index] = hex(szipv6addrlist[index])[2:]
         szResult = ':'.join(szipv6addrlist)
- 
+
         if szResult.startswith('0:0:'):
-            return re.sub(r'(0:){2,}','::',szResult,count=1)
-        else : 
-            szResult = re.sub(r'(:0){2,}',':',szResult,count=1)
+            return re.sub(r'(0:){2,}', '::', szResult, count=1)
+        else:
+            szResult = re.sub(r'(:0){2,}', ':', szResult, count=1)
             if szResult.endswith(':'):
                 return szResult + ':'
             return szResult
