@@ -257,7 +257,7 @@ class BaseDUT(object):
 
     @staticmethod
     def readportlist(filename='portlist.py'):
-        '''读取文件，返回一个端口列表，’#‘行会被识别为注释。，丢弃'''
+        '''读取文件，返回一个端口列表，’#‘行会被识别为注释，丢弃'''
         with open(filename, 'r') as f:
             portlist = f.readlines()
             for index in range(0, len(portlist)):
@@ -273,7 +273,7 @@ class BaseDUT(object):
     def readtxt(filename):
         '''
         读取一个文本文件，返回列表，每行数据作为一个元素，
-        ’#‘行会被识别为注释。，丢弃
+        ’#‘行会被识别为注释，丢弃
         '''
         with open(filename, 'r') as f:
             szlist = f.readlines()
@@ -292,14 +292,14 @@ class BaseDUT(object):
         with open(filename, 'r') as f:
             szlist = f.readlines()
         return szlist
-    
+
     @staticmethod
     def readtxt_all(filename):
         '''读取一个文本文件，返回str'''
         with open(filename, 'r') as f:
             temp = f.read()
         return temp
- 
+
     @staticmethod
     def nextipv4addr(startipv4addr, step, netmask=24):
         '''根据起始ip地址，步长，掩码，计算ip地址'''
@@ -307,7 +307,7 @@ class BaseDUT(object):
         intValue = int(szipv4addrlist[0])*256*256*256 + int(szipv4addrlist[1])*256*256 + int(szipv4addrlist[2])*256 + int(szipv4addrlist[3])
         stepValue = step << (32 - netmask)
         intValue_new = intValue + stepValue
-        if intValue_new > 4294967295 :
+        if intValue_new > 4294967295:
             raise Exception('Value Error', 'exceed the max value !!')
         ipv4addr1 = intValue_new / 16777216
         temp = intValue_new % 16777216
@@ -327,7 +327,7 @@ class BaseDUT(object):
         elif startipv6addr.endswith('::'):
             szipv6addrlist.remove('')
             szipv6addrlist[-1] = ('0:'*(10-length))[:-1]
-        elif length < 8 :
+        elif length < 8:
             for index in range(length) :
                 if szipv6addrlist[index] == '':
                     szipv6addrlist[index] = ('0:'*(9-length))[:-1]
@@ -357,98 +357,98 @@ class BaseDUT(object):
             if szResult.endswith(':'):
                 return szResult + ':'
             return szResult
- 
+
     @staticmethod
     def mac_address_400g(port):
         '''计算400G版本端口的mac地址'''
-        shelf,slot,np,portid = port.split('-')[1].split('/')
+        shelf, slot, np, portid = port.split('-')[1].split('/')
         if (mactype == 1):
             delta = 0
         elif (mactype == 2):
             delta = int(shelf)*720 + int(slot)*40 + int(np)*10 + int(portid) + 256
         basemac_temp = basemac.split(':')[::-1]
-        for i in range(0,5):
+        for i in range(0, 5):
             basemac_temp[i] = '0x' + basemac_temp[i]
             mac = eval(basemac_temp[i]) + delta
-            if ( mac > 255 ):
-                basemac_temp[i] = '%02x'%(mac%256)
+            if (mac > 255):
+                basemac_temp[i] = '%02x' % (mac % 256)
                 delta = mac/256
             else:
-                basemac_temp[i] = '%02x'%mac
+                basemac_temp[i] = '%02x' % mac
                 break
         basemac_temp = basemac_temp[::-1]
         return basemac_temp[0]+basemac_temp[1]+'.'+basemac_temp[2]+basemac_temp[3]+'.'+basemac_temp[4]+basemac_temp[5]
- 
+
     @staticmethod
     def mac_address_1t(port):
-        shelf,slot,np,portid,portid2 = BaseDUT.portdecode(port)
+        shelf, slot, np, portid, portid2 = BaseDUT.portdecode(port)
         if (mactype == 1):
             delta = 0
         elif (mactype == 2):
             if (portid2 == '0'):
                 delta = int(shelf)*1728 + int(slot)*192 + int(np)*48 + int(portid) + 256
-            else :
+            else:
                 delta = int(shelf)*1728 + int(slot)*192 + int(np)*48 + int(portid)*256 + int(portid2) + 256
         basemac_temp = basemac.split(':')[::-1]
         for i in range(0,5):
             basemac_temp[i] = '0x' + basemac_temp[i]
             mac = eval(basemac_temp[i]) + delta
-            if ( mac > 255 ):
-                basemac_temp[i] = '%02x'%(mac%256)
+            if (mac > 255):
+                basemac_temp[i] = '%02x' % (mac % 256)
                 delta = mac/256
             else:
-                basemac_temp[i] = '%02x'%mac
+                basemac_temp[i] = '%02x' % mac
                 break
         basemac_temp = basemac_temp[::-1]
         return basemac_temp[0]+basemac_temp[1]+'.'+basemac_temp[2]+basemac_temp[3]+'.'+basemac_temp[4]+basemac_temp[5]
- 
+
     @staticmethod
     def portdecodetostr(port):
         '''端口解析为字符串，用于snake流量配置vrf时，用作RD，防止RD冲突'''
-        shelf,slot,np,portid = port.split('-')[1].split('/')
-        #对4.00.10扇出口的支持
-        portid = portid.replace(':','')
+        shelf, slot, np, portid = port.split('-')[1].split('/')
+        # 对4.00.10扇出口的支持
+        portid = portid.replace(':', '')
         return '1'+shelf+slot+np+portid
- 
+
     @staticmethod
     def portdecode(port):
-        '''解析端口的shelf slot np portid等信息'''
+        '''解析端口的shelf slot np portid等信息，支持1分4'''
         portid2 = '0'
-        shelf,slot,np,portid = port.split('-')[1].split('/')
+        shelf, slot, np, portid = port.split('-')[1].split('/')
         if (':' in portid):
-            portid,portid2 = portid.split(':')
-        return (shelf,slot,np,portid,portid2)
- 
+            portid, portid2 = portid.split(':')
+        return (shelf, slot, np, portid, portid2)
+
     @staticmethod
     def shelf_slot_decode(board):
         '''解析单板的shelf slot信息'''
-        shelf,slot,cpu = board.split('-')[1].split('/')
-        return (shelf,slot)
- 
+        shelf, slot, cpu = board.split('-')[1].split('/')
+        return (shelf, slot)
+
     @staticmethod
     def ipv4_addr(port, subcardportnum):
         '''返回端口标准v4地址'''
-        shelf,slot,subcard,portid = port.split('-')[1].split('/')
-        return str(ip_firstbyte+int(shelf))+'.'+ slot + '.'+ str(int(subcard)*subcardportnum+int(portid))+'.1'
- 
+        shelf, slot, subcard, portid = port.split('-')[1].split('/')
+        return str(ip_firstbyte+int(shelf)) + '.' + slot + '.' + str(int(subcard)*subcardportnum+int(portid)) + '.1'
+
     @staticmethod
     def ipv6_addr(port, subcardportnum):
         '''返回端口标准v6地址'''
-        shelf,slot,subcard,portid = port.split('-')[1].split('/')
-        return str(ip_firstbyte+int(shelf))+':'+ slot + ':'+ hex(int(subcard)*subcardportnum+int(portid))[2:]+'::1'
- 
-    @staticmethod	
-    def ipv4_addr_v4(port):
-        '''已废弃。原先扇出口地址配置'''
-        shelf,slot,np,portid,portid2 = BaseDUT.portdecode(port)
-        return str(ip_firstbyte+int(shelf))+'.'+ slot + '.'+ str(int(np)*48+int(portid)*4 +int(	portid2))+'.1'
- 
-    @staticmethod
-    def ipv6_addr_v4(port):
-        '''已废弃。原先扇出口地址配置'''
-        shelf,slot,np,portid,portid2 = BaseDUT.portdecode(port)
-        return str(ip_firstbyte+int(shelf))+':'+ slot + ':'+ str(int(np)*48+int(portid)*4 + int(portid2))+'::1'
-    
+        shelf, slot, subcard, portid = port.split('-')[1].split('/')
+        return str(ip_firstbyte+int(shelf)) + ':' + slot + ':' + hex(int(subcard)*subcardportnum+int(portid))[2:] + '::1'
+
+    # @staticmethod
+    # def ipv4_addr_v4(port):
+    #     '''已废弃。原先扇出口地址配置'''
+    #     shelf, slot, np, portid, portid2 = BaseDUT.portdecode(port)
+    #     return str(ip_firstbyte+int(shelf))+'.'+ slot + '.'+ str(int(np)*48+int(portid)*4 +int(	portid2))+'.1'
+
+    # @staticmethod
+    # def ipv6_addr_v4(port):
+    #     '''已废弃。原先扇出口地址配置'''
+    #     shelf, slot, np, portid, portid2 = BaseDUT.portdecode(port)
+    #     return str(ip_firstbyte+int(shelf))+':'+ slot + ':'+ str(int(np)*48+int(portid)*4 + int(portid2))+'::1'
+
     @staticmethod
     def to_str(bytes_or_str):
         '''转为字符串'''
@@ -457,7 +457,7 @@ class BaseDUT(object):
         else:
             value = bytes_or_str
         return value
-    
+
     @staticmethod
     def to_bytes(bytes_or_str):
         '''转为字节码'''
@@ -466,40 +466,39 @@ class BaseDUT(object):
         else:
             value = bytes_or_str
         return value
-                
+
+
 class DUT(BaseDUT):
     '''
-    利用python自带的telnet库实现此类，可以脱离SecureCRT执行
+    利用python自带的telnet库实现此类
     '''
-    def __init__(self,host = None,port = 23,username = 'who',password = 'who', protocol = 'telnet',
-                 timeout = 5, waittime = 10, compress = False, debug = True, log_switch = True):
+    def __init__(self, host=None, port=23, username='who', password='who', protocol='telnet',
+                 timeout=5, waittime=3, compress=False, debug=True, log_switch=True):
         super().__init__(debug, log_switch)
         self.host = host
         self.port = port
         self.username = username.encode()
         self.password = password.encode()
         self.protocol = protocol
-        self.timeout = timeout
+        self.timeout = timeout  # login timeout
         self.waittime = waittime
         self.compress = compress
-            
+        # 干啥用呢？
         self.sendwithlogfilename = 'sendwithlog_'+time.strftime('%Y.%m.%d.%H.%M.%S')+'.txt'
         self.sendwithlogfileobj = None
-        
-        if self.host :
+
+        if self.host:
+            # 这里可以增加ping测试 todo
             self.conlogger('Begin to connect the DUT !')
             if protocol == 'telnet':
-                try :
-                    self.tn = telnetlib.Telnet(self.host,self.port,self.timeout)
-                except Exception as e :
+                try:
+                    self.tn = telnetlib.Telnet(self.host, self.port, self.timeout)
+                except Exception as e:
                     self.conlogger(self.host+' connect failed !')
                     raise e
-                    #raise Exception('Establish Error', 'Can\'t open the socket !')
                 self.tn.set_option_negotiation_callback(option_negotiation_callback)
-                
-                #self.tn.set_debuglevel(5)
-                
-                tResult = self.tn.expect([b'sername:', b'\(none\) login:'],self.waittime)
+
+                tResult = self.tn.expect([b'sername:', b'\(none\) login:'], self.waittime)
                 if tResult[0] == 1 :
                     self.conlogger('login prompt is : (none) login ! it is sys mode !')
                     raise Exception('sysmode Error', 'it is sys mode !')
@@ -510,24 +509,23 @@ class DUT(BaseDUT):
                 self.tn.write(self.username + BaseDUT.CRLF)
                 self.oam_print(self.tn.read_until(b'assword:'))
                 self.tn.write(self.password + BaseDUT.CRLF)
-                tResult = self.tn.expect([b'#', b'>', b' \$ ', b'~ # '],self.waittime)
-                if tResult[0] == -1 :
+                tResult = self.tn.expect([b'#', b'>', b' \$ ', b'~ # '], self.waittime)
+                if tResult[0] == -1:
                     self.conlogger('Don\'t find system prompt !! maybe the password is wrong !!')
                     raise Exception('password Error', 'Don\'t find system prompt !!')
                 self.oam_print(tResult[2])
-            elif protocol == 'ssh' :
-                if self.port == 23 :
+            elif protocol == 'ssh':
+                if self.port == 23:
                     self.port = 22
                 self.sshlib = __import__('autosshlib')
-                
-                try :
+
+                try:
                     self.tn = self.sshlib.ssh(self.host, self.port, self.username, self.password, self.compress, self.timeout)
-                    tResult = self.tn.expect([b'#', b'>', b' \$ ', b'~ # '],self.waittime)
+                    tResult = self.tn.expect([b'#', b'>', b' \$ ', b'~ # '], self.waittime)
                     self.oam_print(tResult[2])
                 except Exception as e:
                     self.conlogger(self.host+' connect failed !!')
-                    raise e
-                    #raise Exception('Establish Error', 'Can\'t open the socket !!')			
+                    raise e			
  
     def send(self,szCommand,delay = 0, timeout = 60):
         '''遇到错误就会停止，方便查看，主要用于配置设备'''
