@@ -509,11 +509,8 @@ class DUT(BaseDUT):
                     raise e
                 self.tn.set_option_negotiation_callback(option_negotiation_callback)
 
-                tResult = self.tn.expect([b'sername:', b'\(none\) login:'], self.waittime)
-                if tResult[0] == 1 :
-                    self.conlogger('login prompt is : (none) login ! it is sys mode !')
-                    raise Exception('sysmode Error', 'it is sys mode !')
-                elif tResult[0] == -1 :
+                tResult = self.tn.expect([b'sername:'], self.waittime)
+                if tResult[0] == -1:
                     self.conlogger('Don\'t find login prompt !! maybe it is timeout !')
                     raise Exception('Login Error', 'Don\'t find login prompt!! maybe it is timeout !')
                 self.oam_print(tResult[2])
@@ -522,8 +519,9 @@ class DUT(BaseDUT):
                 self.tn.write(self.password + BaseDUT.CRLF)
                 tResult = self.tn.expect([b'#', b'>', b' \$ ', b'~ # '], self.waittime)
                 if tResult[0] == -1:
-                    self.conlogger('Don\'t find system prompt !! maybe the password is wrong !!')
-                    raise Exception('password Error', 'Don\'t find system prompt !!')
+                    # 未读取到> 或者读取到error，为Username or password error
+                    self.conlogger('Don\'t find system prompt !! maybe username or password error !!')
+                    raise Exception('password Error', 'Don\'t find system prompt !! maybe username or password error !!')
                 self.oam_print(tResult[2])
                 self.tn.write('enable'.encode() + BaseDUT.CRLF)
                 self.oam_print(self.tn.read_until(b'assword:'))
@@ -537,6 +535,7 @@ class DUT(BaseDUT):
                 try:
                     self.tn = self.sshlib.ssh(self.host, self.port, self.username, self.password, self.compress, self.timeout)
                     tResult = self.tn.expect([b'#', b'>', b' \$ ', b'~ # '], self.waittime)
+
                     self.oam_print(tResult[2])
                     self.tn.write('enable'.encode() + BaseDUT.CRLF)
                     self.oam_print(self.tn.read_until(b'assword:'))
