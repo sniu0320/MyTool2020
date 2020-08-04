@@ -472,13 +472,24 @@ class DUT(BaseDUT):
     '''
     利用python自带的telnet库实现此类
     '''
-    def __init__(self, host=None, port=23, username='who', password='who', protocol='telnet',
-                 timeout=5, waittime=3, compress=False, debug=True, log_switch=True):
+    def __init__(self,
+                 host=None,
+                 port=23,
+                 username='who',
+                 password='who',
+                 password_enable='zxr10',
+                 protocol='telnet',
+                 timeout=5,
+                 waittime=3,
+                 compress=False,
+                 debug=True,
+                 log_switch=True):
         super().__init__(debug, log_switch)
         self.host = host
         self.port = port
         self.username = username.encode()
         self.password = password.encode()
+        self.password_enable = password_enable.encode()
         self.protocol = protocol
         self.timeout = timeout  # login timeout
         self.waittime = waittime
@@ -514,6 +525,10 @@ class DUT(BaseDUT):
                     self.conlogger('Don\'t find system prompt !! maybe the password is wrong !!')
                     raise Exception('password Error', 'Don\'t find system prompt !!')
                 self.oam_print(tResult[2])
+                self.tn.write('enable'.encode() + BaseDUT.CRLF)
+                self.oam_print(self.tn.read_until(b'assword:'))
+                self.tn.write(self.password_enable + BaseDUT.CRLF)
+
             elif protocol == 'ssh':
                 if self.port == 23:
                     self.port = 22
@@ -523,9 +538,12 @@ class DUT(BaseDUT):
                     self.tn = self.sshlib.ssh(self.host, self.port, self.username, self.password, self.compress, self.timeout)
                     tResult = self.tn.expect([b'#', b'>', b' \$ ', b'~ # '], self.waittime)
                     self.oam_print(tResult[2])
+                    self.tn.write('enable'.encode() + BaseDUT.CRLF)
+                    self.oam_print(self.tn.read_until(b'assword:'))
+                    self.tn.write(self.password_enable + BaseDUT.CRLF)
                 except Exception as e:
                     self.conlogger(self.host+' connect failed !!')
-                    raise e			
+                    raise e
  
     def send(self,szCommand,delay = 0, timeout = 60):
         '''遇到错误就会停止，方便查看，主要用于配置设备'''
