@@ -500,32 +500,48 @@ class DUT(BaseDUT):
 
         if self.host:
             # 这里可以增加ping测试 todo
-            self.conlogger('Begin to connect the DUT !')
+            self.conlogger('Begin to connect the DUT!')
             if protocol == 'telnet':
                 try:
                     self.tn = telnetlib.Telnet(self.host, self.port, self.timeout)
                 except Exception as e:
-                    self.conlogger(self.host+' connect failed !')
+                    self.conlogger(self.host+' connect failed!')
                     raise e
                 self.tn.set_option_negotiation_callback(option_negotiation_callback)
 
                 tResult = self.tn.expect([b'sername:'], self.waittime)
                 if tResult[0] == -1:
-                    self.conlogger('Don\'t find login prompt !! maybe it is timeout !')
-                    raise Exception('Login Error', 'Don\'t find login prompt!! maybe it is timeout !')
+                    self.conlogger('Don\'t find login prompt, maybe it is timeout!')
+                    raise Exception('Login Error', 'Don\'t find login prompt, maybe it is timeout!')
                 self.oam_print(tResult[2])
                 self.tn.write(self.username + BaseDUT.CRLF)
                 self.oam_print(self.tn.read_until(b'assword:'))
                 self.tn.write(self.password + BaseDUT.CRLF)
-                tResult = self.tn.expect([b'#', b'>', b' \$ ', b'~ # '], self.waittime)
+
+                tResult = self.tn.expect([b'#', b'>', b'error'], self.waittime)
                 if tResult[0] == -1:
-                    # 未读取到> 或者读取到error，为Username or password error
-                    self.conlogger('Don\'t find system prompt !! maybe username or password error !!')
-                    raise Exception('password Error', 'Don\'t find system prompt !! maybe username or password error !!')
-                self.oam_print(tResult[2])
-                self.tn.write('enable'.encode() + BaseDUT.CRLF)
-                self.oam_print(self.tn.read_until(b'assword:'))
-                self.tn.write(self.password_enable + BaseDUT.CRLF)
+                    # 未读取到
+                    self.conlogger('Don\'t find system prompt, maybe username or password error!')
+                    raise Exception('Login Error', 'Don\'t find system prompt, maybe username or password error!')
+                elif tResult[0] == 2:
+                    self.conlogger('Username or password error !')
+                    raise Exception('Login Error', 'Username or password error !')
+                elif tResult[0] == 1:
+                    self.oam_print(tResult[2])
+                    self.tn.write('enable'.encode() + BaseDUT.CRLF)
+                    self.oam_print(self.tn.read_until(b'assword:'))
+                    self.tn.write(self.password_enable + BaseDUT.CRLF)
+                    tResult = self.tn.expect([b'#', b'Bad password'], self.waittime)
+                    if tResult[0] == -1:
+                        self.conlogger('Don\'t find 特权模式 prompt, maybe it is timeout!')
+                        raise Exception('Login Error', 'Don\'t find 特权模式 prompt, maybe it is timeout!')
+                    elif tResult[0] == 1:
+                        self.conlogger('特权模式 Bad password !')
+                        raise Exception('Login Error', '特权模式 Bad password !')
+                    elif tResult[0] == 0:
+                        self.conlogger("login {} successful".format(self.host))
+                elif tResult[0] == 0:
+                    self.conlogger("login {} successful".format(self.host))
 
             elif protocol == 'ssh':
                 if self.port == 23:
@@ -534,133 +550,155 @@ class DUT(BaseDUT):
 
                 try:
                     self.tn = self.sshlib.ssh(self.host, self.port, self.username, self.password, self.compress, self.timeout)
-                    tResult = self.tn.expect([b'#', b'>', b' \$ ', b'~ # '], self.waittime)
-
-                    self.oam_print(tResult[2])
-                    self.tn.write('enable'.encode() + BaseDUT.CRLF)
-                    self.oam_print(self.tn.read_until(b'assword:'))
-                    self.tn.write(self.password_enable + BaseDUT.CRLF)
+                    tResult = self.tn.expect([b'#', b'>', b'error'], self.waittime)
+                    if tResult[0] == -1:
+                        # 未读取到
+                        self.conlogger('Don\'t find system prompt, maybe username or password error!')
+                        raise Exception('Login Error', 'Don\'t find system prompt, maybe username or password error!')
+                    elif tResult[0] == 2:
+                        self.conlogger('Username or password error !')
+                        raise Exception('Login Error', 'Username or password error !')
+                    elif tResult[0] == 1:
+                        self.oam_print(tResult[2])
+                        self.tn.write('enable'.encode() + BaseDUT.CRLF)
+                        self.oam_print(self.tn.read_until(b'assword:'))
+                        self.tn.write(self.password_enable + BaseDUT.CRLF)
+                        tResult = self.tn.expect([b'#', b'Bad password'], self.waittime)
+                        if tResult[0] == -1:
+                            self.conlogger('Don\'t find 特权模式 prompt, maybe it is timeout!')
+                            raise Exception('Login Error', 'Don\'t find 特权模式 prompt, maybe it is timeout!')
+                        elif tResult[0] == 1:
+                            self.conlogger('特权模式 Bad password !')
+                            raise Exception('Login Error', '特权模式 Bad password !')
+                        elif tResult[0] == 0:
+                            self.conlogger("login {} successful".format(self.host))
+                    elif tResult[0] == 0:
+                        self.conlogger("login {} successful".format(self.host))
                 except Exception as e:
                     self.conlogger(self.host+' connect failed !!')
                     raise e
- 
-    def send(self,szCommand,delay = 0, timeout = 60):
-        '''遇到错误就会停止，方便查看，主要用于配置设备'''
+
+    def send(self, szCommand, delay=0, timeout=60):
+        '''
+        遇到错误就会停止，方便查看，主要用于配置设备。
+        delay 函数执行后等待延迟时间ms
+        '''
         szCommand = szCommand.encode()
         if (szCommand == b' ' or szCommand == b'\r'):
             self.tn.write(szCommand)
-        else :
+        else:
             self.tn.write(szCommand+BaseDUT.CRLF)
-        while True :
-            tResult = self.tn.expect([b'#', b'--More--', b'%Error ', b'\.\.', b'\r\n'],timeout)
+        while True:
+            tResult = self.tn.expect([b'#', b'--More--', b'%Error ', b'\.\.', b'\r\n'], timeout)
             self.oam_print(tResult[2])
-            if tResult[0] == 3 or tResult[0] == 4 :
+            if tResult[0] == 3 or tResult[0] == 4:
                 continue
-            elif tResult[0] == 0 :
+            elif tResult[0] == 0:  # 这里如果出现打印里有# 怎么处理？
                 break
-            elif tResult[0] == 1 :
+            elif tResult[0] == 1:  # 处理more翻页
                 self.tn.write(b' ')
                 continue
-            elif tResult[0] == 2 :
+            elif tResult[0] == 2:
                 tResult = self.tn.expect([b'again', b'#'])
-                if tResult[0] == 0 :
-                    #给100次重试的机会！
-                    for retry in range(1,101):
+                if tResult[0] == 0:  # 提示again时
+                    # 给100次重试的机会！
+                    for retry in range(1, 101):
                         self.oam_print(tResult[2])
-                        self.oam_print(self.tn.read_until(b'#'))
+                        self.oam_print(self.tn.read_until(b'#'))  # 这里啥意思？
                         self.sleep(retry*500)
                         self.tn.write(szCommand+BaseDUT.CRLF)
                         tResult = self.tn.expect([b'again', b'#'])
-                        if tResult[0] == 1 :
+                        if tResult[0] == 1:
                             self.oam_print(tResult[2])
                             break
-                        elif retry == 100 :
+                        elif retry == 100:
                             szResult = tResult[2] + self.tn.read_until(b'#')
                             self.oam_print(szResult)
                             self.logger('\n'+szResult.decode())
                             sys.exit(0)
                     break
-                elif tResult[0] == 1 :
+                elif tResult[0] == 1:
                     self.oam_print(tResult[2])
                     self.logger('\r\n'+'%Error '+tResult[2].decode())
                     sys.exit(0)
         if (delay != 0):
             self.sleep(delay)
- 
-    def send2(self,szCommand,delay = 0, timeout = 60):
+
+    def send2(self, szCommand, delay=0, timeout=60):
         '''遇到一般错误不会停止，继续执行'''
         szCommand = szCommand.encode()
         if (szCommand == b' ' or szCommand == b'\r'):
             self.tn.write(szCommand)
-        else :
+        else:
             self.tn.write(szCommand+BaseDUT.CRLF)
-        while True :
-            tResult = self.tn.expect([b'#', b'--More--', b'%Error ', b'\.\.', b'\r\n'],timeout)
+        while True:
+            tResult = self.tn.expect([b'#', b'--More--', b'%Error ', b'\.\.', b'\r\n'], timeout)
             self.oam_print(tResult[2])
-            if tResult[0] == 4 or tResult[0] == 3 :
+            if tResult[0] == 4 or tResult[0] == 3:
                 continue
-            elif tResult[0] == 0 :
+            elif tResult[0] == 0:
                 break
-            elif tResult[0] == 1 :
+            elif tResult[0] == 1:
                 self.tn.write(b' ')
                 continue
-            elif tResult[0] == 2 :
+            elif tResult[0] == 2:
                 tResult = self.tn.expect([b'again', b'#'])
-                if tResult[0] == 0 :
-                    #给100次重试的机会！
+                if tResult[0] == 0:
+                    # 给100次重试的机会！
                     for retry in range(1,101):
                         self.oam_print(tResult[2])
                         self.oam_print(self.tn.read_until(b'#'))
                         self.sleep(retry*500)
                         self.tn.write(szCommand+BaseDUT.CRLF)
                         tResult = self.tn.expect([b'again', b'#'])
-                        if tResult[0] == 1 :
+                        if tResult[0] == 1:
                             self.oam_print(tResult[2])
                             break
-                        elif retry == 100 :
+                        elif retry == 100:
                             self.oam_print(tResult[2])
                             self.oam_print(self.tn.read_until(b'#'))
                     break
-                else :
+                else:
                     self.oam_print(tResult[2])
                     break
         if (delay != 0):
             self.sleep(delay)
- 
-    def send3(self,szCommand):
+
+    def send3(self, szCommand):
         '''只发送命令，不关心执行的结果,慎用!!'''
         szCommand = szCommand.encode()
         if (szCommand == b' ' or szCommand == b'\r'):
             self.tn.write(szCommand)
-        else :
+        else:
             self.tn.write(szCommand+BaseDUT.CRLF)
-        #ssh 协议有流控，一直不读sockets，会使服务端不能继续发送内容
+        # ssh 协议有流控，一直不读sockets，会使服务端不能继续发送内容
         self.sleep(15)
         self.oam_print(self.tn.read_eager())
-        
-    def sendwithoutwait(self,szCommand):
+
+    def sendwithoutwait(self, szCommand):
         '''只发送命令，不关心执行的结果,慎用!!'''
         szCommand = szCommand.encode()
         if (szCommand == b' ' or szCommand == b'\r'):
             self.tn.write(szCommand)
-        else :
+        else:
             self.tn.write(szCommand+BaseDUT.CRLF)
-                            
-    def sendexpect(self,send,expect,timeout = 60):
-        send = send.encode()
+
+    def sendexpect(self, szCommand, expect, timeout=60):
+        '''下发命令行，抓到期望字段return True'''
+        send = szCommand.encode()
         expect = expect.encode()
         self.tn.write(send + BaseDUT.CRLF)
-        tResult = self.tn.expect([b'\r\n'],timeout)
+        tResult = self.tn.expect([b'\r\n'], timeout)
         self.oam_print(tResult[2])
-        tResult = self.tn.expect([expect],timeout)
+        tResult = self.tn.expect([expect], timeout)
         self.oam_print(tResult[2])
         self.oam_print(self.tn.read_lazy())
-        if tResult[0] == -1 :
+        if tResult[0] == -1:
             return False
-        else :
+        else:
             return True
- 
-    def sendctrl(self,char,prompt = '#'):
+
+    def sendctrl(self, char, prompt='#'):
         '''目前仅支持字符C和字符X'''
         prompt = prompt.encode()
         if (char == 'c'):
@@ -668,20 +706,20 @@ class DUT(BaseDUT):
             self.oam_print(self.tn.read_until(prompt))
         elif (char == 'x'):
             self.tn.write(b'\30')
-            
-    def sendwithlog(self,szCommand):
+
+    def sendwithlog(self, szCommand):
         '''发送命令的同时，把命令写入文本文件'''
         self.send(szCommand.encode())
-        if not self.sendwithlogfileobj :
-            self.sendwithlogfileobj = open(self.sendwithlogfilename,'a')
+        if not self.sendwithlogfileobj:
+            self.sendwithlogfileobj = open(self.sendwithlogfilename, 'a')
         self.sendwithlogfileobj.write(szCommand+'\n')
- 
+
     def con_t(self):
         self.sendctrl('c')
         self.sendctrl('c')
         self.send('configure terminal')
-        
-    def rec(self,szCommand, prompt = '#', timeout = 60):
+
+    def rec(self, szCommand, prompt='#', timeout=60):
         '''
         接收命令的返回结果，命令的回显和末尾的设备提示符已经删除！！
         '''
@@ -689,16 +727,16 @@ class DUT(BaseDUT):
         prompt = prompt.encode()
         
         self.tn.write(szCommand+BaseDUT.CRLF)
-        tResult = self.tn.expect([b'\r\n'],timeout)
+        tResult = self.tn.expect([b'\r\n'], timeout)
         self.oam_print(tResult[2])
         szResult = b''
         while True:
-            tResult = self.tn.expect([prompt, b' --More--', b'\r\n'],timeout)
+            tResult = self.tn.expect([prompt, b' --More--', b'\r\n'], timeout)
             szResult = szResult + tResult[2]
-            self.oam_print(tResult[2])	
-            if tResult[0] == 0 :
+            self.oam_print(tResult[2])
+            if tResult[0] == 0:
                 break
-            elif tResult[0] == 1 :
+            elif tResult[0] == 1:
                 self.tn.write(b' ')
  
         szResult = szResult.decode()
@@ -764,9 +802,9 @@ class DUT(BaseDUT):
             self.conlogger('系统当前不是Synchronized状态！')		
             return False
         return True
-    
+
     def WaitSynchronized(self):
-        while True :
+        while True:
             self.send('show clock')
             szResult = self.rec('show synchronization | include MPU')
             if 'Slave' not in szResult:
