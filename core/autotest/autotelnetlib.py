@@ -328,7 +328,7 @@ class BaseDUT(object):
             szipv6addrlist.remove('')
             szipv6addrlist[-1] = ('0:'*(10-length))[:-1]
         elif length < 8:
-            for index in range(length) :
+            for index in range(length):
                 if szipv6addrlist[index] == '':
                     szipv6addrlist[index] = ('0:'*(9-length))[:-1]
                     break
@@ -336,7 +336,7 @@ class BaseDUT(object):
         startipv6addr = ':'.join(szipv6addrlist)
         szipv6addrlist = startipv6addr.split(':')
         for index in range(8):
-            szipv6addrlist[index] = int(szipv6addrlist[index],16)
+            szipv6addrlist[index] = int(szipv6addrlist[index], 16)
         index = (netmask / 16) - 1
         szipv6addrlist[index] = szipv6addrlist[index] + step
         while index > -1:
@@ -390,7 +390,7 @@ class BaseDUT(object):
             else:
                 delta = int(shelf)*1728 + int(slot)*192 + int(np)*48 + int(portid)*256 + int(portid2) + 256
         basemac_temp = basemac.split(':')[::-1]
-        for i in range(0,5):
+        for i in range(0, 5):
             basemac_temp[i] = '0x' + basemac_temp[i]
             mac = eval(basemac_temp[i]) + delta
             if (mac > 255):
@@ -589,7 +589,7 @@ class DUT(BaseDUT):
         else:
             self.tn.write(szCommand+BaseDUT.CRLF)
         while True:
-            tResult = self.tn.expect([b'#', b'--More--', b'%Error ', b'\.\.', b'\r\n'], timeout)
+            tResult = self.tn.expect([b'#', b'--More--', b'%Error ', b'..', b'\r\n'], timeout)
             self.oam_print(tResult[2])
             if tResult[0] == 3 or tResult[0] == 4:
                 continue
@@ -632,7 +632,7 @@ class DUT(BaseDUT):
         else:
             self.tn.write(szCommand+BaseDUT.CRLF)
         while True:
-            tResult = self.tn.expect([b'#', b'--More--', b'%Error ', b'\.\.', b'\r\n'], timeout)
+            tResult = self.tn.expect([b'#', b'--More--', b'%Error ', b'..', b'\r\n'], timeout)
             self.oam_print(tResult[2])
             if tResult[0] == 4 or tResult[0] == 3:
                 continue
@@ -645,7 +645,7 @@ class DUT(BaseDUT):
                 tResult = self.tn.expect([b'again', b'#'])
                 if tResult[0] == 0:
                     # 给100次重试的机会！
-                    for retry in range(1,101):
+                    for retry in range(1, 101):
                         self.oam_print(tResult[2])
                         self.oam_print(self.tn.read_until(b'#'))
                         self.sleep(retry*500)
@@ -725,7 +725,6 @@ class DUT(BaseDUT):
         '''
         szCommand = szCommand.encode()
         prompt = prompt.encode()
-        
         self.tn.write(szCommand+BaseDUT.CRLF)
         tResult = self.tn.expect([b'\r\n'], timeout)
         self.oam_print(tResult[2])
@@ -738,68 +737,67 @@ class DUT(BaseDUT):
                 break
             elif tResult[0] == 1:
                 self.tn.write(b' ')
- 
+
         szResult = szResult.decode()
-        szResult = szResult.replace('\b \b','')
-        szResult = szResult.replace(' --More--','')
+        szResult = szResult.replace('\b \b', '')
+        szResult = szResult.replace(' --More--', '')
         if (szResult.rfind('\r\n') == -1):
             return ''
         else:
-            szResult = szResult.rsplit('\r\n',1)
+            szResult = szResult.rsplit('\r\n', 1)
             return BaseDUT.process_newline_forshell(szResult[0])
-        
-    def rec2(self,szCommand, prompt = '#', timeout = 60):
+
+    def rec2(self, szCommand, prompt='#', timeout=60):
         '''接收原始数据，开始的命令回显和末尾的设备提示符都没有删除'''
         szCommand = szCommand.encode()
         prompt = prompt.encode()
         self.tn.write(szCommand+BaseDUT.CRLF)
         szResult = b''
         while True:
-            tResult = self.tn.expect([prompt, b' --More--', b'\r\n'],timeout)
+            tResult = self.tn.expect([prompt, b' --More--', b'\r\n'], timeout)
             szResult = szResult + tResult[2]
-            self.oam_print(tResult[2])	
-            if tResult[0] == 0 :
+            self.oam_print(tResult[2])
+            if tResult[0] == 0:
                 break
-            elif tResult[0] == 1 :
+            elif tResult[0] == 1:
                 self.tn.write(b' ')
- 
+
         szResult = szResult.decode()
-        
-        szResult = szResult.replace('\b \b','')
-        szResult = szResult.replace(' --More--','')
+        szResult = szResult.replace('\b \b', '')
+        szResult = szResult.replace(' --More--', '')
         return BaseDUT.process_newline_forshell(szResult)
-    
-    def rec_raw(self,szCommand, prompt = '#', timeout = 60):
+
+    def rec_raw(self, szCommand, prompt='#', timeout=60):
         self.rec2(szCommand, prompt, timeout)
-        
-    def reconnect(self, retry_cnt = 1000):
+
+    def reconnect(self, retry_cnt=1000):
         '''重新连接设备'''
         for retry in range(0, retry_cnt):
             try:
                 self.oam_print('Begin to reconnect the DUT !\n')
                 if self.protocol == 'telnet':
-                    self.tn = telnetlib.Telnet(self.host,self.port)
+                    self.tn = telnetlib.Telnet(self.host, self.port)
                     tResult = self.tn.expect([b'sername:', b'login:'])
                     self.oam_print(tResult[2])
                     self.tn.write(self.username + BaseDUT.CRLF)
                     self.oam_print(self.tn.read_until(b'assword:'))
                     self.tn.write(self.password + BaseDUT.CRLF)
-                    tResult = self.tn.expect([b'#', b'>', b' \$ ', b'~ # '])
+                    tResult = self.tn.expect([b'#', b'>', b' $ ', b'~ # '])
                     self.oam_print(tResult[2])
                 elif self.protocol == 'ssh':
                     self.tn = self.sshlib.ssh(self.host, self.port, self.username, self.password, self.compress, self.timeout)
-                    tResult = self.tn.expect([b'#', b'>', b' \$ ', b'~ # '],2)
+                    tResult = self.tn.expect([b'#', b'>', b' $ ', b'~ # '], 2)
                     self.oam_print(tResult[2])
                 break
             except:
                 self.oam_print('reconnect failed !\n')
                 self.sleep(30000)
                 continue
-            
+
     def isSynchronized(self):
         szResult = self.rec('show synchronization | include MPU')
         if szResult.count('Master') * 2 != szResult.count('Synchronized'):
-            self.conlogger('系统当前不是Synchronized状态！')		
+            self.conlogger('系统当前不是Synchronized状态！')
             return False
         return True
 
@@ -814,162 +812,164 @@ class DUT(BaseDUT):
             else:
                 break
         return True
-    
+
     def SaveConfig(self):
         self.sendctrl('c')
         self.send('write')
         self.WaitSynchronized()
-        
+
     def reboot(self):
         self.sendctrl('c')
         self.sendexpect('reload system force', 'no')
         self.send3('yes')
-        
-    def redundancyswitch(self,le='sc',interval=10,switch_cnt=10,config_check=True,ospf_check=True,
-                         isis_check=True,bgp_check=True,ldp_check=True,pim_check=True,retry_cnt=1200):
+
+    def redundancyswitch(self, le='sc', interval=10, switch_cnt=10, config_check=True, ospf_check=True,
+                         isis_check=True, bgp_check=True, ldp_check=True, pim_check=True, retry_cnt=1200):
         self.logecho('\n============================== RESTART ==============================')
         self.logecho('系统开始主备倒换测试，当前倒换的逻辑实体是:' + le)
-        #用ctrl c 确保在特权模式下
+        # 用ctrl c 确保在特权模式下
         self.sendctrl('c')
         self.logecho('开始判断系统倒换前的同步状态')
-        
-        #给 retry_cnt 次判断同步的机会
-        for retry in range(0,retry_cnt):
-            if not self.isSynchronized() :
+
+        # 给 retry_cnt 次判断同步的机会
+        for retry in range(0, retry_cnt):
+            if not self.isSynchronized():
                 self.conlogger('系统当前不是Synchronized状态，不能进行主备倒换！')
                 self.conlogger('30秒后，重新进行一次主备同步状态判断')
-                if retry == retry_cnt - 1 :
-                    self.logecho('%d 次机会用完了，依然未同步，倒换测试失败！' %retry_cnt)
+                if retry == retry_cnt - 1:
+                    self.logecho('%d 次机会用完了，依然未同步，倒换测试失败！' % retry_cnt)
                     self.logger(self.rec('show synchronization | include MPU'))
                     return False
-                else :
+                else:
                     self.close()
                     self.sleep(30000)
                     self.reconnect()
                     continue
-            else :
+            else:
                 break
         self.logecho('系统处于Synchronized状态，具备倒换的条件，可以开始倒换了！')
-        if (config_check == True):
+        if config_check is True:
             self.logecho('开始获取倒换前，系统的配置文件！')
             running_config_old = self.rec('sho running-config')
         self.logecho('开始清除系统告警日志！')
         self.send('clear logging')
         self.logecho('倒换测试正式开始！')
-        
-        for i in range(1,switch_cnt+1):
+
+        for i in range(1, switch_cnt+1):
             self.logecho('开始第 %d 次倒换，当前倒换的逻辑实体是：%s' % (i, le))
             self.logger('倒换前 主备状态如下：\n' + self.rec('show synchronization | include MPU'))
             if (le == 'sc' or le == 'rp-router'):
-                self.sendexpect('redundancy switch '+le+' grace',':')
+                self.sendexpect('redundancy switch '+le+' grace', ':')
             elif (le == 'mpls'):
-                self.sendexpect('redundancy switch '+le,':')
+                self.sendexpect('redundancy switch '+le, ':')
             self.send3('yes')
             self.close()
             _begintime = self.timestamp()
             self.logecho('%d 分钟后，会重新登陆设备，请耐心等待！' % interval)
             self.sleep(interval*60*1000)
             self.reconnect()
-            if (config_check == True):
+            if config_check is True:
                 self.logecho('开始获取倒换后，系统的配置文件！')
                 running_config_new = self.rec('sho running-config')
                 if (running_config_new != running_config_old):
                     self.logecho('系统倒换前后的配置不一致，请用比较软件比较保存在脚本目录的配置文件！')
-                    with open('running_config_new.txt','w') as f:
+                    with open('running_config_new.txt', 'w') as f:
                         f.write(running_config_new)
-                    with open('running_config_old.txt','w') as f:
+                    with open('running_config_old.txt', 'w') as f:
                         f.write(running_config_old)
                     return False
-            #判断系统同步状态
+            # 判断系统同步状态
             self.logecho('开始判断倒换后，系统的主备同步状态！')
- 
-            #给 retry_cnt 次判断同步的机会
-            for retry in range(0,retry_cnt):
-                if not self.isSynchronized() :
+
+            # 给 retry_cnt 次判断同步的机会
+            for retry in range(0, retry_cnt):
+                if not self.isSynchronized():
                     self.conlogger('倒换后，系统不是Synchronized状态！')
                     self.conlogger('30秒后，重新进行一次主备同步状态判断')
-                    if retry == retry_cnt - 1 :
+                    if retry == retry_cnt - 1:
                         self.logecho('%d 次机会用完了，依然未同步，倒换测试失败！' % retry_cnt)
                         self.logger(self.rec('show synchronization | include MPU'))
                         return False
-                    else :
+                    else:
                         self.close()
                         self.sleep(30000)
                         self.reconnect()
                         continue
-                else :
+                else:
                     self.logecho('倒换后，系统是Synchronized状态！')
                     break
-                
-            #计算倒换后同步所消耗的时间
+
+            # 计算倒换后同步所消耗的时间
             _endtime = self.timestamp()
-            #unit: min
+            # unit: min
             _syn_time = (_endtime - _begintime) / 60
-            self.logecho('主备倒换后，同步时间为：%f 分钟'% _syn_time)
-            
-            #判断路由是否发生震荡
+            self.logecho('主备倒换后，同步时间为：%f 分钟' % _syn_time)
+
+            # 判断路由是否发生震荡
             self.logecho('开始判断倒换过程中，系统的路由协议震荡情况！')
-            if (ospf_check == True):
+            if ospf_check is True:
                 szResult = self.rec('show logging alarm typeid ospf | include [Dd][Oo][Ww][Nn]')
-                if ( szResult != ''):
+                if szResult != '':
                     self.logecho('倒换过程中，ospf协议出现震荡！')
                     self.logger('\n'+szResult)
                     return False
-            if (isis_check == True):
+            if isis_check is True:
                 szResult = self.rec('show logging alarm typeid isis | include [Dd][Oo][Ww][Nn]')
-                if ( szResult != ''):
+                if szResult != '':
                     self.logecho('倒换过程中，isis协议出现震荡！')
                     self.logger('\n'+szResult)
                     return False
-            if (bgp_check == True):
+            if bgp_check is True:
                 szResult = self.rec('show logging alarm typeid bgp | include [Dd][Oo][Ww][Nn]')
-                if ( szResult != ''):
+                if szResult != '':
                     self.logecho('倒换过程中，bgp协议出现震荡！')
                     self.logger('\n'+szResult)
                     return False
-            if (ldp_check == True):
+            if ldp_check is True:
                 szResult = self.rec('show logging alarm typeid ldp | include [Dd][Oo][Ww][Nn]')
-                if ( szResult != ''):
+                if szResult != '':
                     self.logecho('倒换过程中，ldp协议出现震荡！')
                     self.logger('\n'+szResult)
                     return False
-            if (pim_check == True):
+            if pim_check is True:
                 szResult = self.rec('show logging alarm typeid pim | include [Dd][Oo][Ww][Nn]')
-                if ( szResult != ''):
+                if szResult != '':
                     self.logecho('倒换过程中，pim协议出现震荡！')
                     self.logger('\n'+szResult)
                     return False
             self.logecho('第 %d 次倒换顺利结束，当前倒换的逻辑实体是：%s' % (i, le))
         self.logecho('%d 次倒换全部顺利结束，当前倒换的逻辑实体是：%s' % (switch_cnt, le))
         return True
-    
-    def migratele(self, mpu, le = 'sc'):
+
+    def migratele(self, mpu, le='sc'):
         self.sendctrl('c')
         self.send('con t')
         self.send('placement le %s' % le)
         temp = self.rec('locate-set slave %s' % mpu)
-        if 'Incomplete command' in  temp :
+        if 'Incomplete command' in temp:
             self.sendexpect('locate-set slave %s force' % mpu, 'no')
             self.send('yes')
         self.sendctrl('c')
-    
+
     def close(self):
         '''
         关闭当前DUT会话
         '''
         self.conlogger('\nThe current DUT connection is closed !\n')
         self.tn.close()
- 
+
     def __del__(self):
-        if self.sendwithlogfileobj :
+        if self.sendwithlogfileobj:
             self.sendwithlogfileobj.close()
-            
-        #脚本运行结束时，在屏幕上打印2个空行，便于好看
+
+        # 脚本运行结束时，在屏幕上打印2个空行，便于好看
         self.oam_print('\n\n')
-        
+
         # self.conlogger('按任意键退出！！！')
         # input()
- 
+
+
+"""
 class ushell(BaseDUT):
     '''
     登陆系统的ushell,执行调试函数
@@ -1017,7 +1017,7 @@ class ushell(BaseDUT):
         self.tn.write(BaseDUT.CRLF)
         tResult = self.tn.expect([b'#'], self.waittime)
         self.shell_print(tResult[2])
-                    
+
     def send(self,szCommand,delay = 0):
         szCommand = szCommand.encode()
         crlf_cnt = 0
@@ -1025,7 +1025,7 @@ class ushell(BaseDUT):
             self.tn.write(szCommand)
         else :
             self.tn.write(szCommand+BaseDUT.CRLF)
-        
+
         while True :
             if crlf_cnt > 2 :
                 timeout = 2
@@ -1044,10 +1044,10 @@ class ushell(BaseDUT):
                 break
             else :
                 break
-            
+
         if (delay != 0):
             self.sleep(delay)
- 
+
     def send2(self,szCommand,delay = 0):
         '''只发送命令，不关心执行的结果,慎用!!'''
         szCommand = szCommand.encode()
@@ -1057,7 +1057,7 @@ class ushell(BaseDUT):
             self.tn.write(szCommand+BaseDUT.CRLF)
         if (delay != 0):
             self.sleep(delay)
- 
+
     def sendexpect(self,send,expect,timeout = 10):
         send = send.encode()
         expect = expect.encode()
@@ -1069,11 +1069,11 @@ class ushell(BaseDUT):
             return True
         else :
             return False
-            
+
     def rec(self,szCommand, prompt = '', timeout = 10):
         szCommand = szCommand.encode()
         prompt = prompt.encode()
-        
+
         self.tn.write(szCommand+BaseDUT.CRLF)
         tResult = self.tn.expect([b'\r\n'],timeout)
         self.shell_print(tResult[2])
@@ -1087,25 +1087,25 @@ class ushell(BaseDUT):
             self.shell_print(self.tn.read_until(b'#'))
         szResult = tResult[2].decode()
         return BaseDUT.process_newline_forshell(szResult)
-    
+
     def rec_raw(self,szCommand, timeout = 10):
         szCommand = szCommand.encode()
         if (szCommand == b' ' or szCommand == b'\r'):
             self.tn.write(szCommand)
         else :
-            self.tn.write(szCommand+BaseDUT.CRLF)		
+            self.tn.write(szCommand+BaseDUT.CRLF)
         tResult = self.tn.expect([b'#', b'end  time.*ms'],timeout)
         self.shell_print(tResult[2])
         if tResult[0] == 1 :
             self.tn.write(BaseDUT.CRLF)
             self.shell_print(self.tn.read_until(b'#'))
         szResult = tResult[2].decode()
-        return BaseDUT.process_newline_forshell(szResult)	
- 
+        return BaseDUT.process_newline_forshell(szResult)
+
     def close(self):
         self.shell_print('\nThe current ushell connection is closed !\n')
         self.tn.close()
-        
+
 class shell(BaseDUT):
     '''
     登陆系统的linux BSP shell(不带10000号端口),执行调试函数
@@ -1154,10 +1154,10 @@ class shell(BaseDUT):
         self.shell_print(tResult[2])
         #需要root权限，否则可能部分操作无法执行
         self.tn.write(b'su' + BaseDUT.CRLF)
-        
+
         tResult = self.tn.expect([b'~ \# '], self.waittime)
         self.shell_print(tResult[2])
-                    
+
     def send(self,szCommand,prompt = ' # ' , delay = 0):
         szCommand = szCommand.encode()
         prompt = prompt.encode()
@@ -1166,7 +1166,7 @@ class shell(BaseDUT):
             self.tn.write(szCommand)
         else :
             self.tn.write(szCommand+BaseDUT.CRLF)
-        
+
         while True :
             if crlf_cnt > 2 :
                 timeout = 2
@@ -1183,7 +1183,7 @@ class shell(BaseDUT):
                 break
         if (delay != 0):
             self.sleep(delay)
- 
+
     def send2(self,szCommand,delay = 0):
         '''只发送命令，不关心执行的结果,慎用!!'''
         szCommand = szCommand.encode()
@@ -1193,7 +1193,7 @@ class shell(BaseDUT):
             self.tn.write(szCommand+BaseDUT.CRLF)
         if (delay != 0):
             self.sleep(delay)
- 
+
     def sendexpect(self,send,expect,timeout = 10):
         send = send.encode()
         expect = expect.encode()
@@ -1201,11 +1201,11 @@ class shell(BaseDUT):
         tResult = self.tn.expect([expect],timeout)
         self.shell_print(tResult[2])
         self.shell_print(self.tn.read_lazy())
-        if tResult[0] == 0 :
+        if tResult[0] == 0:
             return True
         else :
             return False
-            
+
     def rec(self,szCommand , prompt = ' # ', timeout = 10):
         szCommand = szCommand.encode()
         self.tn.write(szCommand+BaseDUT.CRLF)
@@ -1213,15 +1213,15 @@ class shell(BaseDUT):
         self.shell_print(tResult[2])
         tResult = self.tn.expect([prompt],timeout)
         self.shell_print(tResult[2])
-        
+
         szResult = tResult[2].decode()
-        
+
         if (szResult.rfind('\r\n') == -1):
             return ''
         else:
             szResult = szResult.rsplit('\r\n',1)
             return BaseDUT.process_newline_forshell(szResult[0])
-            
+
     def rec_raw(self,szCommand , prompt = ' # ', timeout = 10):
         szCommand = szCommand.encode()
         prompt = prompt.encode()
@@ -1233,33 +1233,35 @@ class shell(BaseDUT):
         self.shell_print(tResult[2])
         szResult = tResult[2].decode()
         return BaseDUT.process_newline_forshell(szResult)
- 
+
     def close(self):
         self.shell_print('\nThe current linux BSP shell connection is closed !\n')
         self.tn.close()
- 
+"""
+
+
 class txtFile(BaseDUT):
     '''
     txt文本类，直接打开文本文件，写入命令
     '''
-    def __init__(self,path=None,filename=None,mode='w', debug = True):
+    def __init__(self, path=None, filename=None, mode='w', debug=True):
         super().__init__(debug)
         self.filename = filename
         self.mode = mode
-        if path == None:
+        if path is None:
             self.path = os.path.split(os.path.realpath(__file__))[0]
-        else :
+        else:
             self.path = path
-            #import os
-            if not os.path.exists(self.path) :
+            # import os
+            if not os.path.exists(self.path):
                 os.makedirs(self.path.encode("gb2312"))
- 
-    def setfilename(self,filename):
+
+    def setfilename(self, filename):
         self.filename = self.path+'\\' + filename
-        self.file=open(self.filename,self.mode)
-        
-    def write(self,cmd):
+        self.file = open(self.filename, self.mode)
+
+    def write(self, cmd):
         self.file.write(cmd+'\n')
-        
+
     def close(self):
         self.file.close()
