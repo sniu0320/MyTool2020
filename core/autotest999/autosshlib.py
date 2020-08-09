@@ -4,6 +4,9 @@ import selectors
 from time import monotonic as _time
 
 __all__ = ["ssh"]
+__version__ = '2018.11.02'
+
+print('Loading %s , current lib version is : %s' % (__name__, __version__))
 
 # Tunable parameters
 DEBUGLEVEL = 0
@@ -237,7 +240,7 @@ class ssh:
     def process_rawq(self):
         """
         Transfer from raw queue to cooked queue.
-        Set self.eof when connection is closed.
+        Set self.eof when connection is closed. 
         """
         self.cookedq = self.cookedq + self.rawq
         self.rawq = b''

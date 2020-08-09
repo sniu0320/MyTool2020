@@ -1,0 +1,21 @@
+2020-08-09 22:45:16,558->Begin to connect the DUT!
+2020-08-09 22:45:21,574->telnet 172.11.1.1 failed(timed out)
+2020-08-09 22:49:18,030->Begin to connect the DUT!
+2020-08-09 22:54:00,839->Begin to connect the DUT!
+2020-08-09 22:54:06,112->ssh 172.11.1.1 failed(timed out)
+Traceback (most recent call last):
+  File "/Users/yangyang/MyTool2020/core/autotest/autotest.py", line 249, in login
+    self.tn = self.sshlib.ssh(self.host, port, self.username, self.password, False, timeout)
+  File "/Users/yangyang/MyTool2020/core/autotest/autosshlib.py", line 73, in __init__
+    self.open(host, port, username, password, compress, timeout)
+  File "/Users/yangyang/MyTool2020/core/autotest/autosshlib.py", line 81, in open
+    password, compress=compress, timeout=timeout)
+  File "/usr/local/lib/python3.6/site-packages/paramiko/client.py", line 338, in connect
+    retry_on_signal(lambda: sock.connect(addr))
+  File "/usr/local/lib/python3.6/site-packages/paramiko/util.py", line 279, in retry_on_signal
+    return function()
+  File "/usr/local/lib/python3.6/site-packages/paramiko/client.py", line 338, in <lambda>
+    retry_on_signal(lambda: sock.connect(addr))
+socket.timeout: timed out
+2020-08-09 23:00:52,839->Begin to connect the DUT!
+2020-08-09 23:00:58,036->ssh 172.11.1.1 failed(timed out)
