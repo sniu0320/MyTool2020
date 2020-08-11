@@ -406,6 +406,17 @@ class DUT(BaseDUT):
         if (delay != 0):
             self.sleep(delay)
 
+    def send3(self, szCommand):
+        '''只发送命令，不关心执行的结果,慎用!!'''
+        szCommand = szCommand.encode()
+        if (szCommand == b' ' or szCommand == b'\r'):
+            self.tn.write(szCommand)
+        else:
+            self.tn.write(szCommand+BaseDUT.CRLF)
+        # ssh 协议有流控，一直不读sockets，会使服务端不能继续发送内容
+        self.sleep(15)
+        self.oam_print(self.tn.read_eager())
+
     def rec(self, szCommand, prompt='#', timeout=60):
         '''
         接收命令的返回结果，命令的回显和末尾的设备提示符已经删除！！
@@ -453,3 +464,97 @@ class DUT(BaseDUT):
         szResult = szResult.replace('\b \b', '')
         szResult = szResult.replace(' --More--', '')
         return BaseDUT.process_newline_foroam(szResult)
+
+    def sendctrl(self, char, prompt='#'):
+        '''目前仅支持字符C和字符X'''
+        prompt = prompt.encode()
+        if (char == 'c'):
+            self.tn.write(b'\3')
+            self.oam_print(self.tn.read_until(prompt))
+        elif (char == 'x'):
+            self.tn.write(b'\30')
+
+    def sendexpect(self, szCommand, expect, timeout=60):
+        '''
+        下发命令行，抓到期望字段return True，
+        可以用来处理改路由口、重启等需要用yes的
+        '''
+        send = szCommand.encode()
+        expect = expect.encode()
+        self.tn.write(send + BaseDUT.CRLF)
+        tResult = self.tn.expect([b'\r\n'], timeout)
+        self.oam_print(tResult[2])
+        tResult = self.tn.expect([expect], timeout)
+        self.oam_print(tResult[2])
+        self.oam_print(self.tn.read_lazy())
+        if tResult[0] == -1:
+            return False
+        else:
+            return True
+
+    def con_t(self):
+        '''
+        需要优化，识别多用户等
+        '''
+        self.sendctrl('c')
+        self.sendctrl('c')
+        self.send('configure terminal')
+
+    # def exit_con_t(self):
+    #     """
+    #     从全局配置模式or其他模式 退出到特权模式
+    #     """
+    #     self.send('end')
+
+    # def enter_config_terminal(self, multi_user=1, clear_vty=1):
+    #     """
+    #     进入全局配置模式，multi_user=1 配置多用户；
+    #     如果clear_vty=1，尝试踢掉锁定用户(串口锁定踢不掉)
+
+    #     :return True or False
+    #     """
+    #     # self.sendctrl('c')
+    #     # self.sendctrl('c')
+    #     self.send('end')
+    #     i = 0
+    #     while i <= 1:
+    #         self.send('configure terminal')
+    #         if 'Enter configuration commands' in self.send_command_output:
+    #             logging.debug('进入全局配置模式成功')
+    #             if multi_user == 1:
+    #                 self.send('multi-user config')
+    #             return True
+    #         else:
+    #             if clear_vty == 1:
+    #                 if 'Locked from con' in self.send_command_output:
+    #                     logging.error('进入全局配置模式失败(串口用户锁定)')
+    #                     return False
+    #                 else:
+    #                     vty_id = re.search(r'Locked from vty(\d*)',
+    #                                        self.send_command_output).group(1)
+    #                     elf.send('clear line vty {}'.format(vty_id))
+    #                     i += 1
+    #             else:
+    #                 logging.error('进入全局配置模式失败')
+    #                 return False
+    def WaitSynchronized(self):
+        while True:
+            self.send('show clock')
+            szResult = self.rec('show synchronization | include MPU')
+            if 'Slave' not in szResult:
+                break
+            if szResult.count('Master') * 2 != szResult.count('Synchronized'):
+                self.sleep(5000)
+            else:
+                break
+        return True
+
+    def SaveConfig(self):
+        self.sendctrl('c')
+        self.send('write')
+        self.WaitSynchronized()
+
+    def reboot(self):
+        self.sendctrl('c')
+        self.sendexpect('reload system force', 'no')
+        self.send3('yes')
