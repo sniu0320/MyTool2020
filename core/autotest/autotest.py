@@ -7,7 +7,6 @@ import os
 import sys
 import telnetlib
 import time
-import socket
 
 current_dir = os.path.split(os.path.realpath(__file__))[0]
 if current_dir not in sys.path:
@@ -123,7 +122,7 @@ class BaseDUT(object):
             with open(log_file, 'a') as f:
                 datefmt = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[0:-3]
                 # szString = BaseDUT.process_newline_foroam(szString)
-                f.write(datefmt+'->'+szString + '\n')
+                f.write(datefmt+': '+szString + '\n')
 
     def oam_print(self, szString, end_flag=''):
         if self.log_enable:
@@ -198,22 +197,23 @@ class DUT(BaseDUT):
             if protocol == 'telnet':
                 try:
                     self.tn = telnetlib.Telnet(self.host, port, timeout)
-                except socket.timeout as e:
-                    self.error("telnet {} failed({})".format(self.host, e))
-                    self.login_fail_info = e
-                    return False
-                except ConnectionResetError as e:
-                    #  [WinError 10054] 远程主机强迫关闭了一个现有的连接
-                    self.error("telnet {} failed({})".format(self.host, e))
-                    self.login_fail_info = e
-                    return False
-                except ConnectionResetError as e:
-                    #  [WinError 10061] 由于目标计算机积极拒绝，无法连接
-                    self.error("telnet {} failed({})".format(self.host, e))
-                    self.login_fail_info = e
-                    return False
+                # except socket.timeout as e:
+                #     self.error("telnet {} failed({})".format(self.host, e))
+                #     self.login_fail_info = e
+                #     return False
+                # except ConnectionResetError as e:
+                #     #  [WinError 10054] 远程主机强迫关闭了一个现有的连接
+                #     self.error("telnet {} failed({})".format(self.host, e))
+                #     self.login_fail_info = e
+                #     return False
+                # except ConnectionRefusedError as e:
+                #     #  [WinError 10061] 由于目标计算机积极拒绝，无法连接
+                #     self.error("telnet {} failed({})".format(self.host, e))
+                #     self.login_fail_info = e
+                #     return False
                 except Exception as e:
-                    self.error("telnet {} failed({})".format(self.host, e), True)
+                    # self.error("telnet {} failed({})".format(self.host, e), True)
+                    self.error("telnet {} failed: {}".format(self.host, e))
                     self.login_fail_info = e
                     return False
 
@@ -228,12 +228,14 @@ class DUT(BaseDUT):
                 tResult = self.tn.expect([b'#', b'>', b'error'], waittime)
                 if tResult[0] == -1:
                     # 未读取到
-                    self.error('Don\'t find system prompt!')
-                    self.login_fail_info = 'Don\'t find system prompt!'
+                    e = 'Don\'t find system prompt!'
+                    self.error("telnet {} failed: {}".format(self.host, e))
+                    self.login_fail_info = e
                     return False
                 elif tResult[0] == 2:
-                    self.error('Username or password error!')
-                    self.login_fail_info = 'Username or password error!'
+                    e = 'Username or password error!'
+                    self.error("telnet {} failed: {}".format(self.host, e))
+                    self.login_fail_info = e
                     return False
                 elif tResult[0] == 1:
                     self.oam_print(tResult[2])
@@ -242,12 +244,14 @@ class DUT(BaseDUT):
                     self.tn.write(self.password_enable.encode() + BaseDUT.CRLF)
                     tResult = self.tn.expect([b'#', b'Bad password'], waittime)
                     if tResult[0] == -1:
-                        self.error('Don\'t find 特权模式 prompt!')
-                        self.login_fail_info = 'Don\'t find 特权模式 prompt!'
+                        e = 'Don\'t find 特权模式 prompt!'
+                        self.error("telnet {} failed: {}".format(self.host, e))
+                        self.login_fail_info = e
                         return False
                     elif tResult[0] == 1:
-                        self.error('Bad password!')
-                        self.login_fail_info = 'Bad password!'
+                        e = 'Bad password!'
+                        self.error("telnet {} failed: {}".format(self.host, e))
+                        self.login_fail_info = e
                         return False
                     elif tResult[0] == 0:
                         self.debug("telnet {} successful".format(self.host))
@@ -266,8 +270,9 @@ class DUT(BaseDUT):
                     tResult = self.tn.expect([b'#', b'>'], waittime)
                     if tResult[0] == -1:
                         # 未读取到
-                        self.error('Don\'t find system prompt!')
-                        self.login_fail_info = 'Don\'t find system prompt!'
+                        e = 'Don\'t find system prompt!'
+                        self.error("ssh {} failed: {}".format(self.host, e))
+                        self.login_fail_info = e
                         return False
                     elif tResult[0] == 1:
                         self.oam_print(tResult[2])
@@ -276,12 +281,14 @@ class DUT(BaseDUT):
                         self.tn.write(self.password_enable.encode() + BaseDUT.CRLF)
                         tResult = self.tn.expect([b'#', b'Bad password'], waittime)
                         if tResult[0] == -1:
-                            self.error('Don\'t find 特权模式 prompt!')
-                            self.login_fail_info = 'Don\'t find 特权模式 prompt!'
+                            e = 'Don\'t find 特权模式 prompt!'
+                            self.error("ssh {} failed: {}".format(self.host, e))
+                            self.login_fail_info = e
                             return False
                         elif tResult[0] == 1:
-                            self.error('Bad password!')
-                            self.login_fail_info = 'Bad password!'
+                            e = 'Bad password!'
+                            self.error("ssh {} failed: {}".format(self.host, e))
+                            self.login_fail_info = e
                             return False
                         elif tResult[0] == 0:
                             self.debug("ssh {} successful".format(self.host))
@@ -289,12 +296,8 @@ class DUT(BaseDUT):
                     elif tResult[0] == 0:
                         self.debug("ssh {} successful".format(self.host))
                         return True
-                except socket.timeout as e:
-                    self.error("ssh {} failed({})".format(self.host, e))
-                    self.login_fail_info = e
-                    return False
                 except Exception as e:
-                    self.error("ssh {} failed({})".format(self.host, e), True)
+                    self.error("ssh {} failed: {}".format(self.host, e))
                     self.login_fail_info = e
                     return False
 
@@ -304,6 +307,11 @@ class DUT(BaseDUT):
         '''
         self.debug('\nThe current DUT connection is closed !\n')
         self.tn.close()
+
+    def __del__(self):
+        # 脚本运行结束时，在屏幕上打印2个空行，便于好看
+        self.close()
+        self.oam_print('\n\n')
 
     def send(self, szCommand, delay=0, timeout=60):
         '''
@@ -316,9 +324,13 @@ class DUT(BaseDUT):
         else:
             self.tn.write(szCommand+BaseDUT.CRLF)
         while True:
-            tResult = self.tn.expect([b'#', b'--More--', b'%Error ', b'..', b'\r\n'], timeout)
+            # tResult = self.tn.expect([b'#', b'--More--', b'%Error ', b'\.\.', b'\r\n'], timeout)
+            # self.oam_print(tResult[2])
+            # if tResult[0] == 3 or tResult[0] == 4:
+            #     continue
+            tResult = self.tn.expect([b'#', b'--More--', b'%Error ', b'\.\.'], timeout)
             self.oam_print(tResult[2])
-            if tResult[0] == 3 or tResult[0] == 4:
+            if tResult[0] == 3:
                 continue
             elif tResult[0] == 0:  # 这里如果出现打印里有# 怎么处理？
                 break
@@ -328,17 +340,17 @@ class DUT(BaseDUT):
             elif tResult[0] == 2:
                 tResult = self.tn.expect([b'again', b'#'])
                 if tResult[0] == 0:  # 提示again时
-                    # 给100次重试的机会！
-                    for retry in range(1, 101):
+                    # 给3次重试的机会！
+                    for retry in range(1, 4):
                         self.oam_print(tResult[2])
-                        self.oam_print(self.tn.read_until(b'#'))  # 这里啥意思？
+                        self.oam_print(self.tn.read_until(b'#'))
                         self.sleep(retry*500)
                         self.tn.write(szCommand+BaseDUT.CRLF)
                         tResult = self.tn.expect([b'again', b'#'])
                         if tResult[0] == 1:
                             self.oam_print(tResult[2])
                             break
-                        elif retry == 100:
+                        elif retry == 3:
                             szResult = tResult[2] + self.tn.read_until(b'#')
                             self.oam_print(szResult)
                             sys.exit(0)
@@ -358,9 +370,13 @@ class DUT(BaseDUT):
         else:
             self.tn.write(szCommand+BaseDUT.CRLF)
         while True:
-            tResult = self.tn.expect([b'#', b'--More--', b'%Error ', b'..', b'\r\n'], timeout)
+            # tResult = self.tn.expect([b'#', b'--More--', b'%Error ', b'\.\.', b'\r\n'], timeout)
+            # self.oam_print(tResult[2])
+            # if tResult[0] == 4 or tResult[0] == 3:
+            #     continue
+            tResult = self.tn.expect([b'#', b'--More--', b'%Error ', b'\.\.'], timeout)
             self.oam_print(tResult[2])
-            if tResult[0] == 4 or tResult[0] == 3:
+            if tResult[0] == 3:
                 continue
             elif tResult[0] == 0:
                 break
@@ -370,8 +386,8 @@ class DUT(BaseDUT):
             elif tResult[0] == 2:
                 tResult = self.tn.expect([b'again', b'#'])
                 if tResult[0] == 0:
-                    # 给100次重试的机会！
-                    for retry in range(1, 101):
+                    # 给3次重试的机会！
+                    for retry in range(1, 4):
                         self.oam_print(tResult[2])
                         self.oam_print(self.tn.read_until(b'#'))
                         self.sleep(retry*500)
@@ -380,7 +396,7 @@ class DUT(BaseDUT):
                         if tResult[0] == 1:
                             self.oam_print(tResult[2])
                             break
-                        elif retry == 100:
+                        elif retry == 3:
                             self.oam_print(tResult[2])
                             self.oam_print(self.tn.read_until(b'#'))
                     break
