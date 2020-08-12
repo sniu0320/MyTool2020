@@ -94,23 +94,25 @@ class BaseDUT(object):
         szString = szString.replace(' --More--', '')
         return szString
 
-    def debug(self, szString):
+    def debug(self, szString, print_only=False, time_stamp=True):
         '''debug'''
         szString = BaseDUT.process_newline_foroam(szString)
         if self.debug_enable:
             consolelog_logger.debug(szString)
             filelog_logger.debug(szString)
-        self.log(szString)
+        if not print_only:
+            self.log(szString, time_stamp)
 
-    def error(self, szString, exc_info=False):
+    def error(self, szString, exc_info=False, print_only=False, time_stamp=True):
         '''error'''
         szString = BaseDUT.process_newline_foroam(szString)
         if self.debug_enable:
             consolelog_logger.error(szString, exc_info=exc_info)
             filelog_logger.error(szString, exc_info=exc_info)
-        self.log(szString)
+        if not print_only:
+            self.log(szString, time_stamp)
 
-    def log(self, szString):
+    def log(self, szString, time_stamp=True):
         '''每次的日志文件名都不同，以脚本运行的时间命名日志文件名称 '''
         current_dir = os.getcwd()
         log_file = os.path.join(current_dir, 'log', self.logfilename)
@@ -121,16 +123,23 @@ class BaseDUT(object):
         if self.log_enable:
             with open(log_file, 'a') as f:
                 datefmt = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[0:-3]
-                # szString = BaseDUT.process_newline_foroam(szString)
-                f.write(datefmt+': '+szString + '\n')
+                if time_stamp:
+                    if '\n' in szString:
+                        f.write(datefmt+': '+szString)
+                    else:
+                        f.write(datefmt+': '+szString+'\n')
+                else:
+                    if '\n' in szString:
+                        f.write(szString)
+                    else:
+                        f.write(szString+'\n')
 
-    def oam_print(self, szString, end_flag=''):
+    def oam_print(self, szString, time_stamp=True):
         if self.log_enable:
             szString = BaseDUT.to_str(szString)
             szString = BaseDUT.process_newline_foroam(szString)
-            # print(szString, end=end_flag, flush=True)
             print(szString)
-            self.log(szString)
+            self.log(szString, time_stamp)
 
     @staticmethod
     def to_str(bytes_or_str):
@@ -193,8 +202,8 @@ class DUT(BaseDUT):
         :return True or False
         """
         if self.host:
-            self.debug('Begin to connect the DUT!')
             if protocol == 'telnet':
+                self.debug('Begin to telnet {}'.format(self.host))
                 try:
                     self.tn = telnetlib.Telnet(self.host, port, timeout)
                 # except socket.timeout as e:
@@ -213,14 +222,14 @@ class DUT(BaseDUT):
                 #     return False
                 except Exception as e:
                     # self.error("telnet {} failed({})".format(self.host, e), True)
-                    self.error("telnet {} failed: {}".format(self.host, e))
+                    self.error("telnet {} failed: {}\n".format(self.host, e))
                     self.login_fail_info = e
                     return False
 
-                self.tn.set_option_negotiation_callback(option_negotiation_callback)
+                # self.tn.set_option_negotiation_callback(option_negotiation_callback)
 
                 tResult = self.tn.expect([b'sername:'], waittime)
-                self.oam_print(tResult[2])
+                self.oam_print(tResult[2], time_stamp=False)
                 self.tn.write(self.username.encode() + BaseDUT.CRLF)
                 self.oam_print(self.tn.read_until(b'assword:'))
                 self.tn.write(self.password.encode() + BaseDUT.CRLF)
@@ -229,12 +238,12 @@ class DUT(BaseDUT):
                 if tResult[0] == -1:
                     # 未读取到
                     e = 'Don\'t find system prompt!'
-                    self.error("telnet {} failed: {}".format(self.host, e))
+                    self.error("telnet {} failed: {}".format(self.host, e), print_only=True)
                     self.login_fail_info = e
                     return False
                 elif tResult[0] == 2:
                     e = 'Username or password error!'
-                    self.error("telnet {} failed: {}".format(self.host, e))
+                    self.error("telnet {} failed: {}".format(self.host, e), print_only=True)
                     self.login_fail_info = e
                     return False
                 elif tResult[0] == 1:
@@ -254,10 +263,11 @@ class DUT(BaseDUT):
                         self.login_fail_info = e
                         return False
                     elif tResult[0] == 0:
-                        self.debug("telnet {} successful".format(self.host))
+                        self.oam_print(tResult[2])
+                        self.debug("telnet {} successful".format(self.host), print_only=True)
                         return True
                 elif tResult[0] == 0:
-                    self.debug("telnet {} successful".format(self.host))
+                    self.debug("telnet {} successful".format(self.host), print_only=True)
                     return True
 
             elif protocol == 'ssh':
@@ -266,12 +276,13 @@ class DUT(BaseDUT):
                 self.sshlib = __import__('autosshlib')
 
                 try:
+                    self.debug('Begin to ssh {}'.format(self.host), print_only=True)
                     self.tn = self.sshlib.ssh(self.host, port, self.username, self.password, False, timeout)
                     tResult = self.tn.expect([b'#', b'>'], waittime)
                     if tResult[0] == -1:
                         # 未读取到
                         e = 'Don\'t find system prompt!'
-                        self.error("ssh {} failed: {}".format(self.host, e))
+                        self.error("ssh {} failed: {}".format(self.host, e), print_only=True)
                         self.login_fail_info = e
                         return False
                     elif tResult[0] == 1:
@@ -291,13 +302,15 @@ class DUT(BaseDUT):
                             self.login_fail_info = e
                             return False
                         elif tResult[0] == 0:
-                            self.debug("ssh {} successful".format(self.host))
+                            self.oam_print(tResult[2])
+                            self.debug("ssh {} successful".format(self.host), print_only=True)
                             return True
                     elif tResult[0] == 0:
-                        self.debug("ssh {} successful".format(self.host))
+                        self.oam_print(tResult[2])
+                        self.debug("ssh {} successful".format(self.host), print_only=True)
                         return True
                 except Exception as e:
-                    self.error("ssh {} failed: {}".format(self.host, e))
+                    self.error("ssh {} failed: {}".format(self.host, e), print_only=True)
                     self.login_fail_info = e
                     return False
 
@@ -305,13 +318,12 @@ class DUT(BaseDUT):
         '''
         关闭当前DUT会话
         '''
-        self.debug('\nThe current DUT connection is closed !\n')
+        self.debug('The current DUT connection is closed !\r\n')
+        self.oam_print('\n\n')
         self.tn.close()
 
     def __del__(self):
-        # 脚本运行结束时，在屏幕上打印2个空行，便于好看
         self.close()
-        self.oam_print('\n\n')
 
     def send(self, szCommand, delay=0, timeout=60):
         '''
@@ -370,14 +382,14 @@ class DUT(BaseDUT):
         else:
             self.tn.write(szCommand+BaseDUT.CRLF)
         while True:
-            # tResult = self.tn.expect([b'#', b'--More--', b'%Error ', b'\.\.', b'\r\n'], timeout)
-            # self.oam_print(tResult[2])
-            # if tResult[0] == 4 or tResult[0] == 3:
-            #     continue
-            tResult = self.tn.expect([b'#', b'--More--', b'%Error ', b'\.\.'], timeout)
+            tResult = self.tn.expect([b'#', b'--More--', b'%Error ', b'\.\.', b'\r\n'], timeout)
             self.oam_print(tResult[2])
-            if tResult[0] == 3:
+            if tResult[0] == 4 or tResult[0] == 3:
                 continue
+            # tResult = self.tn.expect([b'#', b'--More--', b'%Error ', b'\.\.'], timeout)
+            # self.oam_print(tResult[2])
+            # if tResult[0] == 3:
+            #     continue
             elif tResult[0] == 0:
                 break
             elif tResult[0] == 1:
@@ -417,7 +429,7 @@ class DUT(BaseDUT):
         self.sleep(15)
         self.oam_print(self.tn.read_eager())
 
-    def rec(self, szCommand, prompt='#', timeout=60):
+    def rec2(self, szCommand, prompt='#', timeout=60):
         '''
         接收命令的返回结果，命令的回显和末尾的设备提示符已经删除！！
         '''
@@ -428,7 +440,8 @@ class DUT(BaseDUT):
         self.oam_print(tResult[2])
         szResult = b''
         while True:
-            tResult = self.tn.expect([prompt, b' --More--', b'\r\n'], timeout)
+            # tResult = self.tn.expect([prompt, b' --More--', b'\r\n'], timeout)
+            tResult = self.tn.expect([prompt, b' --More--'], timeout)
             szResult = szResult + tResult[2]
             self.oam_print(tResult[2])
             if tResult[0] == 0:
@@ -445,14 +458,14 @@ class DUT(BaseDUT):
             szResult = szResult.rsplit('\r\n', 1)
             return BaseDUT.process_newline_foroam(szResult[0])
 
-    def rec2(self, szCommand, prompt='#', timeout=60):
+    def rec(self, szCommand, prompt='#', timeout=60):
         '''接收原始数据，开始的命令回显和末尾的设备提示符都没有删除'''
         szCommand = szCommand.encode()
         prompt = prompt.encode()
         self.tn.write(szCommand+BaseDUT.CRLF)
         szResult = b''
         while True:
-            tResult = self.tn.expect([prompt, b' --More--', b'\r\n'], timeout)
+            tResult = self.tn.expect([prompt, b' --More--', b'\.\.'], timeout)
             szResult = szResult + tResult[2]
             self.oam_print(tResult[2])
             if tResult[0] == 0:

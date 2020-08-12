@@ -48,7 +48,7 @@ class ssh:
             I/O.
     """
 
-    def __init__(self, host=None, port=22, username='who', password='who', compress=False,
+    def __init__(self, host=None, port=22, username='test', password='test', compress=False,
                  timeout=socket._GLOBAL_DEFAULT_TIMEOUT):
         """
         Constructor.
