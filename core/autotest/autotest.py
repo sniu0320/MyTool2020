@@ -124,15 +124,17 @@ class BaseDUT(object):
             with open(log_file, 'a') as f:
                 datefmt = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S,%f')[0:-3]
                 if time_stamp:
-                    if '\n' in szString:
-                        f.write(datefmt+': '+szString)
-                    else:
-                        f.write(datefmt+': '+szString+'\n')
+                    # if '\n' in szString:
+                    #     f.write(datefmt+': '+szString)
+                    # else:
+                    #     f.write(datefmt+': '+szString+'\n')
+                    f.write(datefmt+': '+szString+'\n')
                 else:
-                    if '\n' in szString:
-                        f.write(szString)
-                    else:
-                        f.write(szString+'\n')
+                    # if '\n' in szString:
+                    #     f.write(szString)
+                    # else:
+                    #     f.write(szString+'\n')
+                    f.write(szString+'\n')
 
     def oam_print(self, szString, time_stamp=True):
         if self.log_enable:
@@ -226,7 +228,7 @@ class DUT(BaseDUT):
                     self.login_fail_info = e
                     return False
 
-                # self.tn.set_option_negotiation_callback(option_negotiation_callback)
+                self.tn.set_option_negotiation_callback(option_negotiation_callback)
 
                 tResult = self.tn.expect([b'sername:'], waittime)
                 self.oam_print(tResult[2], time_stamp=False)
@@ -238,12 +240,13 @@ class DUT(BaseDUT):
                 if tResult[0] == -1:
                     # 未读取到
                     e = 'Don\'t find system prompt!'
-                    self.error("telnet {} failed: {}".format(self.host, e), print_only=True)
+                    self.error("telnet {} failed: {}".format(self.host, e))
                     self.login_fail_info = e
                     return False
                 elif tResult[0] == 2:
+                    self.oam_print(tResult[2])
                     e = 'Username or password error!'
-                    self.error("telnet {} failed: {}".format(self.host, e), print_only=True)
+                    self.error("telnet {} failed: {}".format(self.host, e))
                     self.login_fail_info = e
                     return False
                 elif tResult[0] == 1:
@@ -258,6 +261,7 @@ class DUT(BaseDUT):
                         self.login_fail_info = e
                         return False
                     elif tResult[0] == 1:
+                        self.oam_print(tResult[2])
                         e = 'Bad password!'
                         self.error("telnet {} failed: {}".format(self.host, e))
                         self.login_fail_info = e
@@ -276,13 +280,13 @@ class DUT(BaseDUT):
                 self.sshlib = __import__('autosshlib')
 
                 try:
-                    self.debug('Begin to ssh {}'.format(self.host), print_only=True)
+                    self.debug('Begin to ssh {}'.format(self.host))
                     self.tn = self.sshlib.ssh(self.host, port, self.username, self.password, False, timeout)
                     tResult = self.tn.expect([b'#', b'>'], waittime)
                     if tResult[0] == -1:
                         # 未读取到
                         e = 'Don\'t find system prompt!'
-                        self.error("ssh {} failed: {}".format(self.host, e), print_only=True)
+                        self.error("ssh {} failed: {}".format(self.host, e))
                         self.login_fail_info = e
                         return False
                     elif tResult[0] == 1:
@@ -297,6 +301,7 @@ class DUT(BaseDUT):
                             self.login_fail_info = e
                             return False
                         elif tResult[0] == 1:
+                            self.oam_print(tResult[2])
                             e = 'Bad password!'
                             self.error("ssh {} failed: {}".format(self.host, e))
                             self.login_fail_info = e
@@ -310,7 +315,7 @@ class DUT(BaseDUT):
                         self.debug("ssh {} successful".format(self.host), print_only=True)
                         return True
                 except Exception as e:
-                    self.error("ssh {} failed: {}".format(self.host, e), print_only=True)
+                    self.error("ssh {} failed: {}".format(self.host, e))
                     self.login_fail_info = e
                     return False
 
@@ -320,7 +325,8 @@ class DUT(BaseDUT):
         '''
         self.debug('The current DUT connection is closed !\r\n')
         self.oam_print('\n\n')
-        self.tn.close()
+        if self.tn:
+            self.tn.close()
 
     def __del__(self):
         self.close()
@@ -428,35 +434,6 @@ class DUT(BaseDUT):
         # ssh 协议有流控，一直不读sockets，会使服务端不能继续发送内容
         self.sleep(15)
         self.oam_print(self.tn.read_eager())
-
-    def rec2(self, szCommand, prompt='#', timeout=60):
-        '''
-        接收命令的返回结果，命令的回显和末尾的设备提示符已经删除！！
-        '''
-        szCommand = szCommand.encode()
-        prompt = prompt.encode()
-        self.tn.write(szCommand+BaseDUT.CRLF)
-        tResult = self.tn.expect([b'\r\n'], timeout)
-        self.oam_print(tResult[2])
-        szResult = b''
-        while True:
-            # tResult = self.tn.expect([prompt, b' --More--', b'\r\n'], timeout)
-            tResult = self.tn.expect([prompt, b' --More--'], timeout)
-            szResult = szResult + tResult[2]
-            self.oam_print(tResult[2])
-            if tResult[0] == 0:
-                break
-            elif tResult[0] == 1:
-                self.tn.write(b' ')
-
-        szResult = szResult.decode()
-        szResult = szResult.replace('\b \b', '')
-        szResult = szResult.replace(' --More--', '')
-        if (szResult.rfind('\r\n') == -1):
-            return ''
-        else:
-            szResult = szResult.rsplit('\r\n', 1)
-            return BaseDUT.process_newline_foroam(szResult[0])
 
     def rec(self, szCommand, prompt='#', timeout=60):
         '''接收原始数据，开始的命令回显和末尾的设备提示符都没有删除'''
