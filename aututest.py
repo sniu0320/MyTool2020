@@ -3,7 +3,7 @@
 from core.autotest import autotest
 import time
 
-t = autotest.DUT(host='47.105.177.234', username='root', password='yy.10195311')
+t = autotest.DUT(host='47.105.177.235', username='root', password='tt')
 if t.login('ssh'):
     t.rec('dir')
     time.sleep(3)
