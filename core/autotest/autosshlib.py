@@ -82,6 +82,11 @@ class ssh:
         self.channel = self.ssh_client.invoke_shell(width=65278, height=65278)
         self.ssh_fileno = self.fileno()
 
+    def sftp(self):
+        tran = self.client.get_transport()
+        sftp = paramiko.SFTPClient.from_transport(tran)
+        return sftp
+
     def __del__(self):
         """Destructor -- close the connection."""
         self.close()

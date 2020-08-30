@@ -1,0 +1,4 @@
+2020-08-30 23:17:55,247->The current DUT connection is closed !
+
+2020-08-30 23:20:53,281->Begin to ssh 47.105.177.235
+2020-08-30 23:20:53,318->ssh 47.105.177.235 failed: [Errno None] Unable to connect to port 22 on 47.105.177.235

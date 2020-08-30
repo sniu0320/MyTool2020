@@ -181,6 +181,11 @@ class DUT(BaseDUT):
                  password='test',
                  enable='enable',
                  password_enable='zxr10',
+                 protocol='telnet',
+                 port=23,
+                 timeout=5,
+                 waittime=3,
+                 compress=False,
                  crlf='\n',
                  prompt='#',
                  debug_enable=True,
@@ -191,6 +196,11 @@ class DUT(BaseDUT):
         self.password = password
         self.enable = enable
         self.password_enable = password_enable
+        self.protocol = protocol
+        self.port = port
+        self.timeout = timeout  # login timeout
+        self.waittime = waittime
+        self.compress = compress
         self.crlf = crlf.encode()
         self.prompt = prompt.encode()
 
@@ -202,16 +212,16 @@ class DUT(BaseDUT):
         self.login_fail_info = None
         self.results = None
 
-    def login(self, protocol='telnet', port=23, timeout=5, waittime=3):
+    def login(self):
         """
         登陆设备，支持telnet和ssh
         :return True or False
         """
         if self.host:
-            if protocol == 'telnet':
+            if self.protocol != 'ssh':
                 self.debug('Begin to telnet {}'.format(self.host))
                 try:
-                    self.tn = telnetlib.Telnet(self.host, port, timeout)
+                    self.tn = telnetlib.Telnet(self.host, self.port, self.timeout)
                 # except socket.timeout as e:
                 #     self.error("telnet {} failed({})".format(self.host, e))
                 #     self.login_fail_info = e
@@ -234,13 +244,13 @@ class DUT(BaseDUT):
 
                 self.tn.set_option_negotiation_callback(option_negotiation_callback)
 
-                tResult = self.tn.expect([b'sername:'], waittime)
+                tResult = self.tn.expect([b'sername:'], self.waittime)
                 self.oam_print(tResult[2], time_stamp=False)
                 self.tn.write(self.username.encode() + self.crlf)
                 self.oam_print(self.tn.read_until(b'assword:'))
                 self.tn.write(self.password.encode() + self.crlf)
 
-                tResult = self.tn.expect([self.prompt, b'>', b'error'], waittime)
+                tResult = self.tn.expect([self.prompt, b'>', b'error'], self.waittime)
                 if tResult[0] == -1:
                     # 未读取到
                     e = 'Don\'t find system prompt!'
@@ -258,7 +268,7 @@ class DUT(BaseDUT):
                     self.tn.write(self.enable.encode() + self.crlf)
                     self.oam_print(self.tn.read_until(b'assword:'))
                     self.tn.write(self.password_enable.encode() + self.crlf)
-                    tResult = self.tn.expect([self.prompt, b'Bad password'], waittime)
+                    tResult = self.tn.expect([self.prompt, b'Bad password'], self.waittime)
                     if tResult[0] == -1:
                         e = 'Don\'t find 特权模式 prompt!'
                         self.error("telnet {} failed: {}".format(self.host, e))
@@ -278,50 +288,95 @@ class DUT(BaseDUT):
                     self.debug("telnet {} successful".format(self.host), print_only=True)
                     return True
 
-            elif protocol == 'ssh':
-                if port == 23:
-                    port = 22
-                self.sshlib = __import__('autosshlib')
+            elif self.protocol == 'ssh':
+                self.login_ssh()
+                # if self.port == 23:
+                #     self.port = 22
+                # self.sshlib = __import__('autosshlib')
 
-                try:
-                    self.debug('Begin to ssh {}'.format(self.host))
-                    self.tn = self.sshlib.ssh(self.host, port, self.username, self.password, False, timeout)
-                    tResult = self.tn.expect([self.prompt, b'>'], waittime)
-                    if tResult[0] == -1:
-                        # 未读取到
-                        e = 'Don\'t find system prompt!'
-                        self.error("ssh {} failed: {}".format(self.host, e))
-                        self.login_fail_info = e
-                        return False
-                    elif tResult[0] == 1:
-                        self.oam_print(tResult[2])
-                        self.tn.write(self.enable.encode() + self.crlf)
-                        self.oam_print(self.tn.read_until(b'assword:'))
-                        self.tn.write(self.password_enable.encode() + self.crlf)
-                        tResult = self.tn.expect([self.prompt, b'Bad password'], waittime)
-                        if tResult[0] == -1:
-                            e = 'Don\'t find 特权模式 prompt!'
-                            self.error("ssh {} failed: {}".format(self.host, e))
-                            self.login_fail_info = e
-                            return False
-                        elif tResult[0] == 1:
-                            self.oam_print(tResult[2])
-                            e = 'Bad password!'
-                            self.error("ssh {} failed: {}".format(self.host, e))
-                            self.login_fail_info = e
-                            return False
-                        elif tResult[0] == 0:
-                            self.oam_print(tResult[2])
-                            self.debug("ssh {} successful".format(self.host), print_only=True)
-                            return True
-                    elif tResult[0] == 0:
-                        self.oam_print(tResult[2])
-                        self.debug("ssh {} successful".format(self.host), print_only=True)
-                        return True
-                except Exception as e:
+                # try:
+                #     self.debug('Begin to ssh {}'.format(self.host))
+                #     self.tn = self.sshlib.ssh(self.host, self.port, self.username, self.password, self.compress, self.timeout)
+                #     tResult = self.tn.expect([self.prompt, b'>'], self.waittime)
+                #     if tResult[0] == -1:
+                #         # 未读取到
+                #         e = 'Don\'t find system prompt!'
+                #         self.error("ssh {} failed: {}".format(self.host, e))
+                #         self.login_fail_info = e
+                #         return False
+                #     elif tResult[0] == 1:
+                #         self.oam_print(tResult[2])
+                #         self.tn.write(self.enable.encode() + self.crlf)
+                #         self.oam_print(self.tn.read_until(b'assword:'))
+                #         self.tn.write(self.password_enable.encode() + self.crlf)
+                #         tResult = self.tn.expect([self.prompt, b'Bad password'], self.waittime)
+                #         if tResult[0] == -1:
+                #             e = 'Don\'t find 特权模式 prompt!'
+                #             self.error("ssh {} failed: {}".format(self.host, e))
+                #             self.login_fail_info = e
+                #             return False
+                #         elif tResult[0] == 1:
+                #             self.oam_print(tResult[2])
+                #             e = 'Bad password!'
+                #             self.error("ssh {} failed: {}".format(self.host, e))
+                #             self.login_fail_info = e
+                #             return False
+                #         elif tResult[0] == 0:
+                #             self.oam_print(tResult[2])
+                #             self.debug("ssh {} successful".format(self.host), print_only=True)
+                #             return True
+                #     elif tResult[0] == 0:
+                #         self.oam_print(tResult[2])
+                #         self.debug("ssh {} successful".format(self.host), print_only=True)
+                #         return True
+                # except Exception as e:
+                #     self.error("ssh {} failed: {}".format(self.host, e))
+                #     self.login_fail_info = e
+                #     return False
+
+    def login_ssh(self):
+        if self.port == 23:
+            self.port = 22
+            self.sshlib = __import__('autosshlib')
+        try:
+            self.debug('Begin to ssh {}'.format(self.host))
+            self.tn = self.sshlib.ssh(self.host, self.port, self.username, self.password, self.compress, self.timeout)
+            tResult = self.tn.expect([self.prompt, b'>'], self.waittime)
+            if tResult[0] == -1:
+                # 未读取到
+                e = 'Don\'t find system prompt!'
+                self.error("ssh {} failed: {}".format(self.host, e))
+                self.login_fail_info = e
+                return False
+            elif tResult[0] == 1:
+                self.oam_print(tResult[2])
+                self.tn.write(self.enable.encode() + self.crlf)
+                self.oam_print(self.tn.read_until(b'assword:'))
+                self.tn.write(self.password_enable.encode() + self.crlf)
+                tResult = self.tn.expect([self.prompt, b'Bad password'], self.waittime)
+                if tResult[0] == -1:
+                    e = 'Don\'t find 特权模式 prompt!'
                     self.error("ssh {} failed: {}".format(self.host, e))
                     self.login_fail_info = e
                     return False
+                elif tResult[0] == 1:
+                    self.oam_print(tResult[2])
+                    e = 'Bad password!'
+                    self.error("ssh {} failed: {}".format(self.host, e))
+                    self.login_fail_info = e
+                    return False
+                elif tResult[0] == 0:
+                    self.oam_print(tResult[2])
+                    self.debug("ssh {} successful".format(self.host), print_only=True)
+                    return True
+            elif tResult[0] == 0:
+                self.oam_print(tResult[2])
+                self.debug("ssh {} successful".format(self.host), print_only=True)
+                return True
+        except Exception as e:
+            self.error("ssh {} failed: {}".format(self.host, e))
+            self.login_fail_info = e
+            return False
 
     def close(self):
         '''
@@ -337,7 +392,7 @@ class DUT(BaseDUT):
 
     def send(self, szCommand, delay=0, timeout=60, error_exit=True):
         '''
-        遇到错误就会停止，方便查看，主要用于配置设备。
+        遇到错误就会停止(error_exit=True)，方便查看，主要用于配置设备;
         delay 函数执行后等待延迟时间ms
         '''
         szCommand = szCommand.encode()
@@ -426,15 +481,6 @@ class DUT(BaseDUT):
         szResult = BaseDUT.process_newline_foroam(szResult)
         self.results = szResult
 
-    def sendctrl(self, char):
-        '''目前仅支持字符C和字符X'''
-        if (char == 'c'):
-            self.tn.write(b'\3')
-
-        elif (char == 'x'):
-            self.tn.write(b'\30')
-        self.oam_print(self.tn.read_until(self.prompt))
-
     def sendexpect(self, szCommand, expect, timeout=60):
         '''
         下发命令行，抓到期望字段return True，
@@ -453,19 +499,18 @@ class DUT(BaseDUT):
         else:
             return True
 
-    # def con_t(self):
-    #     '''
-    #     需要优化，识别多用户等
-    #     '''
-    #     self.sendctrl('c')
-    #     self.sendctrl('c')
-    #     self.send('configure terminal')
+    def sendctrl(self, char):
+        '''目前仅支持字符C和字符X'''
+        if (char == 'c'):
+            self.tn.write(b'\3')
 
-    def con_t_exit(self):
-        """
-        从全局配置模式or其他模式 退出到特权模式
-        """
-        self.send('end')
+        elif (char == 'x'):
+            self.tn.write(b'\30')
+        self.oam_print(self.tn.read_until(self.prompt))
+
+    def sendctrl_c(self):
+        '''send ctrl+c'''
+        self.sendctrl('c')
 
     def con_t(self, multi_user=1, clear_vty=1):
         """
@@ -474,14 +519,14 @@ class DUT(BaseDUT):
 
         :return True or False
         """
-        self.con_t_exit()
+        self.sendctrl_c()
         i = 0
         while i <= 1:
-            self.send('configure terminal')
+            self.send('configure terminal', error_exit=False)
             if 'Enter configuration commands' in self.results:
-                logging.debug('进入全局配置模式成功')
+                self.debug('进入全局配置模式成功')
                 if multi_user == 1:
-                    self.send('multi-user config')
+                    self.send('multi-user config', error_exit=False)
                 return True
             else:
                 if clear_vty == 1:
@@ -491,30 +536,92 @@ class DUT(BaseDUT):
                     else:
                         vty_id = re.search(r'Locked from vty(\d*)',
                                            self.results).group(1)
-                        self.send('clear line vty {}'.format(vty_id))
+                        self.send('clear line vty {}'.format(vty_id), error_exit=False)
                         i += 1
                 else:
                     self.error('进入全局配置模式失败')
                     return False
 
-    def WaitSynchronized(self):
-        while True:
-            self.send('show clock')
-            szResult = self.rec('show synchronization | include MPU')
-            if 'Slave' not in szResult:
-                break
-            if szResult.count('Master') * 2 != szResult.count('Synchronized'):
-                self.sleep(5000)
-            else:
-                break
-        return True
-
-    def SaveConfig(self):
-        self.sendctrl('c')
+    def saveConfig(self):
+        self.sendctrl_c()
         self.send('write')
-        self.WaitSynchronized()
 
-    def reboot(self):
-        self.sendctrl('c')
-        self.sendexpect('reload system force', 'no')
-        self.send3('yes')
+    def reload_all(self):
+        self.sendctrl_c()
+        self.sendexpect('reload all system force', 'no')
+        self.send('yes')
+
+    # --------------------------------sftp --------------------------
+    def getlog_fromSFTP(self):
+        if (self.tn and self.protocol == 'ssh') is not True:
+            if self.login_ssh() is not True:
+                sys.exit(0)
+
+        time_now = time.strftime("%Y-%m-%d_%H-%M", time.localtime())
+        file_dir = os.path.join(current_dir, 'output', u"[{}]{}".format(self.host, time_now))
+        if not os.path.isdir(file_dir):
+            os.makedirs(file_dir)
+
+        sftp = self.tn.sftp()
+
+        remote_dir_list = ['/DATA0',
+                           '/run_log',
+                           '/run_log/except_log',
+                           '/usrcmd_log',
+                           '/LOG/ALARM',
+                           '/run_log/EXCOOB',
+                           '/run_log/EXCINFO',
+                           '/BSPLOG', '/BSPLOG/k']
+
+        def get_filelist(sftp, remote_dir):
+            # 去除路径后/
+            if remote_dir[-1] == '/':
+                remote_dir = remote_dir[0:-1]
+            print(">>>show {}:".format(remote_dir))
+            # 以列表的形式返回指定目录下的所有文件和目录名
+            # files = sftp.listdir(remote_dir)
+            files = sftp.listdir_attr(remote_dir)
+            all_files = list()
+            for x in files:
+                print(x)  # 打印目录列表(带属性)
+                # print(x.st_size)
+                remote_file = remote_dir + '/' + x.filename
+                # os.path.join的方法在win上运行时用的是\，会出现///\的路径情况
+                # remote_file = os.path.join(remote_dir, x.filename)
+                # print(x.st_mode)
+                if x.st_mode > 32767 and x.st_mode < 36864:
+                    # 32768  36863
+                    if x.st_size != 0:
+                        all_files.append(remote_file)
+            return all_files
+
+        def sftp_download(sftp, localpath, remotepath):
+            print("Download {}: ".format(remotepath.split("/")[-1]))
+            try:
+                sftp.get(remotepath, localpath, callback=progress_bar)
+            except Exception as e:
+                print(">>>Error:{}".format(e))
+                os.remove(localpath)
+
+        def progress_bar(transferred, toBeTransferred, suffix=''):
+            bar_len = 30
+            filled_len = int(round(bar_len * transferred/float(toBeTransferred)))
+            percents = round(100.0 * transferred/float(toBeTransferred), 1)
+            bar = '#' * filled_len + '-' * (bar_len - filled_len)
+            if transferred == toBeTransferred:
+                sys.stdout.write('  %s%s |%s| %s bytes\r' % (percents, '%', bar, toBeTransferred))
+                print("\r")
+            else:
+                sys.stdout.write('  %s%s |%s| %s bytes\r' % (percents, '%', bar, transferred))
+            sys.stdout.flush()
+
+        for remote_dir in remote_dir_list:
+            remote_files = self.get_filelist(sftp, remote_dir)  # 获取remote_dir文件列表
+            for remote_file in remote_files:
+                filepath = re.split('[:/]', remote_file)
+                filename = filepath[-1]
+                local_path = file_dir + os.sep + os.path.sep.join(filepath[1:-1])
+                if not os.path.exists(local_path):
+                    os.makedirs(local_path)
+                local_file = os.path.join(local_path, filename)
+                sftp_download(sftp, local_file, remote_file)
