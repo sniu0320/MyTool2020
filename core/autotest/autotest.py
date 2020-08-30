@@ -3,7 +3,7 @@ import datetime
 import logging
 import logging.handlers
 import os
-# import re
+import re
 import sys
 import telnetlib
 import time
@@ -72,7 +72,6 @@ class BaseDUT(object):
 
     :param log_switch: log日志开关,记录命令行回显
     """
-    CRLF = b'\n'
 
     def __init__(self, debug_enable=True, log_enable=True):
         self.logfilename = time.strftime('%Y.%m.%d.%H.%M.%S')+'.log'
@@ -182,6 +181,8 @@ class DUT(BaseDUT):
                  password='test',
                  enable='enable',
                  password_enable='zxr10',
+                 crlf='\n',
+                 prompt='#',
                  debug_enable=True,
                  log_enable=True):
         super().__init__(debug_enable, log_enable)
@@ -190,6 +191,8 @@ class DUT(BaseDUT):
         self.password = password
         self.enable = enable
         self.password_enable = password_enable
+        self.crlf = crlf.encode()
+        self.prompt = prompt.encode()
 
         if self.host:
             logfilename = host.replace(':', '.') + '_' + time.strftime('%Y.%m.%d')
@@ -197,6 +200,7 @@ class DUT(BaseDUT):
 
         self.tn = None
         self.login_fail_info = None
+        self.results = None
 
     def login(self, protocol='telnet', port=23, timeout=5, waittime=3):
         """
@@ -232,11 +236,11 @@ class DUT(BaseDUT):
 
                 tResult = self.tn.expect([b'sername:'], waittime)
                 self.oam_print(tResult[2], time_stamp=False)
-                self.tn.write(self.username.encode() + BaseDUT.CRLF)
+                self.tn.write(self.username.encode() + self.crlf)
                 self.oam_print(self.tn.read_until(b'assword:'))
-                self.tn.write(self.password.encode() + BaseDUT.CRLF)
+                self.tn.write(self.password.encode() + self.crlf)
 
-                tResult = self.tn.expect([b'#', b'>', b'error'], waittime)
+                tResult = self.tn.expect([self.prompt, b'>', b'error'], waittime)
                 if tResult[0] == -1:
                     # 未读取到
                     e = 'Don\'t find system prompt!'
@@ -251,10 +255,10 @@ class DUT(BaseDUT):
                     return False
                 elif tResult[0] == 1:
                     self.oam_print(tResult[2])
-                    self.tn.write(self.enable.encode() + BaseDUT.CRLF)
+                    self.tn.write(self.enable.encode() + self.crlf)
                     self.oam_print(self.tn.read_until(b'assword:'))
-                    self.tn.write(self.password_enable.encode() + BaseDUT.CRLF)
-                    tResult = self.tn.expect([b'#', b'Bad password'], waittime)
+                    self.tn.write(self.password_enable.encode() + self.crlf)
+                    tResult = self.tn.expect([self.prompt, b'Bad password'], waittime)
                     if tResult[0] == -1:
                         e = 'Don\'t find 特权模式 prompt!'
                         self.error("telnet {} failed: {}".format(self.host, e))
@@ -282,7 +286,7 @@ class DUT(BaseDUT):
                 try:
                     self.debug('Begin to ssh {}'.format(self.host))
                     self.tn = self.sshlib.ssh(self.host, port, self.username, self.password, False, timeout)
-                    tResult = self.tn.expect([b'#', b'>'], waittime)
+                    tResult = self.tn.expect([self.prompt, b'>'], waittime)
                     if tResult[0] == -1:
                         # 未读取到
                         e = 'Don\'t find system prompt!'
@@ -291,10 +295,10 @@ class DUT(BaseDUT):
                         return False
                     elif tResult[0] == 1:
                         self.oam_print(tResult[2])
-                        self.tn.write(self.enable.encode() + BaseDUT.CRLF)
+                        self.tn.write(self.enable.encode() + self.crlf)
                         self.oam_print(self.tn.read_until(b'assword:'))
-                        self.tn.write(self.password_enable.encode() + BaseDUT.CRLF)
-                        tResult = self.tn.expect([b'#', b'Bad password'], waittime)
+                        self.tn.write(self.password_enable.encode() + self.crlf)
+                        tResult = self.tn.expect([self.prompt, b'Bad password'], waittime)
                         if tResult[0] == -1:
                             e = 'Don\'t find 特权模式 prompt!'
                             self.error("ssh {} failed: {}".format(self.host, e))
@@ -331,7 +335,7 @@ class DUT(BaseDUT):
     def __del__(self):
         self.close()
 
-    def send(self, szCommand, delay=0, timeout=60):
+    def send(self, szCommand, delay=0, timeout=60, error_exit=True):
         '''
         遇到错误就会停止，方便查看，主要用于配置设备。
         delay 函数执行后等待延迟时间ms
@@ -340,13 +344,16 @@ class DUT(BaseDUT):
         if (szCommand == b' ' or szCommand == b'\r'):
             self.tn.write(szCommand)
         else:
-            self.tn.write(szCommand+BaseDUT.CRLF)
+            self.tn.write(szCommand+self.crlf)
+        szResult = b''
+        iserror = False
         while True:
-            # tResult = self.tn.expect([b'#', b'--More--', b'%Error ', b'\.\.', b'\r\n'], timeout)
+            # tResult = self.tn.expect([self.prompt, b'--More--', b'%Error ', b'\.\.', b'\r\n'], timeout)
             # self.oam_print(tResult[2])
             # if tResult[0] == 3 or tResult[0] == 4:
             #     continue
-            tResult = self.tn.expect([b'#', b'--More--', b'%Error ', b'\.\.'], timeout)
+            tResult = self.tn.expect([self.prompt, b'--More--', b'%Error ', b'\.\.'], timeout)
+            szResult = szResult + tResult[2]
             self.oam_print(tResult[2])
             if tResult[0] == 3:
                 continue
@@ -356,93 +363,58 @@ class DUT(BaseDUT):
                 self.tn.write(b' ')
                 continue
             elif tResult[0] == 2:
-                tResult = self.tn.expect([b'again', b'#'])
+                tResult = self.tn.expect([b'again', self.prompt])
                 if tResult[0] == 0:  # 提示again时
                     # 给3次重试的机会！
                     for retry in range(1, 4):
                         self.oam_print(tResult[2])
-                        self.oam_print(self.tn.read_until(b'#'))
+                        self.oam_print(self.tn.read_until(self.prompt))
                         self.sleep(retry*500)
-                        self.tn.write(szCommand+BaseDUT.CRLF)
-                        tResult = self.tn.expect([b'again', b'#'])
+                        self.tn.write(szCommand+self.crlf)
+                        tResult = self.tn.expect([b'again', self.prompt])
                         if tResult[0] == 1:
+                            szResult = szResult + tResult[2]
                             self.oam_print(tResult[2])
                             break
                         elif retry == 3:
-                            szResult = tResult[2] + self.tn.read_until(b'#')
-                            self.oam_print(szResult)
-                            sys.exit(0)
+                            tResult = tResult[2] + self.tn.read_until(self.prompt)
+                            szResult = szResult + tResult
+                            self.oam_print(tResult)
+                            self.error('\r\n'+'%Error '+tResult.decode())
+                            iserror = True
                     break
                 elif tResult[0] == 1:
+                    szResult = szResult + tResult[2]
                     self.oam_print(tResult[2])
                     self.error('\r\n'+'%Error '+tResult[2].decode())
-                    sys.exit(0)
+                    iserror = True
+                    break
+        szResult = szResult.decode()
+        szResult = BaseDUT.process_newline_foroam(szResult)
+        self.results = szResult
+        if iserror and error_exit:
+            sys.exit(0)
         if (delay != 0):
             self.sleep(delay)
 
-    def send2(self, szCommand, delay=0, timeout=60):
-        '''遇到一般错误不会停止，继续执行'''
-        szCommand = szCommand.encode()
-        if (szCommand == b' ' or szCommand == b'\r'):
-            self.tn.write(szCommand)
-        else:
-            self.tn.write(szCommand+BaseDUT.CRLF)
-        while True:
-            tResult = self.tn.expect([b'#', b'--More--', b'%Error ', b'\.\.', b'\r\n'], timeout)
-            self.oam_print(tResult[2])
-            if tResult[0] == 4 or tResult[0] == 3:
-                continue
-            # tResult = self.tn.expect([b'#', b'--More--', b'%Error ', b'\.\.'], timeout)
-            # self.oam_print(tResult[2])
-            # if tResult[0] == 3:
-            #     continue
-            elif tResult[0] == 0:
-                break
-            elif tResult[0] == 1:
-                self.tn.write(b' ')
-                continue
-            elif tResult[0] == 2:
-                tResult = self.tn.expect([b'again', b'#'])
-                if tResult[0] == 0:
-                    # 给3次重试的机会！
-                    for retry in range(1, 4):
-                        self.oam_print(tResult[2])
-                        self.oam_print(self.tn.read_until(b'#'))
-                        self.sleep(retry*500)
-                        self.tn.write(szCommand+BaseDUT.CRLF)
-                        tResult = self.tn.expect([b'again', b'#'])
-                        if tResult[0] == 1:
-                            self.oam_print(tResult[2])
-                            break
-                        elif retry == 3:
-                            self.oam_print(tResult[2])
-                            self.oam_print(self.tn.read_until(b'#'))
-                    break
-                else:
-                    self.oam_print(tResult[2])
-                    break
-        if (delay != 0):
-            self.sleep(delay)
-
-    def send3(self, szCommand):
+    def send_onlysend(self, szCommand):
         '''只发送命令，不关心执行的结果,慎用!!'''
         szCommand = szCommand.encode()
         if (szCommand == b' ' or szCommand == b'\r'):
             self.tn.write(szCommand)
         else:
-            self.tn.write(szCommand+BaseDUT.CRLF)
+            self.tn.write(szCommand+self.crlf)
         # ssh 协议有流控，一直不读sockets，会使服务端不能继续发送内容
         self.sleep(15)
         self.oam_print(self.tn.read_eager())
 
-    def rec(self, szCommand, prompt='#', timeout=60):
-        '''接收原始数据，开始的命令回显和末尾的设备提示符都没有删除'''
+    def show(self, szCommand, timeout=60):
+        '''show命令'''
         szCommand = szCommand.encode()
-        prompt = prompt.encode()
-        self.tn.write(szCommand+BaseDUT.CRLF)
+        self.tn.write(szCommand+self.crlf)
         szResult = b''
         while True:
-            tResult = self.tn.expect([prompt, b' --More--', b'\.\.'], timeout)
+            tResult = self.tn.expect([self.prompt, b' --More--'], timeout)
             szResult = szResult + tResult[2]
             self.oam_print(tResult[2])
             if tResult[0] == 0:
@@ -451,18 +423,17 @@ class DUT(BaseDUT):
                 self.tn.write(b' ')
 
         szResult = szResult.decode()
-        szResult = szResult.replace('\b \b', '')
-        szResult = szResult.replace(' --More--', '')
-        return BaseDUT.process_newline_foroam(szResult)
+        szResult = BaseDUT.process_newline_foroam(szResult)
+        self.results = szResult
 
-    def sendctrl(self, char, prompt='#'):
+    def sendctrl(self, char):
         '''目前仅支持字符C和字符X'''
-        prompt = prompt.encode()
         if (char == 'c'):
             self.tn.write(b'\3')
-            self.oam_print(self.tn.read_until(prompt))
+
         elif (char == 'x'):
             self.tn.write(b'\30')
+        self.oam_print(self.tn.read_until(self.prompt))
 
     def sendexpect(self, szCommand, expect, timeout=60):
         '''
@@ -471,7 +442,7 @@ class DUT(BaseDUT):
         '''
         send = szCommand.encode()
         expect = expect.encode()
-        self.tn.write(send + BaseDUT.CRLF)
+        self.tn.write(send + self.crlf)
         tResult = self.tn.expect([b'\r\n'], timeout)
         self.oam_print(tResult[2])
         tResult = self.tn.expect([expect], timeout)
@@ -482,51 +453,50 @@ class DUT(BaseDUT):
         else:
             return True
 
-    def con_t(self):
-        '''
-        需要优化，识别多用户等
-        '''
-        self.sendctrl('c')
-        self.sendctrl('c')
-        self.send('configure terminal')
+    # def con_t(self):
+    #     '''
+    #     需要优化，识别多用户等
+    #     '''
+    #     self.sendctrl('c')
+    #     self.sendctrl('c')
+    #     self.send('configure terminal')
 
-    # def exit_con_t(self):
-    #     """
-    #     从全局配置模式or其他模式 退出到特权模式
-    #     """
-    #     self.send('end')
+    def con_t_exit(self):
+        """
+        从全局配置模式or其他模式 退出到特权模式
+        """
+        self.send('end')
 
-    # def enter_config_terminal(self, multi_user=1, clear_vty=1):
-    #     """
-    #     进入全局配置模式，multi_user=1 配置多用户；
-    #     如果clear_vty=1，尝试踢掉锁定用户(串口锁定踢不掉)
+    def con_t(self, multi_user=1, clear_vty=1):
+        """
+        进入全局配置模式，multi_user=1 配置多用户；
+        如果clear_vty=1，尝试踢掉锁定用户(串口锁定踢不掉)
 
-    #     :return True or False
-    #     """
-    #     # self.sendctrl('c')
-    #     # self.sendctrl('c')
-    #     self.send('end')
-    #     i = 0
-    #     while i <= 1:
-    #         self.send('configure terminal')
-    #         if 'Enter configuration commands' in self.send_command_output:
-    #             logging.debug('进入全局配置模式成功')
-    #             if multi_user == 1:
-    #                 self.send('multi-user config')
-    #             return True
-    #         else:
-    #             if clear_vty == 1:
-    #                 if 'Locked from con' in self.send_command_output:
-    #                     logging.error('进入全局配置模式失败(串口用户锁定)')
-    #                     return False
-    #                 else:
-    #                     vty_id = re.search(r'Locked from vty(\d*)',
-    #                                        self.send_command_output).group(1)
-    #                     elf.send('clear line vty {}'.format(vty_id))
-    #                     i += 1
-    #             else:
-    #                 logging.error('进入全局配置模式失败')
-    #                 return False
+        :return True or False
+        """
+        self.con_t_exit()
+        i = 0
+        while i <= 1:
+            self.send('configure terminal')
+            if 'Enter configuration commands' in self.results:
+                logging.debug('进入全局配置模式成功')
+                if multi_user == 1:
+                    self.send('multi-user config')
+                return True
+            else:
+                if clear_vty == 1:
+                    if 'Locked from con' in self.results:
+                        self.error('进入全局配置模式失败(串口用户锁定)')
+                        return False
+                    else:
+                        vty_id = re.search(r'Locked from vty(\d*)',
+                                           self.results).group(1)
+                        self.send('clear line vty {}'.format(vty_id))
+                        i += 1
+                else:
+                    self.error('进入全局配置模式失败')
+                    return False
+
     def WaitSynchronized(self):
         while True:
             self.send('show clock')
