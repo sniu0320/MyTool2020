@@ -616,7 +616,7 @@ class DUT(BaseDUT):
             sys.stdout.flush()
 
         for remote_dir in remote_dir_list:
-            remote_files = self.get_filelist(sftp, remote_dir)  # 获取remote_dir文件列表
+            remote_files = get_filelist(sftp, remote_dir)  # 获取remote_dir文件列表
             for remote_file in remote_files:
                 filepath = re.split('[:/]', remote_file)
                 filename = filepath[-1]

@@ -83,7 +83,7 @@ class ssh:
         self.ssh_fileno = self.fileno()
 
     def sftp(self):
-        tran = self.client.get_transport()
+        tran = self.ssh_client.get_transport()
         sftp = paramiko.SFTPClient.from_transport(tran)
         return sftp
 
