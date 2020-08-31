@@ -548,7 +548,7 @@ class DUT(BaseDUT):
 
     def reload_all(self):
         self.sendctrl_c()
-        self.sendexpect('reload all system force', 'no')
+        self.sendexpect('reload all force', 'no')
         self.send('yes')
 
     # --------------------------------sftp --------------------------
