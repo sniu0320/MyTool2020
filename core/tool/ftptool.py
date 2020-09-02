@@ -2,6 +2,7 @@
 from ftplib import FTP
 import os
 import sys
+import logging
 
 '''
 FTP对象常用方法:
@@ -18,6 +19,9 @@ ftp.retrbinary(cmd, callback, bufsize)  # 下载文件，cmd是一个获取命�
 
 
 def upload(f, remote_path, local_path):
+    '''
+    upload(ftp, "ftp_a.txt", "a.txt")   # 将当前目录下的a.txt文件上传到ftp服务器的tmp目录，命名为ftp_a.txt
+    '''
     fp = open(local_path, "rb")
     buf_size = 1024
     f.storbinary("STOR {}".format(remote_path), fp, buf_size)
@@ -25,6 +29,9 @@ def upload(f, remote_path, local_path):
 
 
 def download(f, remote_path, local_path):
+    '''
+    download(ftp, "ftp_a.txt", "b.txt")  # 将ftp服务器tmp目录下的ftp_a.txt文件下载到当前目录，命名为b.txt
+    '''
     fp = open(local_path, "wb")
     buf_size = 1024
     f.retrbinary('RETR {}'.format(remote_path), fp.write, buf_size)
@@ -57,6 +64,7 @@ def get_file_list_in_current_path(path=os.getcwd(), remove='.p'):
 
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.DEBUG, filename='ftp.log')
     ftpT1 = '10.233.70.1'
     ftpT1_username = 'ss'
     ftpT1_password = 'ss'
@@ -73,7 +81,7 @@ if __name__ == "__main__":
         for file in file_list:
             upload(ftp, file, file)
     except Exception as e:
-        print("ERROR: {}".format(e))
+        logging.error(e)
     finally:
         ftp.quit()
 
@@ -85,11 +93,6 @@ if __name__ == "__main__":
         for file in file_list:
             upload(ftp, file, file)
     except Exception as e:
-        print("ERROR: {}".format(e))
+        logging.error(e)
     finally:
         ftp.quit()
-
-
-    # upload(ftp, "ftp_a.txt", "a.txt")   # 将当前目录下的a.txt文件上传到ftp服务器的tmp目录，命名为ftp_a.txt
-    # download(ftp, "ftp_a.txt", "b.txt")  # 将ftp服务器tmp目录下的ftp_a.txt文件下载到当前目录，命名为b.txt
-    # ftp.quit()
