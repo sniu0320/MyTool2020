@@ -17,6 +17,10 @@ ftp.storbinary(cmd, fp, bufsize)    # 上传文件，cmd是一个存储命令，
 ftp.retrbinary(cmd, callback, bufsize)  # 下载文件，cmd是一个获取命令，可以为"RETR filename.txt"， callback是一个回调函数，用于读取获取到的数据块
 '''
 
+logging.basicConfig(level=logging.DEBUG,
+                    format='%(asctime)s->%(message)s',
+                    filename='ftp.log')
+
 
 def upload(f, remote_path, local_path):
     '''
@@ -63,36 +67,28 @@ def get_file_list_in_current_path(path=os.getcwd(), remove='.p'):
     return file_list
 
 
+def run(file_list, ip, username, password):
+    try:
+        ftp = FTP()
+        ftp.connect(ip, 21)      # 第一个参数可以是ftp服务器的ip或者域名，第二个参数为ftp服务器的连接端口，默认为21
+        ftp.login(username, password)     # 匿名登录直接使用ftp.login()
+        # ftp.cwd("tmp")                # 切换到tmp目录
+        for file in file_list:
+            upload(ftp, file, file)
+            logging.debug("upload {} to {} successfully".format(file, ip))
+    except Exception as e:
+        logging.error(e)
+    finally:
+        ftp.quit()
+
+
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.DEBUG, filename='ftp.log')
     ftpT1 = '10.233.70.1'
     ftpT1_username = 'ss'
     ftpT1_password = 'ss'
     ftpT2 = '10.233.70.99'
     ftpT2_username = 'ss'
     ftpT2_password = 'ss'
-
     file_list = get_file_list_in_current_path()
-    try:
-        ftp = FTP()
-        ftp.connect(ftpT1, 21)      # 第一个参数可以是ftp服务器的ip或者域名，第二个参数为ftp服务器的连接端口，默认为21
-        ftp.login(ftpT1_username, ftpT1_username)     # 匿名登录直接使用ftp.login()
-        # ftp.cwd("tmp")                # 切换到tmp目录
-        for file in file_list:
-            upload(ftp, file, file)
-    except Exception as e:
-        logging.error(e)
-    finally:
-        ftp.quit()
-
-    try:
-        ftp = FTP()
-        ftp.connect(ftpT2, 21)      # 第一个参数可以是ftp服务器的ip或者域名，第二个参数为ftp服务器的连接端口，默认为21
-        ftp.login(ftpT2_username, ftpT2_username)     # 匿名登录直接使用ftp.login()
-        # ftp.cwd("tmp")                # 切换到tmp目录
-        for file in file_list:
-            upload(ftp, file, file)
-    except Exception as e:
-        logging.error(e)
-    finally:
-        ftp.quit()
+    run(file_list, ftpT1, ftpT1_username, ftpT1_password)
+    run(file_list, ftpT2, ftpT2_username, ftpT2_password)
