@@ -3,6 +3,7 @@ from ftplib import FTP
 import os
 import sys
 import logging
+# from progressbar import ProgressBar
 
 '''
 FTP对象常用方法:
@@ -21,15 +22,40 @@ logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s - %(levelname)s: %(message)s',
                     filename='ftp.log')
 
+file_size = 0			# 文件总大小，计算进度时用
+upload_size = 0			# 已上传的数据大小，计算进度时用
+download_size = 0
+
 
 def upload(f, remote_path, local_path):
     '''
     upload(ftp, "ftp_a.txt", "a.txt")   # 将当前目录下的a.txt文件上传到ftp服务器的tmp目录，命名为ftp_a.txt
     '''
-    print("start upload {}({}):".format(local_path, f.size(local_path)))
+    global file_size
+    file_size = os.path.getsize(local_path)
+    print("start upload {}({}):".format(local_path, file_size))
+
     fp = open(local_path, "rb")
+
+    def upload_file_progress_bar(block):
+        global upload_size
+        upload_size = upload_size+len(block)
+        transferred = upload_size
+        toBeTransferred = file_size
+        # suffix = ''
+        bar_len = 30
+        filled_len = int(round(bar_len * transferred/float(toBeTransferred)))
+        percents = round(100.0 * transferred/float(toBeTransferred), 1)
+        bar = '#' * filled_len + '-' * (bar_len - filled_len)
+        if transferred == toBeTransferred:
+            sys.stdout.write('  %s%s |%s| %s bytes\r' % (percents, '%', bar, toBeTransferred))
+            print("\r")
+        else:
+            sys.stdout.write('  %s%s |%s| %s bytes\r' % (percents, '%', bar, transferred))
+        sys.stdout.flush()
+
     buf_size = 8192
-    f.storbinary("STOR {}".format(remote_path), fp, buf_size)
+    f.storbinary("STOR {}".format(remote_path), fp, buf_size, callback=upload_file_progress_bar)
     fp.close()
 
 
@@ -37,23 +63,50 @@ def download(f, remote_path, local_path):
     '''
     download(ftp, "ftp_a.txt", "b.txt")  # 将ftp服务器tmp目录下的ftp_a.txt文件下载到当前目录，命名为b.txt
     '''
+    global file_size
+    file_size = f.size(remote_path)
+    print("start download {}({}):".format(local_path, file_size))
+
     fp = open(local_path, "wb")
+
+    def download_file_progress_bar(block):
+        global download_size
+        download_size = download_size+len(block)
+        transferred = download_size
+        toBeTransferred = file_size
+        # suffix = ''
+        bar_len = 30
+        filled_len = int(round(bar_len * transferred/float(toBeTransferred)))
+        percents = round(100.0 * transferred/float(toBeTransferred), 1)
+        bar = '#' * filled_len + '-' * (bar_len - filled_len)
+        if transferred == toBeTransferred:
+            sys.stdout.write('  %s%s |%s| %s bytes\r' % (percents, '%', bar, toBeTransferred))
+            print("\r")
+        else:
+            sys.stdout.write('  %s%s |%s| %s bytes\r' % (percents, '%', bar, transferred))
+        sys.stdout.flush()
+
     buf_size = 8192
-    f.retrbinary('RETR {}'.format(remote_path), fp.write, buf_size)
+    f.retrbinary('RETR {}'.format(remote_path), fp.write, buf_size, callback=download_file_progress_bar)
     fp.close()
 
+# def download(f, remote_path, local_path):
+#     '''
+#     download(ftp, "ftp_a.txt", "b.txt")  # 将ftp服务器tmp目录下的ftp_a.txt文件下载到当前目录，命名为b.txt
+#     '''
+#     fp = open(local_path, "wb")
+#     buf_size = 8192
 
-def progress_bar(transferred, toBeTransferred, suffix=''):
-    bar_len = 30
-    filled_len = int(round(bar_len * transferred/float(toBeTransferred)))
-    percents = round(100.0 * transferred/float(toBeTransferred), 1)
-    bar = '#' * filled_len + '-' * (bar_len - filled_len)
-    if transferred == toBeTransferred:
-        sys.stdout.write('  %s%s |%s| %s bytes\r' % (percents, '%', bar, toBeTransferred))
-        print("\r")
-    else:
-        sys.stdout.write('  %s%s |%s| %s bytes\r' % (percents, '%', bar, transferred))
-    sys.stdout.flush()
+#     size = f.size(remote_path)
+#     pbar = ProgressBar(widgets=widgets, maxval=size)
+#     pbar.start()
+
+#     def file_write(data):
+#         fp.write(data)
+#         global pbar
+#         pbar += len(data)
+#     f.retrbinary('RETR {}'.format(remote_path), file_write, buf_size)
+#     fp.close()
 
 
 def get_file_list_in_current_path(path=os.getcwd(), remove='.py'):
