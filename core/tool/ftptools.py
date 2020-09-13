@@ -6,7 +6,9 @@ import ftplib
 
 
 class FtpTools(object):
-
+    """
+    ftp client
+    """
     def __init__(self, ftpserver, user='test',  passwd='test', remotedir=None):
         self.ftpserver = ftpserver
         self.user = user
@@ -151,4 +153,6 @@ class FtpTools(object):
 
 
 if __name__ == '__main__':
-    ftp2 = FtpTools()
+    ftp2 = FtpTools('10.233.70.99', 'admin', 'Zte@888888', 'T2_Version')
+    ftp2.uploadDir('test')
+    ftp2.close()
