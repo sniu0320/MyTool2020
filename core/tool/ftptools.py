@@ -158,10 +158,12 @@ class FtpTools(object):
             else:
                 sys.stdout.write('  %s%s |%s| %s bytes\r' % (percents, '%', bar, transferred))
             sys.stdout.flush()
-
+            fp.write(block)
+            
         fp = open(localpath, "wb")
         print("start download {}({}):".format(localpath, self.filesize))
-        self.connection.retrbinary('RETR {}'.format(remotename), fp.write, buf_size, callback=download_file_progress_bar)
+        # self.connection.retrbinary('RETR {}'.format(remotename), fp.write, buf_size, callback=download_file_progress_bar)
+        self.connection.retrbinary('RETR {}'.format(remotename), download_file_progress_bar, buf_size)
         fp.close()
  
     def downloadFileTree(self, remotedir='.', localdir='.'):
