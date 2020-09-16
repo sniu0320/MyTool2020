@@ -39,42 +39,41 @@ class FtpTools(object):
         connection.login(self.user, self.passwd)
         if self.remotedir is not None:
             connection.cwd(self.remotedir)
-        print("Connecting to {} successfully".format(self.ftpserver))
+        print("Connecting to {}:".format(self.ftpserver))
         return connection
 
     def getlocaldir(self):
         return '.'
 
-    def cleanLocals(self):
-        """
-        try to delete all local files first to remove garbage
-        """
-        if self.cleanall:
-            for localname in os.listdir(self.localdir):    # local dirlisting
-                try:                                       # local file delete
-                    print('deleting local', localname)
-                    os.remove(os.path.join(self.localdir, localname))
-                except:
-                    print('cannot delete local', localname)
+    # def cleanLocals(self):
+    #     """
+    #     try to delete all local files first to remove garbage
+    #     """
+    #     if self.cleanall:
+    #         for localname in os.listdir(self.localdir):    # local dirlisting
+    #             try:                                       # local file delete
+    #                 print('deleting local', localname)
+    #                 os.remove(os.path.join(self.localdir, localname))
+    #             except:
+    #                 print('cannot delete local', localname)
 
     def uploadOne(self, localname, localpath, remotename=None, buf_size=81920):
         """
         upload one file by FTP in text or binary mode
         remote name need not be same as local name
         """
-        print("----------uploadOne----------")
-        print("localname:", localname)
-        print("localpath:", localpath)
-        print("remotename:", remotename)
-        print("----------uploadOne----------")
         if remotename is None:
             remotename = localname
         self.filesize = os.path.getsize(localpath)
         self.uploadsize = 0
+        # 备份文件
+        suffix = localpath.split('.')[-1]
+        oldfile = localpath.replace('.'+suffix, '_old.'+suffix)
         try:
-            suffix = localpath.split('.')[-1]
-            oldfile = localpath.replace('.'+suffix, '_old.'+suffix)
             self.connection.delete(oldfile)
+        except:
+            pass
+        try:
             self.connection.rename(localpath, oldfile)
         except:
             pass
@@ -109,7 +108,7 @@ class FtpTools(object):
         upload simple files, recur into subdirectories
         """
         localfiles = os.listdir(localdir)
-        print("localfiles:", localfiles)
+        # print("localfiles:", localfiles)
         for localname in localfiles:
             localpath = os.path.join(localdir, localname)
             if not os.path.isdir(localpath):
@@ -126,21 +125,17 @@ class FtpTools(object):
                     print('{} directory not created'.format(localname))
                 self.connection.cwd(localname)            # change remote dir
                 # upload local subdir
-                self.uploadDir(localpath)
+                self.uploadFileTree(localpath)
                 self.connection.cwd('..')                  # change back up
                 self.dcount += 1
                 print('{} directory exited'.format(localname))
         print('Done:', self.fcount, 'files uploaded.')
 
-   def downloadOne(self, remotename, localpath, buf_size=81920):
+    def downloadOne(self, remotename, localpath, buf_size=81920):
         """
         download one file by FTP in text or binary mode
         local name need not be same as remote name
         """
-        print("----------downloadOne----------")
-        print("localpath:", localpath)
-        print("remotename:", remotename)
-        print("----------downloadOne----------")
         self.filesize = self.connection.size(remotename)
         self.downloadsize = 0
 
@@ -159,13 +154,12 @@ class FtpTools(object):
                 sys.stdout.write('  %s%s |%s| %s bytes\r' % (percents, '%', bar, transferred))
             sys.stdout.flush()
             fp.write(block)
-            
+
         fp = open(localpath, "wb")
         print("start download {}({}):".format(localpath, self.filesize))
-        # self.connection.retrbinary('RETR {}'.format(remotename), fp.write, buf_size, callback=download_file_progress_bar)
         self.connection.retrbinary('RETR {}'.format(remotename), download_file_progress_bar, buf_size)
         fp.close()
- 
+
     def downloadFileTree(self, remotedir='.', localdir='.'):
         print("remoteDir:", remotedir)
         # 如果本地目录不存在，创建本地目录
@@ -174,15 +168,16 @@ class FtpTools(object):
         self.connection.cwd(remotedir)
         remotenames = self.connection.nlst()
         print("RemoteNames:", remotenames)
-        
         for remotename in remotenames:
             localpath = os.path.join(localdir, remotename)
             print(self.connection.nlst(remotename))
-            if file.find(".") == -1:
+            if remotename.find(".") == -1:
                 if not os.path.exists(localpath):
                     os.makedirs(localpath)
                 self.downloadFileTree(remotename, localpath)
                 self.dcount += 1
+            elif remotename == '.' or remotename == '..':
+                pass
             else:
                 print('downloading', remotename, 'to', localpath)
                 self.downloadOne(remotename, localpath)
@@ -193,10 +188,8 @@ class FtpTools(object):
     def close(self):
         self.connection.quit()
 
+
 if __name__ == '__main__':
-    ftp2 = FtpTools('10.233.70.99', 'admin', 'Zte@888888', 'T2_Version')
+    ftp2 = FtpTools('10.233.70.XX', 'admin', 'XXX', 'T2_Version')
     ftp2.uploadFileTree('test')
     ftp2.close()
-
-
-
